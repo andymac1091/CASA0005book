@@ -1,0 +1,3280 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={CASA0005 Geographic Information Systems and Science},
+            pdfauthor={Andy MacLachlan and Adam Dennett},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{CASA0005 Geographic Information Systems and Science}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Andy MacLachlan and Adam Dennett}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-06-19}
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{welcome}{%
+\chapter{Welcome}\label{welcome}}
+
+Welcome to the CASA0005 Geographic Information Systems and Science online pratical handbook. This website is hosted on Github and holds all the practical instructions and data. All data used within the practicals is aviaiable online, however occasionally websites can undergo maintenance or be inaccessible due to political facors such as the government shutdowns.
+
+If you need the practical data you can access it from my github repository here: \url{https://github.com/andrewmaclachlan/CASA0005}
+
+Practical data is divided into the relevant sessions, although sometimes i'll refer to a dataset used within a previous week.
+
+\hypertarget{the-world-of-gis}{%
+\section{The world of GIS}\label{the-world-of-gis}}
+
+Spatial analysis can yield fascinating insights into geographical relationships. However, at times it can be difficult to work with. You will get lots of error messages and have software crash. The academic staff are here to help you work through these practicals but we do not know everything. It's a good idea to become familar with online sources of help, such as:
+
+\begin{itemize}
+\tightlist
+\item
+  Stack Exchange \url{https://stackexchange.com/}
+\item
+  QGIS documemtation \url{https://docs.qgis.org/3.4/en/docs/index.html}
+\item
+  R documentation \url{https://www.rdocumentation.org/}
+\item
+  ArcGIS help pages \url{https://support.esri.com/en}
+\end{itemize}
+
+\hypertarget{getting-started}{%
+\section{Getting Started}\label{getting-started}}
+
+One of the issues with GIS is that many of the files we will be working with are quite large. Fortunately, in recent years, UCL has seriously beefed up the storage available for students. You now get 100GB of free storage, which should be plenty for the work you will be doing this year! The Bartlett faculty has several gigabytes of storage space available on their central servers, so before we get started, we will connect to our N drive to carry out all of our practical work over the coming weeks.
+
+\hypertarget{offline-viewing}{%
+\section{Offline viewing}\label{offline-viewing}}
+
+If you are unable to access the internet to view this github website most web browsers allow you to save webpages for offline viewieng.
+
+Insturctions for Google Chrome are provided here: \url{https://support.google.com/chrome/answer/7343019?co=GENIE.Platform\%3DDesktop\&hl=en\&oco=1}
+
+\hypertarget{practical-1-geographic-information}{%
+\chapter{Practical 1 -- Geographic Information}\label{practical-1-geographic-information}}
+
+\hypertarget{learning-outcomes}{%
+\section{Learning outcomes}\label{learning-outcomes}}
+
+By the end of this practical you should be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Describe and explain GIS data formats and databases
+\item
+  Source and pre-process spatial data
+\item
+  Load and undertaken some basic manipulcation of spatial data in: ArcMap, QGIS and R
+\item
+  Evaluate the (dis)advantages of each GIS you have used
+\end{itemize}
+
+\hypertarget{the-basics-of-geographic-information}{%
+\section{The Basics of Geographic Information}\label{the-basics-of-geographic-information}}
+
+Geographic data, geospatial data or geographic inforamtion is data that identifies the location of features on Earth. There are two main types of data which are used in GIS applications to represent the real world. \textbf{Vectors} that are composed of points, lines and polygons and \textbf{rasters} that are grids of cells with individual values.
+
+In the above example the features in the real world (e.g.~lake, forest, marsh and grassland) have been represented by points, lines and polygons (vector) or discrete grid cells (raster) of a certain size (e.g.~1 x 1m) specifying land cover type.
+
+\hypertarget{important-gis-data-formats}{%
+\subsection{Important GIS data formats}\label{important-gis-data-formats}}
+
+There are a number of commonly used geographic data formats that store vector and raster data that you will come across during this course and it's important to understand what they are, how they represent data and how you can use them.
+
+\hypertarget{shapefiles}{%
+\subsubsection{Shapefiles}\label{shapefiles}}
+
+Perhaps the most commonly used GIS data format is the shapefile. Shapefiles were developed by ESRI (\url{http://www.esri.com/}) -- one of the first and now certainly the largest commercial GIS company in the world. Despite being developed by a commercial company, they are mostly an open format and can be used (read and written) by a host of GIS Software applications.
+
+A shapefile is actually a collection of files -- at least three of which are needed for the shapefile to be displayed by GIS software. They are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{.shp} - the file which contains the feature geometry
+\item
+  \texttt{.shx} - an index file which stores the position of the feature IDs in the \texttt{.shp} file
+\item
+  \texttt{.dbf} - the file that stores all of the attribute information associated with the coordinates -- this might be the name of the shape or some other information associated with the feature
+\item
+  \texttt{.prj} - the file which contains all of the coordinate system information (the location of the shape on Earth's surface). Data can be displayed without a projection, but the \texttt{.prj} file allows software to display the data correctly where data with different projections might be being used
+\end{enumerate}
+
+\hypertarget{geojson}{%
+\subsubsection{GeoJSON}\label{geojson}}
+
+GeoJSON (Geospatial Data Interchange format for JavaScript Object Notation, \url{http://geojson.org/}) is becoming an increasingly popular spatial data format, particularly for web-based mapping as it is based on JavaScript Object Notation. Unlike a shapefile in a GeoJSON, the attributes, boundaries and projection information are all contained in the same file.
+
+\hypertarget{shapefile-and-geojson}{%
+\subsubsection{Shapefile and GeoJSON}\label{shapefile-and-geojson}}
+
+We're now going to explore a shapefile (\texttt{.shp} ) and GeoJSON (\texttt{.geojson}) in action.
+
+Go to: \url{http://geojson.io/\#map=16/51.5247/-0.1339}
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/JSONwebsite} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using the drawing tools to the right of the map window, create 3 objects: a point, line and a polygon as I have done above. Click on your polygon and colour it red and colour your point green
+\item
+  Using the `Save' option at the top of the map, save two copies of your new data -- one in \texttt{.geojson} format and one in \texttt{.shp} format
+\item
+  Open your two newly saved files in a text editor such as notepad or notepad++. For the shapefile you might have to unzip the folder then open each file individually. What do you notice about the similarities or differences between the two ways that the data are encoded?
+\end{enumerate}
+
+\hypertarget{raster-data}{%
+\subsubsection{Raster data}\label{raster-data}}
+
+Most raster data is now provided in GeoTIFF (\texttt{.tiff}) format, which stands for Geostarionary Earth Orbit Tagged Image File. The GeoTIFF data format was created by NASA and is a standard public domain format. All necesary inforamtion to establish the location of the data on Earth's surface is embedded into the image. This includes: map projection, coordinate system, ellipsoid and datum type.
+
+\hypertarget{other-data-formats}{%
+\subsubsection{Other data formats}\label{other-data-formats}}
+
+Aforementioned data types and formats are likely to be the ones you predominately encounter. However there are several more used within spatial analysis. Theres include:
+
+\textbf{Vector}
+
+\begin{itemize}
+\tightlist
+\item
+  GML (Geography Markup Language -- gave birth to KML) - \url{http://www.opengeospatial.org/standards/gml}
+\end{itemize}
+
+\textbf{Raster}
+
+\begin{itemize}
+\tightlist
+\item
+  Band SeQuential (BSQ) - technically a method for encoding data but commonly refered to as BSQ.
+\item
+  Hierarchical Data Format (HDF)
+\item
+  Arc Grid
+\end{itemize}
+
+There are normally valid reasons for storing data in one of these other formats. For example, BSQ are raster data with a seperate text header file (\texttt{.hdr}) providing geographic spatial reference information. Earth observation data often monitors the electromagenitc spectrum in bands. Humans see in the visible range of the spectrum and our vision is composed of red, green and blue wavelengths. If we wanted to analyse just the red wavelength the BSQ format would let us \emph{read in} only that data. In comaprsion a GeoTIFF might come with all the data `packaged' in one file and when doing analysis over thousands of images would significantly slow things down. That said you can now often find GeoTIFFs seperated in a similar format to BSQ and it's fairly straightforward to convert between raster formats.
+
+\hypertarget{geodatabase}{%
+\subsubsection{Geodatabase}\label{geodatabase}}
+
+A geodatabase is a collection of geographic data held within a database. Geodatabases were developed by ESRI to overcome some of the limitations of shapefiles. They come in two main types: Personal (upto 1 TB) and File (limited to 250 - 500 MB), with Personal Geodatabases storing everything in a Microsoft Access database (\texttt{.mdb}) file and File Geodatabases offering more flexibility, storing everything as a series of folders in a file system. In the example below we can see that the FCC\_Geodatabase (left hand pane) holds multiple points, lines, polygons, tables and raster layers in the contents tab.
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/geodatabase} \end{center}
+
+\hypertarget{geopackage}{%
+\subsubsection{GeoPackage}\label{geopackage}}
+
+\begin{center}\includegraphics[width=100pt]{prac1_images/geopkg} \end{center}
+
+A GeoPackage is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial data. It stores spatial data layers (vector and raster) as a single file, and is based upon an SQLite database, a widely used relational database management system, permitting code based, reproducible and transparent workflows. As it stores data in a single file it is very easy to share, copy or move.
+
+\hypertarget{spatialite}{%
+\subsubsection{SpatiaLite}\label{spatialite}}
+
+\begin{center}\includegraphics[width=100pt]{prac1_images/spatialite} \end{center}
+
+SpatialLite is an open-source library that extends SQLite core. Support is fairly limited and most software that supports SpatiaLite also supports GeoPackage, as they both build upon SQLite. It doesn't have any clear advantage over GeoPackage, however it is unable to support raster data.
+
+\hypertarget{postgis}{%
+\subsubsection{PostGIS}\label{postgis}}
+
+\begin{center}\includegraphics[width=100pt]{prac1_images/postGIS} \end{center}
+
+PostGIS is an opensource database extender for PostrgeSQL. Essentially PostgreSQL is a database and PostGIS is an add on which permits spatial functions. The advantages of using PostGIS over a GeoPackage are that it allows users to access the data at the same time, can handle large data more efficiently and reduces processing time. In this example (\url{https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291}) calcualting the number of bars per neighbourhood in Leon, Mexico the processing time reduced from 1.443 seconds (SQLite) to 0.08 seconds in PostGIS. However, data stored in PostGIS is much harder to share, move or copy.
+
+\hypertarget{what-will-i-use}{%
+\subsubsection{What will I use}\label{what-will-i-use}}
+
+The variety of data formats can see a bit overwhelming. But don't worry, most of the time you'll be using shapefiles, GeoPackages or raster data.
+
+\hypertarget{data}{%
+\section{Data}\label{data}}
+
+The volume of geographic information which is freely available for use in the UK is increasing exponentially and spatially referenced data can often be found in many different places. In this practical we're going to use data from the London data store --- a free and open data-sharing portal provided by the Greater London Authrotiy (GLA), also known as City Hall that is the devovled regional governance body of London.
+
+We are going to get spatial data of the London boroughs and join flytipping (the illegal deposit of waste, commonly on road verges) data that is provided as a \texttt{.csv} file. \texttt{.csv} stands for comma-separated values (CSV) --- it uses a comma to separate each value.
+
+At the end of this document I'll also run through some common sources of data that will stand you in good stead (be advantagous) for the rest of the course.
+
+\hypertarget{file-paths}{%
+\subsection{File paths}\label{file-paths}}
+
+In your N drive: create a new folder called GIS and within this a subfolder called wk1. It is up to you how you organise your files. Make sure you change the file paths within where appropraite to your own.
+
+\hypertarget{data-download}{%
+\subsection{Data download}\label{data-download}}
+
+Firstly we need to get a spatial outline of the London boroughs. The geographic boundaries that are used in the UK are a complex, often inter-related, but ever changing mass of areas. For anyone new to the UK (or indeed not a trained quantitative geographer), it can be quite a daunting task to attempt to understand all of the boundaries that are in use. Fortunately the Office for National Statistics (ONS) has an online beginners guide to UK geography. If you need more information on the vast array of different UK geographies, this is the place to start: \url{http://geoportal.statistics.gov.uk/datasets/a-beginners-guide-to-uk-geography-2018-v1-0}
+
+\begin{itemize}
+\tightlist
+\item
+  Spatial Data
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  To get the data go to: \url{https://data.london.gov.uk/}
+\item
+  Seach for Statistical GIS Boundary Files for London
+\item
+  Download the statistical-gis-boundaries-london.zip
+\item
+  Unzip the data and save it to your wk1 folder.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  CSV data
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  On the same website search for fly-tipping incidents
+\item
+  Download the \texttt{.csv} file
+\end{enumerate}
+
+\hypertarget{data-pre-processing}{%
+\subsection{Data pre-processing}\label{data-pre-processing}}
+
+\textbf{Question} Open the \texttt{.csv} in Excel, what do you notice about how the data is stored?
+
+\textbf{Answer} The year is a column and for each area the values are repeated for different years. In our analysis it is easier to have the different years as a coloumn and populated for each area. So, we want to go from this\ldots{}
+
+\begin{center}\includegraphics[width=600pt]{prac1_images/csv_original} \end{center}
+
+To this\ldots{}
+
+\begin{center}\includegraphics[width=600pt]{prac1_images/csv_pivot} \end{center}
+
+As we are going to use this dataset in ArcMap, QGIS and R I've done it in Excel using a pivot table.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Go to Insert \textgreater{} PivotTable
+\item
+  Select the original table and create a PivotTable in a new worksheet
+\item
+  The PivotTable Field box will appear, experiment with the different fields in each of the areas
+\end{enumerate}
+
+I've used the following:
+
+\begin{center}\includegraphics[width=200pt]{prac1_images/pivot_example} \end{center}
+
+Note how I've altered the total\_action\_taken to the sum of\ldots{} as the original was displaying incorrectly, to do so:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on drop down button for total\_action\_taken \textgreater{} Value Field Settings \textgreater{} select Count
+\end{enumerate}
+
+It's important to think about what data we actually need in the next step and it's good practice to avoid data redundancy where possible.
+
+\textbf{Spoiler} The spatial data we have downloaded already contains borough name, so we don't need it twice. However, we do need a field to link the two datasets on. You could use borough name, but when using text fields sometimes input variations can affect joins. For example, you had the University of Manchester in one dataset and Manchester University in another the join would fail. Consequntly it's usually best to join datsets on a code field.
+
+Now save the Excel sheet that contains the pivot table as a new \texttt{.csv}. Make sure that the first row of data holds the coloumn titles. Remove all empty rows.
+
+When saving the file also avoid any special characters (e.g.~-) and spaces, use an underscore instead of spaces.
+
+\textbf{Warning} Spatial software (especially ArcGIS) does not like file names with spaces or special characters.
+
+\hypertarget{data-loading}{%
+\subsection{Data loading}\label{data-loading}}
+
+Now it's time to load, inspect and do some basic manipulation of this data. As mentioned in the lecture there are several GIS software `types', here we will repeat the same process across ArcGIS, QGIS and R. Each system has specific benefits, but in general there has been a recent shift towards the use of QGIS and R, both being opensource. ArcGIS was the first major spatial analysis software produced by the Environmental Systems Research Institute, Inc.~(Esri), founded in 1969 by Jack Dangermond. Due to its high cost and lack of customisation it is now less commonly used within the research community.
+
+\begin{center}\includegraphics[width=300pt]{prac1_images/ArcGISvsQGIS} \end{center}
+
+\hypertarget{arcgis}{%
+\subsection{ArcGIS}\label{arcgis}}
+
+\hypertarget{basics}{%
+\subsubsection{Basics}\label{basics}}
+
+ArcGIS should be installed as a standard programme in the UCL desktop and you can navigate to it from the Windows start button.
+
+\hypertarget{installing-arcgis-on-your-own-computer}{%
+\paragraph{Installing ArcGIS on your own computer}\label{installing-arcgis-on-your-own-computer}}
+
+As a UCL student, you can install ArcGIS on your own computer. This is easy if you have a PC, but if you have a Mac this can be trickier as Arc will only run in a PC environment. If you have a Mac, the options open to you are either to:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Run ArcGIS through the \href{mailto:Desktop@UCL}{\nolinkurl{Desktop@UCL}} application - \url{http://www.ucl.ac.uk/isd/services/computers/remote-access/desktop}
+\item
+  Duel boot your machine using bootcamp, install Windows (7 or 8 is fine) and then install Arc onto the Windows partition.
+\item
+  Install some kind of virtualisation software such as Parallels (\url{http://www.parallels.com/ca/products/desktop/}) or VMware (\url{http://www.vmware.com/products/fusion/}), and run Arc on a virtual windows machine
+\end{enumerate}
+
+If you can, it is preferable to run Arc on Bootcamp as virtualisation software can be slow, but the \href{mailto:Desktop@UCL}{\nolinkurl{Desktop@UCL}} facility should suffice for this course.
+ArcGIS (Version 10.6 is the latest at time of writing, but may have already been superseded) can be downloaded from the UCL Software Database for free --- \url{https://swdb.ucl.ac.uk/}.
+
+\hypertarget{getting-help}{%
+\paragraph{Getting Help}\label{getting-help}}
+
+ArcGIS is a huge and complex piece of software, but thankfully is has an excellent help system -- depending on the version you are using (they are all quite similar anyway) you can access the online help system here:
+
+\begin{itemize}
+\item
+  \url{http://resources.arcgis.com/en/help/main/10.2/}
+\item
+  \url{http://resources.arcgis.com/en/help/main/10.1/}
+\end{itemize}
+
+\hypertarget{arcgis-1}{%
+\paragraph{ArcGIS}\label{arcgis-1}}
+
+ArcGIS is actually a whole suite of software built and maintained by ESRI (\url{http://www.esri.com/software/arcgis}).Within the ArcGIS for Desktop suite you will find the following programmes:
+
+\begin{itemize}
+\item
+  \textbf{ArcCatalog --- Similar to Windows Explorer, ArcCatalog allows you to manage your GIS files, folders and geodatabases}
+\item
+  ArcGIS Administrator --- This programme us used to manage licences for the various elements of ArcGIS
+\item
+  ArcGlobe --- ArcGlobe allows you to view and analyse your data in 3D ---- this interface looks very similar to Google Earth and is part of the 3D analyst extension
+\item
+  \textbf{ArcMap --- This is the programme you will use most often ---- it is the main mapping and spatial analysis element of ArcGIS}
+\item
+  ArcScene --- ArcScene is a 3D viewer which allows you to navigate and interact with your 3D raster and feature data
+\end{itemize}
+
+ArcCatalog and ArcMap are in bold as these are the only programmes we will be using explicitly in this course. By all means experiment with the others if you have any spare time!
+
+\hypertarget{arccatalog}{%
+\subsubsection{ArcCatalog}\label{arccatalog}}
+
+\begin{itemize}
+\item
+  Find and run the ArcCatalog piece of software
+\item
+  Once ArcCatalog Opens, go to File \textgreater{} Connect To Folder\ldots{} and navigate to the N:\GIS folder, right click in the contents area and create a new Flie Geodatabase.
+\end{itemize}
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/file_geo} \end{center}
+
+You can import data layers into a Geodatabase within ArCatalog, however we will do this in ArcMap.
+
+Close ArcCatalog and never have both ArcCatalog and another ArcGIS product open at the same time.
+
+\hypertarget{arcmap}{%
+\subsubsection{ArcMap}\label{arcmap}}
+
+\hypertarget{introduction}{%
+\paragraph{Introduction}\label{introduction}}
+
+ArcMap is the core of the ArcGIS suite and where you would normally produce maps, carry out spatial analysis functions and automate processes.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Search for and open ArcMap
+\item
+  Upon opening select the database you just created in the dialogue box
+\item
+  Click ok
+\end{enumerate}
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/default_database} \end{center}
+
+When the map document opens you should see something similar to the image below, highlighting some of the key buttons:
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/arcmap} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  It's important to now set the map document up properly. Go File \textgreater{} Map Document Properties, enter the details you wish. You can see the connection to the Geodatabase we just made. Click store relative pathnames, this means as long as the data stays in the same position relative to the path then ArcMap can load all the layers. For example if you moved your work from the C: drive to an external drive, H:.
+\end{enumerate}
+
+\hypertarget{load-data}{%
+\paragraph{Load data}\label{load-data}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Using the \textbf{Plus} icon (add data layer) navigate to the extracted folder you saved earlier.
+\item
+  Open London\_Borough\_Excluding\_MHW.shp, but feel free to explore the other data layers. In the left hand Table Of Contents you can unselect layers to turn them off or drag layers above or below to change the display order. In the example below the wards layer is showing above the borough layer.
+\end{enumerate}
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/display_order} \end{center}
+
+\textbf{Note}, while we have loaded the shapefile, it is not stored in our Geodatabase yet.
+
+\textbf{Useful tips}
+
+\begin{itemize}
+\item
+  To the right of the document you will see the Catalog and Search tabs.The Catalog tab is a more compact version of ArcCatalog and will let you see what data is stored in the current Geodatabase. The search tab will let you find any analysis tool within ArcGIS. Try searching for Clip.
+\item
+  If you right click on the boroughs layer (in the Table of Contents, left hand pane) you will see various options. Zoom to layer is very useful if you ever get lost in your ArcMap document.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Now right click on the borough layer (in the Table of Contents) and open the attribute table. You'll see the GSS\_CODE field, which is the same code we output in our \texttt{.csv}. If you now right click on a field you'll also be able to see the data type (e.g.~string, integer). For example:
+\end{enumerate}
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/London_attribute_table} \end{center}
+
+\hypertarget{join-data}{%
+\paragraph{Join data}\label{join-data}}
+
+We're now going to join our flytipping data to the lonon borough shapefile. So:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Right click on the london borough layer \textgreater{} Joins and Relates \textgreater{} Join\\
+\item
+  Select the GSS\_CODE as the field in the layer to base the join on
+\item
+  Navigate to the \texttt{.csv} we created earlier
+\item
+  Select the code field that matches (in my case this is called Row Labels)
+\item
+  Select only to join matching records
+\item
+  Validate join and click OK
+\end{enumerate}
+
+\textbf{You will get errors}, ArcMap does not like fields starting with numbers (e.g.~2012), dashes (e.g.~-) or spaces. Feel free to change them in the original \texttt{.csv} but for this practical it is fine to continue.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  The join should work, so reopen the attribute table for the layer London boroughs
+\end{enumerate}
+
+\textbf{Note}, the join we have made is not permanent. To do so we need to export the layer.
+
+\hypertarget{export-data}{%
+\paragraph{Export data}\label{export-data}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  Right click on the london boroughs layer \textgreater{} Data \textgreater{} Export Data
+\item
+  The location should default to our GeoDatabase. Be sure to change the filename --- again avoid all of the characters (e.g.~spaces and -) previously mentioned. Add the data layer to the map
+\end{enumerate}
+
+Now lets use the data we've joined to create a basic thematic map.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  Right click on the new London borough layer \textgreater{} Properties
+\item
+  Under the Symbology tab select Graduated colors
+\item
+  Select the Value as one of the years of data we joined and change the classificaiton to something of your choice
+\end{enumerate}
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/symbology} \end{center}
+
+You should have something that looks like this:
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/thematicmap} \end{center}
+
+\textbf{We haven't talked about the Coordiante Reference System (CRS) (or Spatial Reference System (SRS)) of our map document}
+
+A coordinate reference system is a series of paramters that define the coordinate system. Within GIS we use geographic or projected cooridnate systems. The former uses a three-dimesional spherical surface to define locations of Earth, whereas the latter is defined on a flat, two-dimesional surface giving it constat lengths, angles and areas.
+
+In ArcMap we can specify what CRS we want to use by:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Right clicking on the map document \textgreater{} Data Frame Properties
+\end{enumerate}
+
+You'll see that it is already set to Projected Coordinate Systems, National Grids, Europe, British National Grid. This is because ArcMap will default to the cooridnate system of the first data layer loaded.
+
+\begin{center}\includegraphics[width=300pt]{prac1_images/coorindate_system} \end{center}
+
+Save and then close your ArcMap document. We're now going to replicate this task in QGIS.
+
+\textbf{\emph{Note}} As we are going to open the same files in difference GIS systems it is important to close the software before moving on. If you don't then files can be \emph{locked} and unreadable as they are still considered to be in use.
+
+\hypertarget{qgis}{%
+\subsection{QGIS}\label{qgis}}
+
+\hypertarget{introduction-1}{%
+\subsubsection{Introduction}\label{introduction-1}}
+
+QGIS is very similar to ArcMap except that as it is open-source and free there are many add on packages that (or plugins) that provide additional functionality to the software.
+
+To get QGIS on your personal machine go to: \url{https://qgis.org/en/site/forusers/download.html}
+
+I install the OSGeo4W version. The nature of open-source means that several programs will rely on each other for features. OSGeo4W tracks all the shared requirements and does not intall any duplicates.
+
+\hypertarget{load-data-1}{%
+\subsubsection{Load data}\label{load-data-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Search for and open QGIS
+\item
+  Click on the open data source manager. Just above the word \emph{browser} in the top left of the screen
+\end{enumerate}
+
+\begin{center}\includegraphics[width=700pt]{prac1_images/qgis_datamanager} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Navigate to the London boroughs layer \texttt{.shp} and add it, you then have to close the data source manager
+\end{enumerate}
+
+Just like in ArcMap you can right click on the layer to view the attribute table. Unlike ArcMap you have to load the \texttt{.csv} file into QGIS in order to join it to a shapefile.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Open the data source manager and select Delimited Text
+\item
+  Navigate to our \texttt{.csv} file and provide a suitable layer name
+\item
+  Under Record and Fields Options make sure the number of header lines to discard is 0 and the First record has field names box is selected (this is assuming you left a title for each coloumn in your \texttt{.csv})
+\item
+  Under Geometry Definition select No geometry (attribute table only)
+\end{enumerate}
+
+\begin{center}\includegraphics[width=700pt]{prac1_images/csv_datamanager} \end{center}
+
+Does the sample data seem right?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  If so, click add then close
+\end{enumerate}
+
+\hypertarget{join-data-1}{%
+\subsubsection{Join data}\label{join-data-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Right click on the London boroughs layer \textgreater{} Properties \textgreater{} Joins
+\item
+  Click the plus button at the bottom of the box
+\item
+  Complete the dialouge box
+\end{enumerate}
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/qgis_join} \end{center}
+
+\hypertarget{export-data-1}{%
+\subsubsection{Export data}\label{export-data-1}}
+
+Now instead of using a GeoDatabase, let's export to a GeoPackage.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  Right click on the London boroughs layer \textgreater{} Export \textgreater{} Save Feautre As
+\item
+  Select the GeoPackage format and complete the File name (the saved file name for the GeoPackage) and the Layer name (the name for this layer within the GeoPackage). Recall that a GeoPackage can store many data layers as a single file
+\item
+  The new layer will be added to the map, so you can remove the old one. Make sure you remove the right one
+\end{enumerate}
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/make_geopkg} \end{center}
+
+We've now made a GeoPackage that we can connect our map project to.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  Under \emph{Browser}, Right click on GeoPackage \textgreater{} New Connection \textgreater{} Navigate to your GeoPackage
+\item
+  Click the down arrow left to GeoPackage and you should see the one you just navigated to. Click the down arrow on the database and you can see your layer.
+\item
+  Now we are going to import our \texttt{.csv} into our GeoPackage. To do so go: Database \textgreater{} DB Manager
+\item
+  Select your GeoPackage in the left hand pane
+\item
+  Import layer/file then select the \texttt{.csv}. Click Ok.
+\end{enumerate}
+
+Again, remember that the \texttt{.csv} in the Layers tab (bottom left) is the original. Remove it, then from the GeoPackage just click, hold and drag the \texttt{.csv} into the layer pane.
+
+Now let's make a quick thematic map like we did in ArcMap.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Right click on your London boroughs layer \textgreater{} Properties \textgreater{} Symbology
+\item
+  Select categorised and choose a data coloumn and color ramp
+\end{enumerate}
+
+You could also select graduated, however our joined data fields are in the wrong data type. If you wish to change them follow this guide: \url{https://wiki.tuflow.com/index.php?title=QGIS_Change_Attribute_Type}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{21}
+\tightlist
+\item
+  Save your QGIS project
+\end{enumerate}
+
+You should have produced something like this:
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/QGIS_final} \end{center}
+
+\textbf{Spatial reference}
+
+QGIS is similar but different to ArcMap. QGIS defaults to the Coordiante Reference System (CRS) WGS 84, or known by its European Petroleum Survey Group (EPSG) code 4326. However, when you add your first layer in will default to that CRS. We'll go into the background of EPSG next time.
+
+You can change the CRS by going File \textgreater{} Properties and selecting CRS in the left hand pane.
+
+\hypertarget{r}{%
+\subsection{R}\label{r}}
+
+\hypertarget{introduction-2}{%
+\subsubsection{Introduction}\label{introduction-2}}
+
+R is both a programming language and software environment, originally designed for statistical computing and graphics. R's great strength is that it is open-source, can be used on any computer operating system and free for anyone to use and contribute to. Because of this, it is rapidly becoming the statistical language of choice for many academics and has a huge user community with people constantly contributing new packages to carry out all manner of statistical, graphical and importantly for us, geographical tasks.
+
+The purpose of this practical is just to demostrate data loading and manipulation in different software. The next practical will provide much more detail on R, so don't worry.
+
+Search for and open R Studio.
+
+You can install R Studio on your own machine from: \url{https://www.rstudio.com/products/rstudio/download/\#download}
+
+R studio requires R which you can download from: \url{https://cran.rstudio.com/}
+
+RStudio is a free and open-source integrated development envrionment for R --- it makes R much easier to use.
+
+In RStduio go:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  File \textgreater{} New File \textgreater{} R Script
+\end{enumerate}
+
+You should be able to see these quadrants:
+
+\begin{center}\includegraphics[width=800pt]{prac1_images/RStudio} \end{center}
+
+Below are bits of code, to start we will work using the \textbf{console}. So just copy the bits of code into the console window, changing the file names to where your data is stored. Then at the end of this section I'll show you how to make a script.
+
+R works on packages that are collections of functions and data. For this practical we will need the ones listed in the code chunk below. Whilst we've installed them, we haven't yet loaded them. It's best practice to do all this at the start of your code, however, for demonstration purpoposes I'll load each one as we need it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tmap"}\NormalTok{, }\StringTok{"tmaptools"}\NormalTok{, }\StringTok{"RSQLite"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://www.stats.bris.ac.uk/R/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Packages we've installed:
+
+\begin{itemize}
+\tightlist
+\item
+  sf: simple features, standad way to encode spatial vector data
+\item
+  tmap: layer-based and easy approach to make thematic maps
+\item
+  tmaptools: set of tools for reading and processing spatial data
+\item
+  RSQLite: embeds the SQLite database engine in R
+\end{itemize}
+
+Here, repos stands for repository where we will download the packages from.
+
+\hypertarget{load-data-2}{%
+\subsubsection{Load data}\label{load-data-2}}
+
+Great, load the sf package so we can read our shapefile in --- remember to change to filepath to your shapefile.
+
+\textbf{\emph{Note}} by default in R, the file path should be defined with / but on a \#windows file system it is defined with . Using \textbackslash{} instead allows R \#to read the path correctly -- alternatively, just use /
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sf)}
+\NormalTok{shape <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"Prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Reading layer `London_Borough_Excluding_MHW' from data source `N:\Documents\Teaching\CASA0005practicals\CASA0005book\Prac1_data\statistical-gis-boundaries-london\ESRI\London_Borough_Excluding_MHW.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 33 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 200933.9
+## epsg (SRID):    NA
+## proj4string:    +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs
+\end{verbatim}
+
+To get a summary of the data held within the shapefile data (attribute table) enter the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    NAME         GSS_CODE     HECTARES      
+##  Barking and Dagenham: 1   E09000001: 1   Min.   :  314.9  
+##  Barnet              : 1   E09000002: 1   1st Qu.: 2724.9  
+##  Bexley              : 1   E09000003: 1   Median : 3857.8  
+##  Brent               : 1   E09000004: 1   Mean   : 4832.4  
+##  Bromley             : 1   E09000005: 1   3rd Qu.: 5658.5  
+##  Camden              : 1   E09000006: 1   Max.   :15013.5  
+##  (Other)             :27   (Other)  :27                    
+##    NONLD_AREA     ONS_INNER SUB_2009  SUB_2006           geometry 
+##  Min.   :  0.00   F:19      NA's:33   NA's:33   MULTIPOLYGON :33  
+##  1st Qu.:  0.00   T:14                          epsg:NA      : 0  
+##  Median :  2.30                                 +proj=tmer...: 0  
+##  Mean   : 64.22                                                   
+##  3rd Qu.: 95.60                                                   
+##  Max.   :370.62                                                   
+## 
+\end{verbatim}
+
+To have a quick look what the shapefile looks like enter the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(shape)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{01-prac1_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+From what we did in QGIS and ArcMap this should look familiar.
+
+We now need to load our \texttt{.csv} file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mycsv <-}\StringTok{  }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Prac1_data/fly_tipping_borough_edit.csv"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+To view the data just input:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mycsv }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Row.Labels X2011_12 X2012_13 X2013_14 X2014_15 X2015_16 X2016_17
+## 1    E09000001      563     1492      433      347      587     1944
+## 2    E09000002     2687     2122     1399     3100     2672     1130
+## 3    E09000003     2356     1828      890      219      615      130
+## 4    E09000004      505      627      732      399      262      439
+## 5    E09000005     6713     2232     3189     3926     3980     4366
+## 6    E09000006      306      479      653      462      326      228
+## 7    E09000007     5541     5962     8281     4837     4719     4656
+## 8    E09000008       31      108      460      712     1707      637
+## 9    E09000009     6727     5679     6543     5521     6067    12688
+## 10   E09000010     7262     3595     3269     4937     5292    10894
+## 11   E09000011     6344     7482    13950    17667     6410     2188
+## 12   E09000012     2332     1456    10495     8865     9494     5601
+## 13   E09000013     6944     1719     1719     1632     1868     4857
+## 14   E09000014     8817     4719     7633     8639     3615     5131
+## 15   E09000015     1053        0        0      995     1354     1385
+## 16   E09000016    13970    13762    13393     7404     8523    11748
+## 17   E09000017     5120     4188     3101        0      620     3031
+## 18   E09000018     1234     1030      994     2190     1865     2242
+## 19   E09000019     6959     6167     8646     8172     8250     7878
+## 20   E09000020     4773     5009     6353     6651     6308     9282
+## 21   E09000021        0        0        0        0        0        0
+## 22   E09000022      598        0        0        0        0        0
+## 23   E09000023      789     1083     1499     2627     2611     1454
+## 24   E09000024     1279     1299     1305     6985     2542     6056
+## 25   E09000025     9593     7283    10354     8620    10621     5155
+## 26   E09000026     6114     6913     4778     6306     4319     2489
+## 27   E09000027     2610     2291     2647      207     2133     3337
+## 28   E09000028        0     1194     3776     1889     1476     1937
+## 29   E09000029     1255      201      755      545      146      278
+## 30   E09000030     3251     4909    18057    17064    17494    14601
+## 31   E09000031    17182    17049    17176    17361    12290    18459
+## 32   E09000032     8226     5166     6674     4977     8547     9582
+## 33   E09000033     8367     6636     6166     6380     3447     3876
+## 34 Grand Total   149501   123680   165320   159636   140160   157679
+##    X2017_18 Grand_Total
+## 1      2579        7945
+## 2      1066       14176
+## 3       503        6541
+## 4       327        3291
+## 5      7483       31889
+## 6       258        2712
+## 7     12671       46667
+## 8      2684        6339
+## 9      5471       48696
+## 10     5855       41104
+## 11     1443       55484
+## 12    11172       49415
+## 13     2982       21721
+## 14     3171       41725
+## 15     1622        6409
+## 16    10463       79263
+## 17     4393       20453
+## 18     4334       13889
+## 19     7231       53303
+## 20    10165       48541
+## 21        3           3
+## 22      959        1557
+## 23     1330       11393
+## 24     6299       25765
+## 25     3615       55241
+## 26     5670       36589
+## 27     2615       15840
+## 28     2255       12527
+## 29      450        3630
+## 30    13316       88692
+## 31    17036      116553
+## 32     9735       52907
+## 33     7111       41983
+## 34   166267     1062243
+\end{verbatim}
+
+\hypertarget{join-data-2}{%
+\subsubsection{Join data}\label{join-data-2}}
+
+In R we've given our London boroughs shapefile the name shape and our flytipping \texttt{.csv} the name mycsv. If you look in the Environment quadrant you should see them both listed.
+
+Join the \texttt{.csv} to the shapefile. Here, replace Row.Labels with whatever your GSS\_CODE is called in the \texttt{.csv}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{library}\NormalTok{(tmaptools)}
+\NormalTok{shape <-}\StringTok{ }\KeywordTok{append_data}\NormalTok{(shape, mycsv, }\DataTypeTok{key.shp=}\StringTok{"GSS_CODE"}\NormalTok{, }\DataTypeTok{key.data =} \StringTok{"Row.Labels"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Over coverage: 1 out of 34 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.
+\end{verbatim}
+
+Let's break this down a bit. We just created a data frame (my.csv) where each coloumn has a variable and each row contains a set of values --- so basically a normal table. The match simply found the GSS\_CODE values in the \texttt{.csv} and joined the data to our shapefile.
+
+The message detailing 1 out of the 34 data records were not appended refers to the Grand Total row within the \texttt{.csv}.
+
+Check the merge was successful, this is just going to show the top 10 rows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(shape, }\DataTypeTok{n=}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Simple feature collection with 10 features and 15 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 198355.2
+## epsg (SRID):    NA
+## proj4string:    +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.1502,0.247,0.8421,-20.4894 +units=m +no_defs
+##                    NAME  GSS_CODE  HECTARES NONLD_AREA ONS_INNER SUB_2009
+## 21 Kingston upon Thames E09000021  3726.117      0.000         F     <NA>
+## 8               Croydon E09000008  8649.441      0.000         F     <NA>
+## 6               Bromley E09000006 15013.487      0.000         F     <NA>
+## 18             Hounslow E09000018  5658.541     60.755         F     <NA>
+## 9                Ealing E09000009  5554.428      0.000         F     <NA>
+## 16             Havering E09000016 11445.735    210.763         F     <NA>
+## 17           Hillingdon E09000017 11570.063      0.000         F     <NA>
+## 15               Harrow E09000015  5046.330      0.000         F     <NA>
+## 5                 Brent E09000005  4323.270      0.000         F     <NA>
+## 3                Barnet E09000003  8674.837      0.000         F     <NA>
+##    SUB_2006 X2011_12 X2012_13 X2013_14 X2014_15 X2015_16 X2016_17 X2017_18
+## 21     <NA>        0        0        0        0        0        0        3
+## 8      <NA>       31      108      460      712     1707      637     2684
+## 6      <NA>      306      479      653      462      326      228      258
+## 18     <NA>     1234     1030      994     2190     1865     2242     4334
+## 9      <NA>     6727     5679     6543     5521     6067    12688     5471
+## 16     <NA>    13970    13762    13393     7404     8523    11748    10463
+## 17     <NA>     5120     4188     3101        0      620     3031     4393
+## 15     <NA>     1053        0        0      995     1354     1385     1622
+## 5      <NA>     6713     2232     3189     3926     3980     4366     7483
+## 3      <NA>     2356     1828      890      219      615      130      503
+##    Grand_Total                       geometry
+## 21           3 MULTIPOLYGON (((516401.6 16...
+## 8         6339 MULTIPOLYGON (((535009.2 15...
+## 6         2712 MULTIPOLYGON (((540373.6 15...
+## 18       13889 MULTIPOLYGON (((521975.8 17...
+## 9        48696 MULTIPOLYGON (((510253.5 18...
+## 16       79263 MULTIPOLYGON (((549893.9 18...
+## 17       20453 MULTIPOLYGON (((510599.8 19...
+## 15        6409 MULTIPOLYGON (((510599.8 19...
+## 5        31889 MULTIPOLYGON (((525201 1825...
+## 3         6541 MULTIPOLYGON (((524579.9 19...
+\end{verbatim}
+
+Now, let's make a quick thematic map (or a qtm) using the package \texttt{tmap}. I've made mine for flytipping between 2011 and 2012 (coloumn X2011\_12):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{library}\NormalTok{(tmaptools)}
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tmap mode set to plotting
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qtm}\NormalTok{(shape, }\DataTypeTok{fill =} \StringTok{"X2011_12"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{01-prac1_files/figure-latex/unnamed-chunk-32-1.pdf}
+
+\hypertarget{export-data-2}{%
+\subsection{Export data}\label{export-data-2}}
+
+Finally write shape to a new GeoPackage (\texttt{.gpkg}) giving it the layer name of your choice:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{st_write}\NormalTok{(shape, }\StringTok{"Prac1_data/Rwk1.gpkg"}\NormalTok{, }\StringTok{"london_boroughs_fly_tippint"}\NormalTok{, }\DataTypeTok{delete_layer=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Deleting layer `london_boroughs_fly_tippint' using driver `GPKG'
+## Updating layer `london_boroughs_fly_tippint' to data source `Prac1_data/Rwk1.gpkg' using driver `GPKG'
+## features:       33
+## fields:         15
+## geometry type:  Multi Polygon
+\end{verbatim}
+
+So here, we are saying the shape is the object we want to save, then to the GeoPackage file path, with the layer name of london\_boroughs\_fly\_tippint. I've set delete\_layer to true so I could overwrite mine when I developed this practical. Changing it to false would generate an error message if you ever tried to re-run the code.
+
+Let's also add the \texttt{.csv} as we did in QGIS. This is a bit more complicated as we have to use the SQLite datavase package. Firstly, connect to the \texttt{.gpkg} we just made:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(RSQLite)}
+\NormalTok{con =}\StringTok{ }\KeywordTok{dbConnect}\NormalTok{(}\KeywordTok{SQLite}\NormalTok{(),}\DataTypeTok{dbname=}\StringTok{"Prac1_data/Rwk1.gpkg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now examine what is in the \texttt{.gpkg}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbListTables}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "gpkg_contents"                                
+##  [2] "gpkg_extensions"                              
+##  [3] "gpkg_geometry_columns"                        
+##  [4] "gpkg_metadata"                                
+##  [5] "gpkg_metadata_reference"                      
+##  [6] "gpkg_ogr_contents"                            
+##  [7] "gpkg_spatial_ref_sys"                         
+##  [8] "gpkg_tile_matrix"                             
+##  [9] "gpkg_tile_matrix_set"                         
+## [10] "london_boroughs_fly_tippint"                  
+## [11] "original_csv"                                 
+## [12] "rtree_london_boroughs_fly_tippint_geom"       
+## [13] "rtree_london_boroughs_fly_tippint_geom_node"  
+## [14] "rtree_london_boroughs_fly_tippint_geom_parent"
+## [15] "rtree_london_boroughs_fly_tippint_geom_rowid" 
+## [16] "sqlite_sequence"
+\end{verbatim}
+
+Then add add our \texttt{.csv} and disconnect from the \texttt{.gpkg}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbWriteTable}\NormalTok{(con,}\StringTok{"original_csv"}\NormalTok{, mycsv, }\DataTypeTok{overwrite=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{dbDisconnect}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{making-a-script}{%
+\subsubsection{Making a script}\label{making-a-script}}
+
+To convert this bit of analysis into a script that we could save and run again in future, I would write the following in the script quadrant:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"sf"}\NormalTok{, }\StringTok{"tmap"}\NormalTok{, }\StringTok{"tmaptools"}\NormalTok{, }\StringTok{"RSQLite"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://www.stats.bris.ac.uk/R/"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(sf, tmap, tmaptools, RSQLite)}
+\NormalTok{shape <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"Prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{)}
+\NormalTok{mycsv =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Prac1_data/fly_tipping_borough_edit.csv"}\NormalTok{)  }
+\NormalTok{shape<-}\KeywordTok{append_data}\NormalTok{(shape, mycsv, }\DataTypeTok{key.shp=}\StringTok{"GSS_CODE"}\NormalTok{, }\DataTypeTok{key.data =} \StringTok{"Row.Labels"}\NormalTok{)}
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"plot"}\NormalTok{)}
+\KeywordTok{qtm}\NormalTok{(shape, }\DataTypeTok{fill =} \StringTok{"X2011_12"}\NormalTok{)}
+\KeywordTok{st_write}\NormalTok{(shape, }\StringTok{"Prac1_data/Rwk1.gpkg"}\NormalTok{, }\StringTok{"london_boroughs_fly_tippint"}\NormalTok{, }\DataTypeTok{delete_layer=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{con =}\StringTok{ }\KeywordTok{dbConnect}\NormalTok{(}\KeywordTok{SQLite}\NormalTok{(),}\DataTypeTok{dbname=}\StringTok{"Prac1_data/Rwk1.gpkg"}\NormalTok{)}
+\KeywordTok{dbListTables}\NormalTok{(con)}
+\KeywordTok{dbWriteTable}\NormalTok{(con,}\StringTok{"original_csv"}\NormalTok{, mycsv, }\DataTypeTok{overwrite=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{dbDisconnect}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+You can then save your script through File \textgreater{} Save As.
+
+\hypertarget{what-will-i-use-1}{%
+\subsection{What will I use}\label{what-will-i-use-1}}
+
+Well\ldots{} it depends. If you wanted to quickly open a dataset to explore its contents then i'd use QGIS or ArcMap. However, if you had 100 raster images that you wanted to clip to your study area, i'd automate it in R. There are also specfic packages developed for each type of software that might dictate what you use, for example I recently made use of the Urban Multi-sacle Envrionmental Predictor (UMEP) plugin in QGIS. That said, as I needed to match different hourly meterological varaibles over a three year period I automated the first part of the analysis in R and loaded a \texttt{.csv} into QGIS.
+
+\hypertarget{data-sources-and-task}{%
+\section{Data sources and task}\label{data-sources-and-task}}
+
+Below i've listed a few good data sources. \textbf{For this week's task} explore these and any others you can find and get an interesting dataset (e.g.~in this practical our flytipping \texttt{.csv}) that you could join to some spatial data (e.g.~in this practical the London boroughs \texttt{.shp}). This could be for any location in the world.
+
+\hypertarget{uk-data-service}{%
+\subsection{UK Data Service}\label{uk-data-service}}
+
+The UK Data Service geography service (\url{https://census.edina.ac.uk/}) has a library of hundreds of current and former boundary datasets for which attribute data are produced in the UK.
+
+\hypertarget{ons}{%
+\subsection{ONS}\label{ons}}
+
+The Office for National Statistics (ONS) are the national statistical agency for England and Wales and have recently started to provide access to boundary data for the statistics they produce for various geographic areas.
+
+Many of the boundaries on the ONS Geoportal are also available from the Edina Census Geography website in a more flexible fashion, however the ONS website provides very quick access to bulk-downloads ---- something which can be very useful when reading data directly from the web using computer software.
+
+\hypertarget{os}{%
+\subsection{OS}\label{os}}
+
+The Ordnance Survey (OS) are the national mapping agency for the UK. A few years ago, they opened up a number of their data products for public use including greenspace, OS Open Map and OS Terrain.
+
+For the full range see: \url{https://www.ordnancesurvey.co.uk/business-and-government/products/finder.html?Licensed\%20for=OpenData\%20(Free)\&withdrawn=on}
+
+\hypertarget{edina-digimap}{%
+\subsection{Edina Digimap}\label{edina-digimap}}
+
+Before the Ordnance Survey opened up much of its data for public use, academics and students in the UK could access OS data using the Edina Digimap Service ---- this service is still available today and provides access to a number of products in addition to those available from OS Open Data.
+
+Perhaps the most exciting of the additional OS data products available from Digimap is OS MasterMap. MasterMap is a framework for all OS data and contains layers of data that include details of real world objects such as buildings, roads, paths, rivers, physical structures and land parcels, as well as the complete UK transport network. Whilst we still are required to go through Edina OS have recently annonced plans to make this dataset free in the near future under the new Geospatial Commission.
+
+\begin{center}\includegraphics[width=500pt]{prac1_images/mastermap} \end{center}
+
+\hypertarget{osm}{%
+\subsection{OSM}\label{osm}}
+
+Open Street Map (OSM) is a fantastic resource ---- as the name suggests, all data contained in Open Street Map are open and free for anyone to use. Much like Wikipedia, anyone can contribute content to OSM and this brings with it its own benefits (frequent updates, very large user-base) and problems (data quality and patch coverage). OSM is a very good example of Volunteered Geographic Information (VGI).
+
+It's possible to download OSM data straight from the website, although the interface can be a little unreliable (it works better for small areas). There are, however, a number of websites that allow OSM data to be downloaded more easily and are directly linked to from the `Export' option in OSM. Geofabrik (\url{https://www.geofabrik.de/data/download.html}) allows you to download frequently updated Shapefiles for various global subdivisions.
+
+\hypertarget{defra}{%
+\subsection{DEFRA}\label{defra}}
+
+The Department for Environmen and Rural Affairs (DEFRA) have recently created the Data Services Platform to openly distribute envrionmental data. See: \url{https://environment.data.gov.uk/}
+
+\hypertarget{data-lists}{%
+\subsection{Data lists}\label{data-lists}}
+
+Another good place to start searching for data are data lists. They simply provide a comprehensive overview of all available data conveniently categorised by discipline and country.
+
+I normally use this one: \url{https://freegisdata.rtwilson.com/}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Within this practical we have explored the different types, formats and software used to store, analyse and manipulate spatial data. In relfecting upon this practical you should consider the (dis)advtanges of each, where and when they might be approraite and the overall practicality. Next week we will delve further into R and RStudio.
+
+\hypertarget{practical-2-introduction-to-r}{%
+\chapter{Practical 2 -- Introduction to R}\label{practical-2-introduction-to-r}}
+
+\hypertarget{learning-outcomes-1}{%
+\section{Learning outcomes}\label{learning-outcomes-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  Examine and clean data
+\item
+  More advaned data mamipulation
+\item
+  Plot graps and maps
+\item
+  Create interative maps
+\end{itemize}
+
+\hypertarget{introduction-3}{%
+\section{Introduction}\label{introduction-3}}
+
+This practical is \textbf{LONG} but it will take you from not knowing much about R to making freaking cool interactive maps in one practial. As you can imagine, this will be a steep learning curve.
+
+I will give you all the code you need, it's your job to read through the text very carefully and try to understand what bits of code are doing as you go.
+
+There will be bits of code you don't fully understand. Don't worry, the key is to revisit later and try to work out what is going on then. Learning R is a long and iterative process and this is just the start\ldots{}
+
+If you want to learn more about R and indeed download the latest version for your own use, then visit the R project pages: \url{http://www.r-project.org/}
+
+The Wikipedia page for those who want to know a little of the history of R can be found here: \url{http://en.wikipedia.org/wiki/R_(programming_language)}
+
+There is an almost endless supply of good R tutorials on the web. If you get stuck or want to learn even more R (and why would you not want to?!), I'd recommend trying some of the following R Tutorial websites:
+
+\begin{itemize}
+\item
+  \url{http://www.statmethods.net/index.html}
+\item
+  \url{http://www.r-tutor.com/}
+\item
+  \url{http://www.cyclismo.org/tutorial/R/index.html}
+\item
+  \url{http://www.cookbook-r.com/}
+\end{itemize}
+
+If you want to really be up to date with the state of the art in R, then \url{https://bookdown.org/} is a fantastic resource. It features free books by some of the pre-eminent names in the R scene - I would urge you to go and take a look.
+
+\hypertarget{online-forums-are-your-friend}{%
+\subsection{Online forums are your friend!!}\label{online-forums-are-your-friend}}
+
+With almost every problem you encounter with R, someone else will have had the same problem before you and posted it on a forum -- someone will then post a solution below.
+
+My usual route is to google the problem and I'll then be directed to a post, usually on StackOverflow, StackExchange or CrossValidated. When doing so try to think about the minimal working (or not working) example (MWE), by this i mean remove anything very specific to your problem. I've rarely not found a solution to a problem this way.
+
+\hypertarget{health-warning}{%
+\subsection{Health warning}\label{health-warning}}
+
+Beware of posting questions on these forums yourself -- contributors to these forums (especially the R ones!), whilst almost always extremely knowledgeable about R, have a bit of a reputation for being insert familiar pejorative term for less-than-polite-human-being here! As you might expect, people who have enough time to become total experts in R, have little time to work on their social skills!! Fortunately though, some other poor chump has usually taken that hit for you and you can still find a useful answer to your problem.
+
+If you are specifically more interested in the spatial side of R, then Alex Singleton and Chris Brunsdon at the Universities of Liverpool and Maynooth also have a number of very useful R Spatial Tutorials -- \url{http://rpubs.com/alexsingleton/} \& \url{http://rpubs.com/chrisbrunsdon/}
+
+Robin Lovelace in Leeds is also frequently at the bleeding edge of developments in R spatial stuff, so keep an eye on his website too: \url{http://robinlovelace.net/}. Robin is also in the process of completing a book on GeoComputation in R, which you should definitely read! - \url{https://geocompr.robinlovelace.net/}
+
+These websites are also very very good: \url{https://pakillo.github.io/R-GIS-tutorial/} and \url{http://www.maths.lancs.ac.uk/~rowlings/Teaching/UseR2012/cheatsheet.html}
+
+\hypertarget{r-and-rstudio}{%
+\subsection{R and RStudio}\label{r-and-rstudio}}
+
+When you download and install R, you get the R Graphical User Interface (GUI) as standard (below). This is fine and some purists prefer using the clean, unfussy command-line original, but it has some limitations such as no graphical way to view data tables or keep track of what is in your working directory (there are a number of others too).
+
+\begin{center}\includegraphics[width=500px]{prac2_images/R} \end{center}
+
+Fortunately there are a number of software environments that have been developed for R to make it a little more user-friendly; the best of these by a long way is RStudio. RStudio can be downloaded for free from \url{https://www.rstudio.com/}. We covered the RStudio layout last week.
+
+\hypertarget{getting-started-1}{%
+\subsection{Getting started}\label{getting-started-1}}
+
+If you are some kind of masochist, you are welcome to use the bundled R GUI for all of your work. If pain is not your thing, then for this practical (and future practicals) I will assume that you are using RStudio.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  From the start menu on your computer, find and run R Studio
+\end{enumerate}
+
+Once RStudio has opened, the first thing we will do is create a new project -- projects enable you to organise your work effectively and store all of the files you create and work with for a particular task.
+2. To create a new project (and this will vary a little depending on the version of RStudio you are using), either select File \textgreater{} New Project\ldots{} or Project \textgreater{} Create Project
+
+\begin{center}\includegraphics[width=500px]{prac2_images/r_newproject} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Select Start a project in a brand new working directory and create a new project in a directory of a new `wk2' directory on your N: drive:
+\end{enumerate}
+
+\begin{center}\includegraphics[width=500px]{prac2_images/new_proj} \end{center}
+
+My file directory (the second box here) will be different to yours as this is my teaching resources folder. Keep yours simple N:/GIS/wk2.
+
+RStudio should now open with three windows -- the main R console on the left, with windows for your environment and files on the right.
+
+\hypertarget{basics-1}{%
+\subsection{Basics}\label{basics-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  R has a very steep learning curve, but hopefully it won't take long to get your head around the basics. For example, at its most simple R can be used as a calculator. In the console window (bottom left), just type the following and press enter:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{1}\OperatorTok{+}\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{4}\OperatorTok{*}\DecValTok{5}\OperatorTok{^}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 100
+\end{verbatim}
+
+As you can see R performs these calculations instantly and prints the results in the console. This is useful for quick calculations but less useful for writing scripts requiring multiple operations or saving these for future use.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  To save your scripts, you should create a new R Script file. Do this now: Select File \textgreater{} New File \textgreater{} R Script.
+\item
+  The R Script should open up on the top-left of your GUI. \textbf{From now on type everything in this R script file and save it}
+\end{enumerate}
+
+\hypertarget{scripts-and-some-basic-commands}{%
+\subsection{Scripts and some basic commands}\label{scripts-and-some-basic-commands}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Usually one of the first things to do when starting a new R Script is to check that you are in the correct working directory. This is important especially if you are working on multiple projects in different locations. To do this type the following into your new empty R Script:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "N:/Documents/Teaching/CASA0005practicals/CASA0005book"
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  To run this line, hold Ctrl (Cmd on a Mac) and press the Return(↲) key (if you are in the standard R installation, you would run your script with Ctrl R). You should now see your current working directory appear in the console.
+\item
+  Because of the new project we have already set up, this working directory should be correct, but if for any reason we wanted to change the working directory, we would use the setwd() function. For example, we wanted to change our directory to the documents folder on the C drive, we could run (don't do this now):
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"C:/Documents"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\item
+  When we are sure we are working in the correct working directory, we can save our script by clicking on the save icon on the script tab. Save your script as something like ``wk2\_part1'' and you will see it appear in your files window on the right hand side. As you build up a document of R code, you should get into the habit of saving your script periodically in case of an unexpected software crash.
+\item
+  We can now begin to write a script without the need to run each line every time we press enter. In the script editor type:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A <-}\StringTok{ }\DecValTok{1}
+\NormalTok{B <-}\StringTok{ }\DecValTok{2}
+\NormalTok{C <-}\StringTok{ }\NormalTok{A}\OperatorTok{+}\NormalTok{B}
+\NormalTok{C}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\item
+  Select (highlight) the three lines and run all three lines with Ctrl Return(↲). You will notice the lines appear in the console (the other window). If you type C and press enter in the console (C and then ctrl return in the script window) you should have the number 3 appear. From now on I recommend you type all the commands below in the script first and then run them. Copying and pasting from this document won't necessarily work.
+\item
+  You will also notice that in RStudio, values A, B and C will appear in your workspace window (top right). These variables are stored in memory for future use. Try giving A and B different values and see what happens. What about if you use lower case letters?
+\item
+  You have just demonstrated one of the powerful aspects of R, which is that it is an \textbf{object oriented} programming language. A, B and C are all objects that have been assigned a value with the \textless{}- symbol (you can also use the = sign, but it operates slightly differently to \textless{}- in R, plus the arrow assignment has become standard over the years. Use \textbf{alt -} to type it automatically). This principle underlies the whole language and enables users to create ever more complex objects as they progress through their analysis. If you type:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ls}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "A" "B" "C"
+\end{verbatim}
+
+R will produce a list of objects that are currently active.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+will remove the object A from the workspace (do ls() again to check this or look in your workspace window).
+
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  Both rm() and ls() are known as functions. Functions are the other fundamental aspect to the R language. Functions can be thought of as single or multiple calculations that you apply to objects. They generally take the form of:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{function}\NormalTok{(object, parameter1, parameter2, parameter3...)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  You can write your own functions to carry out tasks (and we'll come onto that in subsequent practical sessions), but normally you will just used one of the virtually infinite number of functions that other people have already written for us.
+\end{enumerate}
+
+\hypertarget{basic-plotting}{%
+\subsection{Basic plotting}\label{basic-plotting}}
+
+For example, one common function is the \texttt{plot()} function for displaying data as a graphical output. Add these lines to your script and run them as before and you can see some \texttt{plot()} outputs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#create some datasets, first a vector of 1-100 and 101-200}
+\NormalTok{Data1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{Data2 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{101}\OperatorTok{:}\DecValTok{200}\NormalTok{)}
+\CommentTok{#Plot the data}
+\KeywordTok{plot}\NormalTok{(Data1, Data2, }\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#just for fun, create some more, this time some normally distributed}
+\CommentTok{#vectors of 100 numbers}
+\NormalTok{Data3 <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{53}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{34}\NormalTok{)}
+\NormalTok{Data4 <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DataTypeTok{mean =} \DecValTok{64}\NormalTok{, }\DataTypeTok{sd=}\DecValTok{14}\NormalTok{)}
+\CommentTok{#plot}
+\KeywordTok{plot}\NormalTok{(Data3, Data4, }\DataTypeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  In the code above, you will have noticed the \# symbol. This signifies that whatever comes after it on that line is a comment. Comments are ignored by the R console and they allow you to annotate your code so that you know what it is doing. It is good programming practice to comment your code extensively so that you can keep track of what your scripts are for.
+\end{enumerate}
+
+\hypertarget{help}{%
+\subsection{Help}\label{help}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  The previous lines of code also demonstrated a number of functions: c() concatenates a string of numbers together into a vector. 1:100 means produce the integers between and including 1:100, the plot() function plots the two data objects and includes a parameter to change the colour of the points. To understand what a function does, you can consult the R Help system. Simply type a question mark and then the function name; for example:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?plot}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=300px]{prac2_images/rhelp} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\tightlist
+\item
+  In RStudio you will see the help file appear in the Help window in the bottom right of the GUI. Here you can also search for the help files for other functions in the search bar.
+\end{enumerate}
+
+\hypertarget{data-types}{%
+\subsection{Data types}\label{data-types}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  Objects in R can exist as a number of different data types. These include a \textbf{matrix}, a \textbf{vector}, a \textbf{data frame} and a \textbf{list}. For the purposes of this practical we will focus on data frames. These are the most flexible data format in R (although tibbles are now becoming popular as well). Data frames can be conceptualised in a similar way to a spreadsheet with data held in rows and columns. They are the most commonly used object type in R and the most straightforward to create from the two vector objects we just created.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(Data1, Data2)}
+\KeywordTok{plot}\NormalTok{(df, }\DataTypeTok{col=}\StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\tightlist
+\item
+  If you have a very large data frame (thousands or millions of rows) it is useful to see only a selection of these. There are several ways of doing this:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#show the first 10 and then last 10 rows of data in df...}
+\KeywordTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Data1 Data2
+## 1     1   101
+## 2     2   102
+## 3     3   103
+## 4     4   104
+## 5     5   105
+## 6     6   106
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Data1 Data2
+## 95     95   195
+## 96     96   196
+## 97     97   197
+## 98     98   198
+## 99     99   199
+## 100   100   200
+\end{verbatim}
+
+You can also view elements of your data frame in RStudio by simply clicking on it in the top-right Environment window:
+
+\begin{center}\includegraphics[width=800px]{prac2_images/dataview} \end{center}
+
+\hypertarget{elements-of-a-data-frame}{%
+\subsection{Elements of a data frame}\label{elements-of-a-data-frame}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+  When programming you will frequently want to refer to different elements in a data frame or a vector/list. To select elements of a data frame, or subset it, you can refer specifically to ranges or elements of rows and columns. These are accessed using the single square bracket operator {[}{]}, with the form:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data.frame[row,column]}
+\end{Highlighting}
+\end{Shaded}
+
+Rows are always referenced first, before the comma, columns second, after the comma.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  Try the subsetting your df data frame with the following commands to see what is returned:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{1}\OperatorTok{:}\DecValTok{10}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{5}\OperatorTok{:}\DecValTok{15}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Data1 Data2
+## 5      5   105
+## 6      6   106
+## 7      7   107
+## 8      8   108
+## 9      9   109
+## 10    10   110
+## 11    11   111
+## 12    12   112
+## 13    13   113
+## 14    14   114
+## 15    15   115
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{),}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 102 103 106
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{20}
+\tightlist
+\item
+  You will note that the column headings are the names of the original objects creating the data frame. We can change these using the \texttt{colnames()} function:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(df)<-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"column1"}\NormalTok{, }\StringTok{"column2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+To select or refer to these columns directly by name, we can either use the \texttt{\$} operator, which takes the form \texttt{data.frame\$columnName}, e.g.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{column1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
+\end{verbatim}
+
+or we can use the double square bracket operator {[}{[}{]}{]}, and refer to our column by name using quotes e.g.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[[}\StringTok{"column1"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+##  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+##  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+##  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+##  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+##  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
+\end{verbatim}
+
+This again is useful if you have a lot of columns and you wish to efficiently extract one of them.
+
+\hypertarget{reading-data-into-r}{%
+\section{Reading data into R}\label{reading-data-into-r}}
+
+One of the most tedious things a spatial analyst / data scientist has to do is clean their data so it doesn't cause problems for the software later. In the past, we would have needed to do this by hand - these days, we can use software to do much of this for us.
+
+I will now give you two options to arrive at a nice cleaned dataset. If you have issues with software packages etc, you might still need to via the old skool route, however, the new skool route will be much more satisfying if it works!
+
+For this example we are going to use the London Datastore Catalogue.
+
+Go to: \url{https://data.london.gov.uk/dataset/london-datastore-catalogue} and download the excel document.
+
+\hypertarget{old-skool-cleaning}{%
+\subsection{Old skool cleaning}\label{old-skool-cleaning}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{21}
+\item
+  Open the \texttt{LondonData.xls} file in Excel, and save as \texttt{LondonData.csv} into your wk2/RProject folder.
+\item
+  Open your new \texttt{.csv} file in Excel. There might be some non-numeric values inside numeric columns which will cause problems in your analysis. These need to be removed before proceeding any further. To remove these, you can use the replace function in Excel. In the home tab under `Editing' open up the find and replace dialogue box and enter the following into the find box:
+\end{enumerate}
+
+\texttt{\#VALUE!} \texttt{\#n/a}
+
+Leave the replace box empty each time and click Replace All to remove these from your file, before saving the file again.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{23}
+\tightlist
+\item
+  Once you have cleaned out all of the trixy characters from the file, to read it into R, we will use the read.csv() function:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonDataOSK<-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"prac2_data/london_catalogue.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Note}, i've made an R project for all these practicals, which is why my file path starts with \texttt{prac2\_data/}. If you save the \texttt{.csv} in the same folder as the \texttt{.Rproj} then you can just use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonDataOSK<-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"LondonData.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you look at the \texttt{read.csv()} help file - \texttt{?read.csv} - you will see that we can actually include many more parameters when reading in a .csv file. For example, we could read in the same file as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# by default in R, the file path should be defined with / but on a #windows file system it is defined with \textbackslash{}. Using \textbackslash{}\textbackslash{} instead allows R #to read the path correctly – alternatively, just use /}
+\NormalTok{LondonDataOSK<-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"prac2_data/london_catalogue.csv"}\NormalTok{, }\DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This would specify the exact path; that the first row of the file contains header information; and the values in the file are separated with commas (not ; or : as can be the case sometimes).
+
+\hypertarget{new-skool-cleaning}{%
+\subsection{New skool cleaning}\label{new-skool-cleaning}}
+
+To clean our data as we read it in, we are going to use a package (more about packages later - for now, just think about it as a lovely gift from the R gods) called readr which comes bundled as part of the tidyverse package. If you want to find out more about the Tidyverse (and you really should) then you should start here: \url{https://www.tidyverse.org/} - the Tidyverse package contains almost everything you need to become a kick-ass data scientist. `Tidy' as a concept in data science is well worth reading about and you should start here with Hadley Wickham's paper - \url{http://vita.had.co.nz/papers/tidy-data.pdf}
+
+Anyway, first install the package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://www.stats.bris.ac.uk/R/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can use the \texttt{readr} package which comes bundled as part of the tidyverse to read in some data (directly from the web this time - read.csv can do this too) and clean text characters out from the numeric columns before they cause problems:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\CommentTok{#wang the data in straight from the web using read_csv, skipping over the 'n/a' entries as you go...}
+\NormalTok{LondonData <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"https://files.datapress.com/london/dataset/ward-profiles-and-atlas/2015-09-24T14:21:24/ward-profiles-excel-version.csv"}\NormalTok{, }\DataTypeTok{na =} \StringTok{"n/a"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{note the use of read\_csv here as opposed to read.csv. They are very similar, but read\_csv is just a bit better - read this to understand why\ldots{} Also, for those python fans out there - IT'S NOT THE SAME FUNCTION AS READ\_CSV IN PYTHON}
+
+\hypertarget{examining-your-new-data}{%
+\subsection{Examining your new data}\label{examining-your-new-data}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{24}
+\tightlist
+\item
+  Your new data has been read in as a data frame / tibble (a tibble is just a data frame with a few extra bells and whistles). If you ever need to check what data type your new data set is, we can use the \texttt{class()} function:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(LondonData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# or, if you have your old skool data from step 24 above}
+\KeywordTok{class}\NormalTok{(LondonDataOSK)}
+\end{Highlighting}
+\end{Shaded}
+
+We can also use the \texttt{class} function within another two functions (cbind() and lapply()) to check that our data has been read in correctly and that, for example, numeric data haven't been read in as text or other variables. Run the following line of code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datatypelist <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\KeywordTok{lapply}\NormalTok{(LondonData,class)))}
+\end{Highlighting}
+\end{Shaded}
+
+You should see that all columns that should be numbers are read in as numeric. Try reading in LondonData again, but this time without excluding the `n/a' values in the file, e.g.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonData <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"https://files.datapress.com/london/dataset/ward-profiles-and-atlas/2015-09-24T14:21:24/ward-profiles-excel-version.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now run the datatypelist function again - you should see that some of the columns (those the n/a values in) have been read in as something other than numeric. This is why we need to exclude them. Isn't \texttt{readr} great for helping us avoid reading in our numeric data as text!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonData <-}\StringTok{ }\KeywordTok{edit}\NormalTok{(LondonData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{26}
+\tightlist
+\item
+  It is also possible to quickly and easily summarise the data or look at the column headers using
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     column1          column2     
+##  Min.   :  1.00   Min.   :101.0  
+##  1st Qu.: 25.75   1st Qu.:125.8  
+##  Median : 50.50   Median :150.5  
+##  Mean   : 50.50   Mean   :150.5  
+##  3rd Qu.: 75.25   3rd Qu.:175.2  
+##  Max.   :100.00   Max.   :200.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(LondonData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Ward name"                                                                  
+##  [2] "Old code"                                                                   
+##  [3] "New code"                                                                   
+##  [4] "Population - 2015"                                                          
+##  [5] "Children aged 0-15 - 2015"                                                  
+##  [6] "Working-age (16-64) - 2015"                                                 
+##  [7] "Older people aged 65+ - 2015"                                               
+##  [8] "% All Children aged 0-15 - 2015"                                            
+##  [9] "% All Working-age (16-64) - 2015"                                           
+## [10] "% All Older people aged 65+ - 2015"                                         
+## [11] "Mean Age - 2013"                                                            
+## [12] "Median Age - 2013"                                                          
+## [13] "Area - Square Kilometres"                                                   
+## [14] "Population density (persons per sq km) - 2013"                              
+## [15] "% BAME - 2011"                                                              
+## [16] "% Not Born in UK - 2011"                                                    
+## [17] "% English is First Language of no one in household - 2011"                  
+## [18] "General Fertility Rate - 2013"                                              
+## [19] "Male life expectancy -2009-13"                                              
+## [20] "Female life expectancy -2009-13"                                            
+## [21] "% children in reception year who are obese - 2011/12 to 2013/14"            
+## [22] "% children in year 6 who are obese- 2011/12 to 2013/14"                     
+## [23] "Rate of All Ambulance Incidents per 1,000 population - 2014"                
+## [24] "Rates of ambulance call outs for alcohol related illness - 2014"            
+## [25] "Number Killed or Seriously Injured on the roads - 2014"                     
+## [26] "In employment (16-64) - 2011"                                               
+## [27] "Employment rate (16-64) - 2011"                                             
+## [28] "Number of jobs in area - 2013"                                              
+## [29] "Employment per head of resident WA population - 2013"                       
+## [30] "Rate of new registrations of migrant workers - 2011/12"                     
+## [31] "Median House Price (<U+00A3>) - 2014"                                       
+## [32] "Number of properties sold - 2014"                                           
+## [33] "Median Household income estimate (2012/13)"                                 
+## [34] "Number of Household spaces - 2011"                                          
+## [35] "% detached houses - 2011"                                                   
+## [36] "% semi-detached houses - 2011"                                              
+## [37] "% terraced houses - 2011"                                                   
+## [38] "% Flat, maisonette or apartment - 2011"                                     
+## [39] "% Households Owned - 2011"                                                  
+## [40] "% Households Social Rented - 2011"                                          
+## [41] "% Households Private Rented - 2011"                                         
+## [42] "% dwellings in council tax bands A or B - 2015"                             
+## [43] "% dwellings in council tax bands C, D or E - 2015"                          
+## [44] "% dwellings in council tax bands F, G or H - 2015"                          
+## [45] "Claimant rate of key out-of-work benefits (working age client group) (2014)"
+## [46] "Claimant Rate of Housing Benefit (2015)"                                    
+## [47] "Claimant Rate of Employment Support Allowance - 2014"                       
+## [48] "Rate of JobSeekers Allowance (JSA) Claimants - 2015"                        
+## [49] "% dependent children (0-18) in out-of-work households - 2014"               
+## [50] "% of households with no adults in employment with dependent children - 2011"
+## [51] "% of lone parents not in employment - 2011"                                 
+## [52] "(ID2010) - Rank of average score (within London) - 2010"                    
+## [53] "(ID2010) % of LSOAs in worst 50% nationally - 2010"                         
+## [54] "Average GCSE capped point scores - 2014"                                    
+## [55] "Unauthorised Absence in All Schools (%) - 2013"                             
+## [56] "% with no qualifications - 2011"                                            
+## [57] "% with Level 4 qualifications and above - 2011"                             
+## [58] "A-Level Average Point Score Per Student - 2013/14"                          
+## [59] "A-Level Average Point Score Per Entry; 2013/14"                             
+## [60] "Crime rate - 2014/15"                                                       
+## [61] "Violence against the person rate - 2014/15"                                 
+## [62] "Deliberate Fires per 1,000 population - 2014"                               
+## [63] "% area that is open space - 2014"                                           
+## [64] "Cars per household - 2011"                                                  
+## [65] "Average Public Transport Accessibility score - 2014"                        
+## [66] "% travel by bicycle to work - 2011"                                         
+## [67] "Turnout at Mayoral election - 2012"
+\end{verbatim}
+
+\hypertarget{data-manipulation-in-r}{%
+\subsection{Data manipulation in R}\label{data-manipulation-in-r}}
+
+Now we have some data read into R, we need to select a small subset to work on. The first thing we will do is select just the London Boroughs to work with. If you recall, the Borough data is at the bottom of the file.
+
+\hypertarget{selecting-rows}{%
+\subsubsection{Selecting rows}\label{selecting-rows}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{28}
+\tightlist
+\item
+  Your borough data will probably be found between rows 626 and 658. Therefore we will first create a subset by selecting these rows into a new data frame and then reducing that data frame to just four columns. There are a few ways of doing this:
+\end{enumerate}
+
+We could select just the rows we need by explicitly specifying the range of rows we need:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonBoroughs<-LondonData[}\DecValTok{626}\OperatorTok{:}\DecValTok{658}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+There is also a \texttt{subset()} function in R. You could look that up and see whether you could create a subset with that. Or, we could try a cool `data sciency' way of pulling out the rows we want with the knowledge that the codes for London Boroughs start with E09 (the wards in the rest of the file start with E05).
+
+Knowing this, we can use the \texttt{grep()} function which can use regular expressions to match patterns in text. Let's try it!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonData <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(LondonData)}
+\NormalTok{LondonBoroughs <-}\StringTok{ }\NormalTok{LondonData[}\KeywordTok{grep}\NormalTok{(}\StringTok{"^E09"}\NormalTok{,LondonData[,}\DecValTok{3}\NormalTok{]),]}
+\end{Highlighting}
+\end{Shaded}
+
+Check it worked:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(LondonBoroughs)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{AWWMAHGAWD!!!} Pretty cool hey?
+
+What that function is saying is \emph{``grep (get) me all of the rows from the London Data data frame where the text in column 3 starts with (\^{}) E09''}
+
+You will notice that you will have two rows at the top for the City of London. This is becuase it features twice in the data set. That's fine, we can just drop this row from our dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonBoroughs <-}\StringTok{ }\NormalTok{LondonBoroughs[}\DecValTok{2}\OperatorTok{:}\DecValTok{34}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{selecting-columns}{%
+\subsubsection{Selecting columns}\label{selecting-columns}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LondonBoroughs<-LondonBoroughs[,}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{19}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{21}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
+\tightlist
+\item
+  You will have noticed the use of square brackets above -- these are very useful in R. Refer back to points 19-21 above if you can't remember how they work. The c() function is also used here -- this is the `combine' function - another very useful function in R which allows arguments (in this case, column reference numbers) into a single value
+\end{enumerate}
+
+\hypertarget{renaming-columns}{%
+\subsubsection{Renaming columns}\label{renaming-columns}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{30}
+\tightlist
+\item
+  You will notice that the column names are slightly misleading as we are now working with boroughs rather than wards. We can rename the columns to something more appropriate using the \texttt{names()} function (there are various other functions for renaming columns - for example \texttt{colnames()} if you want to rename multiple columns:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#rename the column 1 in LondonBoroughs}
+\KeywordTok{names}\NormalTok{(LondonBoroughs)[}\DecValTok{1}\NormalTok{] <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Borough Name"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{plotting}{%
+\subsection{Plotting}\label{plotting}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(LondonBoroughs}\OperatorTok{$}\NormalTok{Male.life.expectancy..}\FloatTok{2009.13}\NormalTok{, LondonBoroughs}\OperatorTok{$}\NormalTok{X..children.in.reception.year.who.are.obese...}\DecValTok{2011}\NormalTok{.}\FloatTok{12.}\NormalTok{to.}\FloatTok{2013.14}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-43-1.pdf}
+
+\hypertarget{pimp-my-graph}{%
+\subsection{Pimp my graph!}\label{pimp-my-graph}}
+
+Now, of course, because this is R, we can pimp this graph using something a bit more fancy than the base graphics functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"plotly"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"https://www.stats.bris.ac.uk/R/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{plot_ly}\NormalTok{(LondonBoroughs, }\DataTypeTok{x =} \OperatorTok{~}\NormalTok{Male.life.expectancy..}\FloatTok{2009.13}\NormalTok{, }\DataTypeTok{y =} \OperatorTok{~}\NormalTok{X..children.in.reception.year.who.are.obese...}\DecValTok{2011}\NormalTok{.}\FloatTok{12.}\NormalTok{to.}\FloatTok{2013.14}\NormalTok{, }\DataTypeTok{text =} \OperatorTok{~}\NormalTok{LondonBoroughs}\OperatorTok{$}\StringTok{`}\DataTypeTok{Borough Name}\StringTok{`}\NormalTok{, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"markers"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-45-1.pdf}
+
+\hypertarget{spatial-data-in-r}{%
+\subsection{Spatial Data in R}\label{spatial-data-in-r}}
+
+This next part of the practical applies the same principles introduced above to the much more complex problem of handling spatial data within R. In this workshop we will produce a gallery of maps using many of the plotting tools available in R. The resulting maps will not be that meaningful- the focus here is on sound visualisation with R and not sound analysis (I know one is useless without the other!). Good quality spatial analysis will come in the rest of the module.
+
+Whilst the instructions are step by step you are encouraged to start deviating from them (trying different colours for example) to get a better understanding of what we are doing.
+
+\hypertarget{packages}{%
+\subsubsection{Packages}\label{packages}}
+
+In this section we'll require even more specialist packages, so I should probably spend some more time explaining what packages actually are! Packages are bits of code that extend R beyond the basic statistical functionality it was originally designed for. For spatial data, they enable R to process spatial data formats, carry out analysis tasks and create some of the maps that follow.
+
+Bascially, without packages, R would be very limited. With packages, you can do virtually anything! One of the issues you will come across is that packages are being continually developed and updated and unless you keep your version of R updated and your packages updated, there may be some functions and options not available to you. This can be a problem, particularly with University installations which (at best) may only get updated once a year. Therefore, apologies in advance if things don't work as intended!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In R Studio all packages can be installed and activated in the `Packages' tab in the bottom-right hand window:
+\end{enumerate}
+
+\begin{center}\includegraphics[width=500px]{prac2_images/r_packages} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  As with everything else in R though, we can also run everything from the command line. The first package we need to install for this part of the practical is \texttt{maptools} -- either find and install it using the RStudio GUI or do the following:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"maptools"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+There are a few other packages we'll need to get to grips with. Some, like \texttt{ggplot2} (one of the most influential R packages ever) are part of the \texttt{tidyverse} package we came across earlier. Others we will need to install for the first time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"OpenStreetMap"}\NormalTok{, }\StringTok{"classInt"}\NormalTok{, }\StringTok{"tmap"}\NormalTok{))}
+
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"RColorBrewer"}\NormalTok{, }\StringTok{"sp"}\NormalTok{, }\StringTok{"rgeos"}\NormalTok{, }\StringTok{"tmaptools"}\NormalTok{, }\StringTok{"sf"}\NormalTok{, }\StringTok{"downloader"}\NormalTok{, }\StringTok{"rgdal"}\NormalTok{, }\StringTok{"geojsonio"}\NormalTok{))}\CommentTok{# might also need these ones}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Now that the packages have been installed you will not have to repeat the above steps again (when you use your account in these cluster rooms). Open a new script and save it to your working directory as ``wk3\_maps.r''. As before, type each of the lines of code into this window and then select and use the ctrl return keys to run them. Be sure to save your script often.
+\item
+  The first task is to load the packages we have just installed. note, you might have some issues with the OpenStreetMap package if your installation of java on your computer doesn't match your installation of R -- e.g.~if you have installed the 64bit version of R, you also need the 64bit version of java (same with the 32bit versions) - you may also need to install the package Rcpp separately and try again.
+\end{enumerate}
+
+Install Java 64-bit from: \url{https://java.com/en/download/manual.jsp}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Load Packages (ignore any error messages about being built under a #different R version):}
+\KeywordTok{library}\NormalTok{(maptools)}
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\KeywordTok{library}\NormalTok{(classInt)}
+\KeywordTok{library}\NormalTok{(OpenStreetMap)}
+\KeywordTok{library}\NormalTok{(sp)}
+\KeywordTok{library}\NormalTok{(rgeos)}
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{library}\NormalTok{(tmaptools)}
+\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(rgdal)}
+\KeywordTok{library}\NormalTok{(geojsonio)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{background-to-spatial-data-in-r}{%
+\subsubsection{Background to spatial data in R}\label{background-to-spatial-data-in-r}}
+
+R has a very well developed ecosystem of packages for working with Spatial Data. Early pioneers like Roger Bivand and Edzer Pebesma along with various colleagues were instrumental in writing packages to interface with some powerful open source libraries for working with spatial data, such as GDAL and GEOS. These were accessed via the \texttt{rgdal} and \texttt{rgeos} packages. The \texttt{maptools} package by Roger Bivand, amongst other things, allowed Shapefiles to be read into R. The \texttt{sp} package (along with \texttt{spdep}) by Edzer Pebesma was very important for defining a series of classes and methods for spatial data natively in R which then allowed others to write software to work with these formats. Other packages like \texttt{raster} advanced the analysis of gridded spatial data, while packages like \texttt{classint} and \texttt{RColorbrewer} facilitated the binning of data and colouring of choropleth maps.
+
+Whilst these packages were extremely important for advancing spatial data analysis in R, they were not always the most straighforward to use - making a map in R could take quite a lot of effort and they were static and visually basic. However, more recently new packages have arrived to change this. Now \texttt{leaflet} enables R to interface with the leaflet javascript library for online, dynamic maps. \texttt{ggplot2} which was developed by Hadley Wickam and colleagues radically changed the way that people thought about and created graphical objects in R, including maps, and introduced a graphical style which has been the envy of other software to the extent that there are now libraries in Python which copy the ggplot2 style!
+
+Building on all of these, the new \texttt{tmap} (Thematic Map) package has changed the game completely and now enables us to read, write and manipulate spatial data and produce visually impressive and interactive maps, very easily. In parallel, the \texttt{sf} (Simple Features) package is helping us re-think the way that spatial data can be stored and manipulated. It's exciting times for geographic information / spatial data science!
+
+\hypertarget{making-some-choropleth-maps}{%
+\subsubsection{Making some choropleth maps}\label{making-some-choropleth-maps}}
+
+Choropleth maps are thematic maps which colour areas according to some phenomenon. In our case, we are going to fill some irregular polygons (the London Boroughs) with a colour that corresponds to a particular attribute.
+
+As with all plots in R, there are multiple ways we can do this. The basic \texttt{plot()} function requires no data preparation but additional effort in colour selection/ adding the map key etc. \texttt{qplot()} and \texttt{ggplot()} (installed in the ggplot2 package) require some additional steps to format the spatial data but select colours and add keys etc automatically. Here, we are going to make use of the new \texttt{tmap} package which makes making maps very easy indeed.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  So one mega cool thing about R is you can read spatial data in straight from the internetz! Try this below for downloading a GeoJson file:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{EW <-}\StringTok{ }\KeywordTok{geojson_read}\NormalTok{(}\StringTok{"http://geoportal.statistics.gov.uk/datasets/8edafbe3276d4b56aec60991cbddda50_2.geojson"}\NormalTok{, }\DataTypeTok{what =} \StringTok{"sp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#pull out london using grep and the regex wildcard for'start of the string' (^) to to look for the bit of the district code that relates to London (E09) from the 'lad15cd' column in the data slot of our spatial polygons dataframe}
+\NormalTok{LondonMap <-}\StringTok{ }\NormalTok{EW[}\KeywordTok{grep}\NormalTok{(}\StringTok{"^E09"}\NormalTok{,EW}\OperatorTok{@}\NormalTok{data}\OperatorTok{$}\NormalTok{lad15cd),]}
+\CommentTok{#plot it using the base plot function}
+\KeywordTok{qtm}\NormalTok{(LondonMap)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-51-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Of course, we can also read in our data from a shapefile stored in a local directory:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#read the shapefile into a simple features object}
+\NormalTok{BoroughMapSF <-}\StringTok{ }\KeywordTok{read_shape}\NormalTok{(}\StringTok{"prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{, }\DataTypeTok{as.sf =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{BoroughMapSP <-}\StringTok{ }\NormalTok{LondonMap}
+\CommentTok{#plot it very quickly usking qtm (quick thematic map) to check it has been read in correctly}
+\KeywordTok{qtm}\NormalTok{(BoroughMapSF)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-52-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qtm}\NormalTok{(BoroughMapSP)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  And naturally we can convert between simple features objects and spatialPolygonsDataFrames very easily:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(methods)}
+\CommentTok{#check the class of BoroughMapSF}
+\KeywordTok{class}\NormalTok{(BoroughMapSF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "sf"         "data.frame"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#And check the class of BoroughMapSP}
+\KeywordTok{class}\NormalTok{(BoroughMapSP)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "SpatialPolygonsDataFrame"
+## attr(,"package")
+## [1] "sp"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#now convert the SP object into an SF object...}
+\NormalTok{newSF <-}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(BoroughMapSP)}
+\CommentTok{#and try the other way around SF to SP...}
+\NormalTok{newSP <-}\StringTok{ }\KeywordTok{as}\NormalTok{(newSF, }\StringTok{"Spatial"}\NormalTok{)}
+\CommentTok{#simples!}
+\NormalTok{BoroughMapSP <-}\StringTok{ }\KeywordTok{as}\NormalTok{(BoroughMapSF, }\StringTok{"Spatial"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{attribute-data}{%
+\subsubsection{Attribute data}\label{attribute-data}}
+
+OK, enough messing around, show us the maps!!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Hold your horses, before be can create a map, we need to join some attribute data to some boundaries. Doing this an \texttt{SP} object can be a bit of a pain, but I'll show you here:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#join the data to the @data slot in the SP data frame}
+\NormalTok{BoroughMapSP}\OperatorTok{@}\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(BoroughMapSP}\OperatorTok{@}\NormalTok{data,LondonData[}\KeywordTok{match}\NormalTok{(BoroughMapSP}\OperatorTok{@}\NormalTok{data[,}\StringTok{"GSS_CODE"}\NormalTok{],LondonData[,}\StringTok{"New.code"}\NormalTok{]),])}
+\CommentTok{#check it's joined.}
+\CommentTok{#head(BoroughMapSP@data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Joining data is a bit more intuitive with SF:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughDataMap <-}\StringTok{ }\KeywordTok{append_data}\NormalTok{(BoroughMapSF,LondonData, }\DataTypeTok{key.shp =} \StringTok{"GSS_CODE"}\NormalTok{, }\DataTypeTok{key.data =} \StringTok{"New.code"}\NormalTok{, }\DataTypeTok{ignore.duplicates =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Data contains duplicated keys: E09000001
+\end{verbatim}
+
+\begin{verbatim}
+## Over coverage: 626 out of 659 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.
+\end{verbatim}
+
+An alternative to append\_data would be to use a left-join (like in SQL)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughDataMap2 <-}\StringTok{ }\NormalTok{BoroughMapSF }\OperatorTok{%>%}\StringTok{ }\KeywordTok{left_join}\NormalTok{(LondonData, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"GSS_CODE"}\NormalTok{ =}\StringTok{ "New.code"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Column `GSS_CODE`/`New.code` joining factor and character vector,
+## coercing into character vector
+\end{verbatim}
+
+However, you would need to remove the duplicate City of London row afterwards
+
+\hypertarget{making-some-maps}{%
+\subsubsection{Making some maps}\label{making-some-maps}}
+
+If you want to learn a bit more about the sorts of things you can do with tmap, then there are 2 vignettes that you can access here: \url{https://cran.r-project.org/web/packages/tmap/} - I suggest you refer to these to see the various things you can do using tmap. Here's a quick sample though:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  We can create a choropleth map very quickly now using \texttt{qtm}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{library}\NormalTok{(tmaptools)}
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tmap mode set to plotting
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qtm}\NormalTok{(BoroughDataMap, }\DataTypeTok{fill =} \StringTok{"Rate.of.JobSeekers.Allowance..JSA..Claimants...2015"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-61-1.pdf}
+
+You can also add a basemap and some other guff, if you wish\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{london_osm <-}\StringTok{ }\KeywordTok{read_osm}\NormalTok{(BoroughDataMap, }\DataTypeTok{type =} \StringTok{"esri"}\NormalTok{, }\DataTypeTok{zoom =} \OtherTok{NULL}\NormalTok{)}
+\KeywordTok{qtm}\NormalTok{(london_osm) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{tm_shape}\NormalTok{(BoroughDataMap) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{tm_polygons}\NormalTok{(}\StringTok{"Rate.of.JobSeekers.Allowance..JSA..Claimants...2015"}\NormalTok{, }
+        \DataTypeTok{style=}\StringTok{"jenks"}\NormalTok{,}
+        \DataTypeTok{palette=}\StringTok{"YlOrBr"}\NormalTok{,}
+        \DataTypeTok{midpoint=}\OtherTok{NA}\NormalTok{,}
+        \DataTypeTok{title=}\StringTok{"Rate per 1,000 people"}\NormalTok{,}
+        \DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{tm_compass}\NormalTok{(}\DataTypeTok{position =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{),}\DataTypeTok{type =} \StringTok{"arrow"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{tm_scale_bar}\NormalTok{(}\DataTypeTok{position =} \KeywordTok{c}\NormalTok{(}\StringTok{"left"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Job seekers' Allowance Claimants"}\NormalTok{, }\DataTypeTok{legend.position =} \KeywordTok{c}\NormalTok{(}\StringTok{"right"}\NormalTok{, }\StringTok{"bottom"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-62-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  how about more than one map, perhaps using different data breaks\ldots{}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tm_shape}\NormalTok{(BoroughDataMap) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{tm_polygons}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"Average.Public.Transport.Accessibility.score...2014"}\NormalTok{, }\StringTok{"Violence.against.the.person.rate...2014.15"}\NormalTok{), }
+        \DataTypeTok{style=}\KeywordTok{c}\NormalTok{(}\StringTok{"jenks"}\NormalTok{, }\StringTok{"pretty"}\NormalTok{),}
+        \DataTypeTok{palette=}\KeywordTok{list}\NormalTok{(}\StringTok{"YlOrBr"}\NormalTok{, }\StringTok{"Purples"}\NormalTok{),}
+        \DataTypeTok{auto.palette.mapping=}\OtherTok{FALSE}\NormalTok{,}
+        \DataTypeTok{title=}\KeywordTok{c}\NormalTok{(}\StringTok{"Average Public Transport Accessibility"}\NormalTok{, }\StringTok{"Violence Against the Person Rate"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The argument auto.palette.mapping is deprecated. Please use
+## midpoint for numeric data and stretch.palette for categorical data to
+## control the palette mapping.
+\end{verbatim}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-63-1.pdf}
+
+You will notice that to choose the colour of the maps, I entered some codes. These are the names of colour ramps from the RColourBrewer package which comes bundled with \texttt{tmap}. \texttt{RColorBrewer} uses colour palettes available from the colorbrewer2 website (\url{http://colorbrewer2.org/}) which is in turn based on the work of Cynthia Brewer and colleagues at Penn State University (\url{http://www.personal.psu.edu/cab38/ColorBrewer/ColorBrewer_updates.html}). Cynthia brewer has carried out large amount of academic research into determining the best colour palettes for GIS applications and so we will defer to her expertise here.
+
+If you want to look at the range of colour palettes available, as we; as going to the ColorBrewer website, you can use the a little shiny app which comes bundled with \texttt{tmaptools}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#You might need to install the shinyjs paclage for this to work}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"shinyjs"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(shinyjs)}
+\CommentTok{#it's possible to explicitly tell R which package to get the function from with the :: operator...}
+\NormalTok{tmaptools}\OperatorTok{::}\KeywordTok{palette_explorer}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  \texttt{tmap} will even let you make a FRICKING INTERACTIVE MAP!!! Oh yes, we can do interactive maps\ldots{}!
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"view"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tmap mode set to interactive viewing
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tm_shape}\NormalTok{(BoroughDataMap) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{tm_polygons}\NormalTok{(}\StringTok{"X..children.in.year.6.who.are.obese..2011.12.to.2013.14"}\NormalTok{,}
+        \DataTypeTok{style=}\StringTok{"cont"}\NormalTok{,}
+        \DataTypeTok{palette=}\StringTok{"PuRd"}\NormalTok{,}
+        \DataTypeTok{midpoint=}\OtherTok{NA}\NormalTok{,}
+        \DataTypeTok{title=}\StringTok{"Truffle Shuffle Intensity"}\NormalTok{)}\OperatorTok{+}
+\StringTok{    }\KeywordTok{tmap_options}\NormalTok{(}\DataTypeTok{max.categories =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Number of levels of the variable "X..children.in.year.
+## 6.who.are.obese..2011.12.to.2013.14" is 31, which is larger
+## than max.categories (which is 5), so levels are combined. Set
+## tmap_options(max.categories = 31) in the layer function to show all levels.
+\end{verbatim}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-67-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{####You can even save your map as an html file (uncomment, obvs)}
+\CommentTok{#save_tmap(filename = "truffle.html")}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{have-a-play-around}{%
+\subsubsection{Have a play around\ldots{}}\label{have-a-play-around}}
+
+There are loads of options for creating maps with \texttt{tmap} - read the vignettes that have been provided by the developers of the package and see if you can adapt the maps you have just made - or even make some alternative maps using built in data.
+
+\url{https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html} \url{https://cran.r-project.org/web/packages/tmap/vignettes/tmap-modes.html}
+
+You should also read the reference manual on the package homepage: \url{https://cran.r-project.org/web/packages/tmap/}
+
+In fact, since I wrote this last year, the \texttt{tmap} package has developed quite a bit more - have a look at some of the cool examples here: \url{https://github.com/mtennekes/tmap}
+
+Have a play and see what cool shiz you can create!
+
+This is an example from the BubbleMap folder on the tmap github. Don't worry about what github is we will cover that soon.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load spatial data included in the tmap package}
+\KeywordTok{data}\NormalTok{(}\StringTok{"World"}\NormalTok{, }\StringTok{"metro"}\NormalTok{)}
+
+\CommentTok{# calculate annual growth rate}
+\NormalTok{metro}\OperatorTok{$}\NormalTok{growth <-}\StringTok{ }\NormalTok{(metro}\OperatorTok{$}\NormalTok{pop2020 }\OperatorTok{-}\StringTok{ }\NormalTok{metro}\OperatorTok{$}\NormalTok{pop2010) }\OperatorTok{/}\StringTok{ }\NormalTok{(metro}\OperatorTok{$}\NormalTok{pop2010 }\OperatorTok{*}\StringTok{ }\DecValTok{10}\NormalTok{) }\OperatorTok{*}\StringTok{ }\DecValTok{100}
+
+\CommentTok{# plot}
+\KeywordTok{tm_shape}\NormalTok{(World) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_polygons}\NormalTok{(}\StringTok{"income_grp"}\NormalTok{, }\DataTypeTok{palette =} \StringTok{"-Blues"}\NormalTok{, }
+    \DataTypeTok{title =} \StringTok{"Income class"}\NormalTok{, }\DataTypeTok{contrast =} \FloatTok{0.7}\NormalTok{, }\DataTypeTok{border.col =} \StringTok{"gray30"}\NormalTok{, }\DataTypeTok{id =} \StringTok{"name"}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{tm_text}\NormalTok{(}\StringTok{"iso_a3"}\NormalTok{, }\DataTypeTok{size =} \StringTok{"AREA"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"gray30"}\NormalTok{, }\DataTypeTok{root=}\DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\KeywordTok{tm_shape}\NormalTok{(metro) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{tm_bubbles}\NormalTok{(}\StringTok{"pop2010"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"growth"}\NormalTok{, }\DataTypeTok{border.col =} \StringTok{"black"}\NormalTok{, }
+    \DataTypeTok{border.alpha =} \FloatTok{0.5}\NormalTok{,}
+    \DataTypeTok{breaks =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\OtherTok{Inf}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{, }\OtherTok{Inf}\NormalTok{) ,}
+    \DataTypeTok{palette =} \StringTok{"-RdYlGn"}\NormalTok{,}
+    \DataTypeTok{title.size =} \StringTok{"Metro population (2010)"}\NormalTok{, }
+    \DataTypeTok{title.col =} \StringTok{"Annual growth rate (%)"}\NormalTok{,}
+    \DataTypeTok{id =} \StringTok{"name"}\NormalTok{,}
+    \DataTypeTok{popup.vars=}\KeywordTok{c}\NormalTok{(}\StringTok{"pop2010"}\NormalTok{, }\StringTok{"pop2020"}\NormalTok{, }\StringTok{"growth"}\NormalTok{)) }\OperatorTok{+}\StringTok{ }
+\KeywordTok{tm_format}\NormalTok{(}\StringTok{"World"}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\KeywordTok{tm_style}\NormalTok{(}\StringTok{"gray"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-69-1.pdf}
+
+\hypertarget{making-maps-using-ggplot2}{%
+\section{Making maps using ggplot2}\label{making-maps-using-ggplot2}}
+
+So as you have seen, it is possible to make very nice thematic maps with \texttt{tmap}. However, there are other options. The \texttt{ggplot2} package is a very powerful graphics package that allows us to a huge range of sophisticated plots, including maps.
+
+The latest development version of \texttt{ggplot2} has support for simple features objects with the new geom\_sf class (\url{http://ggplot2.tidyverse.org/reference/ggsf.html}), which, quite frankly, is bloody brilliant!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\item
+  If you have not already done so, install and library the \texttt{ggplot2} and \texttt{rgeos} packages (they should be installed automatically as part of \texttt{tidyverse} and \texttt{tmap} packages, but occasionally they need to be installed separately).
+\item
+  Now there are two main ways in which you can construct a plot in \texttt{ggplot2}: \texttt{qplot()} and \texttt{ggplot()}. \texttt{qplot} is short for `Quick plot' and can be good for producing quick charts and maps, but is perhaps less good for constructing complex layered plots. \texttt{ggplot()} is better for building up a plot layer by layer, e.g.~\texttt{ggplot()+layer1+layer2}, and so this is what we will use here.
+\item
+  The important elements of any \texttt{ggplot} layer are the aesthetic mappings -- aes(x,y, \ldots{}) -- which tell ggplot where to place the plot objects. We can imagine a map just like a graph with all features mapping to an x and y axis. All geometry ( \texttt{geom\_}) types in ggplot feature some kind of aesthetic mapping and these can either be declared at the plot level, e.g.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(data.frame, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x, }\DataTypeTok{y=}\NormalTok{y))}
+\end{Highlighting}
+\end{Shaded}
+
+or, more flexibly at the level of the individual geom\_ layer, e.g.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{geom_polygon}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{x, }\DataTypeTok{y=}\NormalTok{y), data.frame)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{16}
+\tightlist
+\item
+  To begin our plot, we will start with the map layer -- we will generate this using the geom\_sf() function in \texttt{ggplot2}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{()}\OperatorTok{+}\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry=}\NormalTok{geometry),}\DataTypeTok{data =}\NormalTok{ BoroughDataMap)}\OperatorTok{+}\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-72-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{17}
+\tightlist
+\item
+  To colour your map, then just pass the name of the variable you want to map to the fill parameter in the aesthetics:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{()}\OperatorTok{+}\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry=}\NormalTok{geometry, }\DataTypeTok{fill=}\NormalTok{Median.House.Price...U}\FloatTok{.00}\NormalTok{A3.....}\DecValTok{2014}\NormalTok{),}\DataTypeTok{data =}\NormalTok{ BoroughDataMap)}\OperatorTok{+}\KeywordTok{theme_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-73-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{18}
+\tightlist
+\item
+  As you can see, this map looks OK, but there are a few issues with things like the colour ramp and a lack of appropriate labels. We can correct this by adding a few more layers. Firstly we can change the palette:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{palette1<-}\KeywordTok{scale_fill_continuous}\NormalTok{(}\DataTypeTok{low=}\StringTok{"white"}\NormalTok{, }\DataTypeTok{high=}\StringTok{"orange"}\NormalTok{, }\StringTok{"Price(£)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{19}
+\tightlist
+\item
+  And some appropriate labels:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{labels<-}\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Average House Price 2014"}\NormalTok{,}\DataTypeTok{x=}\StringTok{"Longitude"}\NormalTok{, }\DataTypeTok{y=}\StringTok{"Latitude"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{20}
+\tightlist
+\item
+  Before plotting the all of them together:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{()}\OperatorTok{+}\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry=}\NormalTok{geometry, }\DataTypeTok{fill=}\NormalTok{Median.House.Price...U}\FloatTok{.00}\NormalTok{A3.....}\DecValTok{2014}\NormalTok{),}\DataTypeTok{data =}\NormalTok{ BoroughDataMap)}\OperatorTok{+}\KeywordTok{theme_minimal}\NormalTok{()}\OperatorTok{+}\NormalTok{palette1}\OperatorTok{+}\NormalTok{labels}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-76-1.pdf}
+
+\hypertarget{changing-projections}{%
+\subsection{Changing projections}\label{changing-projections}}
+
+Now until now, we've not really considered how our maps have been printed to the screen. The coordinates stored in the \texttt{geometry} column of your \texttt{sf} object contain the information to enable points, lines or polygons to be drawn on the screen (think back to the KML exercise in week 1). The \texttt{ggplot} map above could fool you into thinking the coordinate system we are using is latitude and longitude, but actually, the map coordinates are stored in British National Grid. How can we tell?
+
+You can check that the coordinate reference systems of \texttt{sf} or \texttt{sp} objects using the print function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(BoroughMapSP)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## class       : SpatialPolygonsDataFrame 
+## features    : 33 
+## extent      : 503568.2, 561957.5, 155850.8, 200933.9  (xmin, xmax, ymin, ymax)
+## crs         : +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.1502,0.247,0.8421,-20.4894 +units=m +no_defs 
+## variables   : 74
+## names       :                 NAME,  GSS_CODE,  HECTARES, NONLD_AREA, ONS_INNER, SUB_2009, SUB_2006,            Ward.name, Old.code,  New.code, Population...2015, Children.aged.0.15...2015, Working.age..16.64....2015, Older.people.aged.65....2015, X..All.Children.aged.0.15...2015, ... 
+## min values  : Barking and Dagenham, E09000001,   314.942,          0,         F,       NA,       NA, Barking and Dagenham,     00AA, E09000001,              8100,                       650,                       6250,                         1250,                                8, ... 
+## max values  :          Westminster, E09000033, 15013.487,    370.619,         T,       NA,       NA,          Westminster,     00BK, E09000033,            393200,                     82900,                     257850,                        56550,                             26.1, ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(BoroughMapSF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Simple feature collection with 33 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 200933.9
+## epsg (SRID):    NA
+## proj4string:    +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.1502,0.247,0.8421,-20.4894 +units=m +no_defs
+## First 10 features:
+##                   NAME  GSS_CODE  HECTARES NONLD_AREA ONS_INNER SUB_2009
+## 0 Kingston upon Thames E09000021  3726.117      0.000         F     <NA>
+## 1              Croydon E09000008  8649.441      0.000         F     <NA>
+## 2              Bromley E09000006 15013.487      0.000         F     <NA>
+## 3             Hounslow E09000018  5658.541     60.755         F     <NA>
+## 4               Ealing E09000009  5554.428      0.000         F     <NA>
+## 5             Havering E09000016 11445.735    210.763         F     <NA>
+## 6           Hillingdon E09000017 11570.063      0.000         F     <NA>
+## 7               Harrow E09000015  5046.330      0.000         F     <NA>
+## 8                Brent E09000005  4323.270      0.000         F     <NA>
+## 9               Barnet E09000003  8674.837      0.000         F     <NA>
+##   SUB_2006                       geometry
+## 0     <NA> MULTIPOLYGON (((516401.6 16...
+## 1     <NA> MULTIPOLYGON (((535009.2 15...
+## 2     <NA> MULTIPOLYGON (((540373.6 15...
+## 3     <NA> MULTIPOLYGON (((521975.8 17...
+## 4     <NA> MULTIPOLYGON (((510253.5 18...
+## 5     <NA> MULTIPOLYGON (((549893.9 18...
+## 6     <NA> MULTIPOLYGON (((510599.8 19...
+## 7     <NA> MULTIPOLYGON (((510599.8 19...
+## 8     <NA> MULTIPOLYGON (((525201 1825...
+## 9     <NA> MULTIPOLYGON (((524579.9 19...
+\end{verbatim}
+
+\hypertarget{proj4}{%
+\subsubsection{Proj4}\label{proj4}}
+
+If you're a spatial geek and you're used to looking at London, then a quick glance at the values of the extent / bounding box (bbox) will tell you that you are working in British National Grid as the x and y values are in 6 Figures, with x values around 52000 to 55000 and y values around 15000 to 20000. The other way of telling is by looking at the coordinate reference system (CRS) value - in the files above it's defined by the bit that says:
+
+\texttt{+proj=tmerc\ +lat\_0=49\ +lon\_0=-2\ +k=0.9996012717\ +x\_0=400000\ +y\_0=-100000\ +ellps=airy}
+
+``Well that's clear as mud!'' I hear you cry! Yes, not obvious is it! This is called a proj-string or proj4-string and its the proj4-string for British National Grid. You can learn what each of the bits of this mean here: \url{https://proj4.org/usage/quickstart.html}
+
+The proj4-string basically tells the computer where on the earth to locate the coordinates that make up the geometries in your file and what distortions to apply (i.e.~if to flatten it out completely etc.)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{23}
+\tightlist
+\item
+  Sometimes you can download data from the web and it doesn't have a CRS . If any boundary data you download does not have a coordinate reference system attached to it (NA is displayed in the coord. ref section), this is not a huge problem - it can be added afterwards by adding the proj4string to the file.
+\end{enumerate}
+
+To find the proj4-strings for a whole range of different geographic projections, use the search facility at \url{http://spatialreference.org/} or \url{http://epsg.io/}.
+
+\hypertarget{epsg}{%
+\subsubsection{EPSG}\label{epsg}}
+
+Now, if you can store a whole proj4-string in your mind, you must be some kind of savant (why are you doing this course? you could make your fortune as a card-counting poker player or something!). The rest of us need something a little bit more easy to remember and for coordinate reference systems, the saviour is the European Petroleum Survey Group (EPSG) - (naturally!). Now managed and maintained by the International Association of Oil and Gas producers - \url{http://www.epsg.org/} - EPSG codes are short numbers represent all coordinate reference systems in the world and link directly to proj4 strings.
+
+The EPSG code for British National Grid is 27700 - \url{http://epsg.io/27700}. The EPSG code for the WGS84 World Geodetic System (usually the default CRS for most spatial data) is 4326 - \url{http://epsg.io/4326}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{25}
+\tightlist
+\item
+  If your boundary data doesn't have a spatial reference system, you can read it in you can read it in and set the projection either with the full proj4 string, or, more easily, with the EPSG code:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# read borough map in and explicitly set projection to British National Grid }
+\CommentTok{# using the EPSG string code 27700}
+\NormalTok{BoroughMapSP <-}\StringTok{ }\KeywordTok{read_shape}\NormalTok{(}\StringTok{"prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{, }\DataTypeTok{current.projection =} \DecValTok{27700}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Projection already specified in shape file. Use set_projection for
+## reprojection.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#or, for SF}
+\NormalTok{BoroughMapSF <-}\StringTok{ }\KeywordTok{st_read}\NormalTok{(}\StringTok{"prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_set_crs}\NormalTok{(}\DecValTok{27700}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Reading layer `London_Borough_Excluding_MHW' from data source `N:\Documents\Teaching\CASA0005practicals\CASA0005book\prac1_data\statistical-gis-boundaries-london\ESRI\London_Borough_Excluding_MHW.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 33 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 200933.9
+## epsg (SRID):    NA
+## proj4string:    +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: st_crs<- : replacing crs does not reproject data; use st_transform
+## for that
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{26}
+\tightlist
+\item
+  Another option is to assign the coordinates reference system after the shapefile has been read in, for example. However as we have already assigned a CRS to BoroughMapSP R in the fucntion read\_shape R will through an error. So let's read the shape again using \texttt{readOGR} from the rgdal package:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughMapSP <-}\StringTok{ }\KeywordTok{readOGR}\NormalTok{(}\StringTok{"prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## OGR data source with driver: ESRI Shapefile 
+## Source: "N:\Documents\Teaching\CASA0005practicals\CASA0005book\prac1_data\statistical-gis-boundaries-london\ESRI\London_Borough_Excluding_MHW.shp", layer: "London_Borough_Excluding_MHW"
+## with 33 features
+## It has 7 fields
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#create a variable for the EPSG code to reference the proj4string (EPSG codes are shorter and easier to remember than the full strings!) and store it in a variable...}
+\NormalTok{UKBNG <-}\StringTok{ "+init=epsg:27700"}
+\CommentTok{#now set the proj4string for your BoroughMap object - note, this will probably throw an error if your dataset already has a CRS, this is just for demonstration...}
+\KeywordTok{proj4string}\NormalTok{(BoroughMapSP) <-}\StringTok{ }\KeywordTok{CRS}\NormalTok{(UKBNG)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(BoroughMapSP) }\CommentTok{# check for new CRS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## class       : SpatialPolygonsDataFrame 
+## features    : 33 
+## extent      : 503568.2, 561957.5, 155850.8, 200933.9  (xmin, xmax, ymin, ymax)
+## crs         : +init=epsg:27700 +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 
+## variables   : 7
+## names       :                 NAME,  GSS_CODE,  HECTARES, NONLD_AREA, ONS_INNER, SUB_2009, SUB_2006 
+## min values  : Barking and Dagenham, E09000001,   314.942,          0,         F,       NA,       NA 
+## max values  :          Westminster, E09000033, 15013.487,    370.619,         T,       NA,       NA
+\end{verbatim}
+
+or for \texttt{SF}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughMapSF <-}\StringTok{ }\NormalTok{BoroughMapSF }\OperatorTok{%>%}\StringTok{ }\KeywordTok{st_set_crs}\NormalTok{(}\DecValTok{27700}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(BoroughMapSF)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Simple feature collection with 33 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 200933.9
+## epsg (SRID):    27700
+## proj4string:    +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs
+## First 10 features:
+##                    NAME  GSS_CODE  HECTARES NONLD_AREA ONS_INNER SUB_2009
+## 1  Kingston upon Thames E09000021  3726.117      0.000         F     <NA>
+## 2               Croydon E09000008  8649.441      0.000         F     <NA>
+## 3               Bromley E09000006 15013.487      0.000         F     <NA>
+## 4              Hounslow E09000018  5658.541     60.755         F     <NA>
+## 5                Ealing E09000009  5554.428      0.000         F     <NA>
+## 6              Havering E09000016 11445.735    210.763         F     <NA>
+## 7            Hillingdon E09000017 11570.063      0.000         F     <NA>
+## 8                Harrow E09000015  5046.330      0.000         F     <NA>
+## 9                 Brent E09000005  4323.270      0.000         F     <NA>
+## 10               Barnet E09000003  8674.837      0.000         F     <NA>
+##    SUB_2006                       geometry
+## 1      <NA> MULTIPOLYGON (((516401.6 16...
+## 2      <NA> MULTIPOLYGON (((535009.2 15...
+## 3      <NA> MULTIPOLYGON (((540373.6 15...
+## 4      <NA> MULTIPOLYGON (((521975.8 17...
+## 5      <NA> MULTIPOLYGON (((510253.5 18...
+## 6      <NA> MULTIPOLYGON (((549893.9 18...
+## 7      <NA> MULTIPOLYGON (((510599.8 19...
+## 8      <NA> MULTIPOLYGON (((510599.8 19...
+## 9      <NA> MULTIPOLYGON (((525201 1825...
+## 10     <NA> MULTIPOLYGON (((524579.9 19...
+\end{verbatim}
+
+\hypertarget{reprojecting-your-spatial-data}{%
+\subsubsection{Reprojecting your spatial data}\label{reprojecting-your-spatial-data}}
+
+Reprojecting your data is something that you might have to (or want to) do, on occasion. Why? Well, one example might be if you want to measure the distance of a line object, or the distance between two polygons. This can be done far more easily in a projected coordinate system like British National Grid (where the units are measured in metres) than it can a geographic coordiante system such as WGS84 (where the units are degrees).
+
+For generating maps in packages like \texttt{leaflet}, your maps will also need to be in WGS84, rather than British National Grid.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{27}
+\tightlist
+\item
+  So once your data has a coordinates system to work with, we can re-project or transfrom to anything we like. The most commonly used is the global latitude and longitude system (WGS84). With SP objects, this is carried out using the \texttt{spTransform()} function:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughMapSPWGS84 <-}\KeywordTok{spTransform}\NormalTok{(BoroughMapSP, }\KeywordTok{CRS}\NormalTok{(}\StringTok{"+proj=longlat +datum=WGS84"}\NormalTok{))}
+\KeywordTok{print}\NormalTok{(BoroughMapSPWGS84)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## class       : SpatialPolygonsDataFrame 
+## features    : 33 
+## extent      : -0.5103751, 0.3340155, 51.28676, 51.69187  (xmin, xmax, ymin, ymax)
+## crs         : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+## variables   : 7
+## names       :                 NAME,  GSS_CODE,  HECTARES, NONLD_AREA, ONS_INNER, SUB_2009, SUB_2006 
+## min values  : Barking and Dagenham, E09000001,   314.942,          0,         F,       NA,       NA 
+## max values  :          Westminster, E09000033, 15013.487,    370.619,         T,       NA,       NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#transform it back again:}
+\NormalTok{BoroughMapSPBNG <-}\KeywordTok{spTransform}\NormalTok{(BoroughMapSP, }\KeywordTok{CRS}\NormalTok{(UKBNG))}
+\KeywordTok{print}\NormalTok{(BoroughMapSPBNG)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## class       : SpatialPolygonsDataFrame 
+## features    : 33 
+## extent      : 503568.2, 561957.5, 155850.8, 200933.9  (xmin, xmax, ymin, ymax)
+## crs         : +init=epsg:27700 +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +datum=OSGB36 +units=m +no_defs +ellps=airy +towgs84=446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894 
+## variables   : 7
+## names       :                 NAME,  GSS_CODE,  HECTARES, NONLD_AREA, ONS_INNER, SUB_2009, SUB_2006 
+## min values  : Barking and Dagenham, E09000001,   314.942,          0,         F,       NA,       NA 
+## max values  :          Westminster, E09000033, 15013.487,    370.619,         T,       NA,       NA
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#You may want to create a similar variable for WGS84}
+\NormalTok{latlong <-}\StringTok{ "+init=epsg:4326"}
+\end{Highlighting}
+\end{Shaded}
+
+And for SF objects it's carried out using \texttt{st\_transform}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BoroughMapSFWGS84 <-}\StringTok{ }\KeywordTok{st_transform}\NormalTok{(BoroughMapSF, }\DecValTok{4326}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(BoroughMapSFWGS84)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Simple feature collection with 33 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -0.5103751 ymin: 51.28676 xmax: 0.3340156 ymax: 51.69187
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+## First 10 features:
+##                    NAME  GSS_CODE  HECTARES NONLD_AREA ONS_INNER SUB_2009
+## 1  Kingston upon Thames E09000021  3726.117      0.000         F     <NA>
+## 2               Croydon E09000008  8649.441      0.000         F     <NA>
+## 3               Bromley E09000006 15013.487      0.000         F     <NA>
+## 4              Hounslow E09000018  5658.541     60.755         F     <NA>
+## 5                Ealing E09000009  5554.428      0.000         F     <NA>
+## 6              Havering E09000016 11445.735    210.763         F     <NA>
+## 7            Hillingdon E09000017 11570.063      0.000         F     <NA>
+## 8                Harrow E09000015  5046.330      0.000         F     <NA>
+## 9                 Brent E09000005  4323.270      0.000         F     <NA>
+## 10               Barnet E09000003  8674.837      0.000         F     <NA>
+##    SUB_2006                       geometry
+## 1      <NA> MULTIPOLYGON (((-0.330679 5...
+## 2      <NA> MULTIPOLYGON (((-0.0640212 ...
+## 3      <NA> MULTIPOLYGON (((0.01213098 ...
+## 4      <NA> MULTIPOLYGON (((-0.2445624 ...
+## 5      <NA> MULTIPOLYGON (((-0.4118326 ...
+## 6      <NA> MULTIPOLYGON (((0.1586929 5...
+## 7      <NA> MULTIPOLYGON (((-0.4040719 ...
+## 8      <NA> MULTIPOLYGON (((-0.4040719 ...
+## 9      <NA> MULTIPOLYGON (((-0.1965687 ...
+## 10     <NA> MULTIPOLYGON (((-0.1998964 ...
+\end{verbatim}
+
+In the SF object, you can compare the values in the geometry column with those in the original file to look at how they have changed\ldots{}
+
+\hypertarget{maps-with-extra-features}{%
+\subsection{Maps with extra features}\label{maps-with-extra-features}}
+
+Now we can re-project our data, it frees us up to bring in, for example, different base maps and other stuff, a bit like \texttt{tmap}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#install.packages("ggmap")}
+\KeywordTok{library}\NormalTok{(ggmap)}
+
+\NormalTok{BoroughDataMap <-}\StringTok{ }\KeywordTok{append_data}\NormalTok{(BoroughMapSFWGS84,LondonData, }\DataTypeTok{key.shp =} \StringTok{"GSS_CODE"}\NormalTok{, }\DataTypeTok{key.data =} \StringTok{"New.code"}\NormalTok{, }\DataTypeTok{ignore.duplicates =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{londonbbox1 <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DataTypeTok{left =} \FloatTok{-0.5103766}\NormalTok{, }\DataTypeTok{bottom =} \FloatTok{51.28676}\NormalTok{, }\DataTypeTok{right =} \FloatTok{0.3340146}\NormalTok{, }\DataTypeTok{top =} \FloatTok{51.69187}\NormalTok{)}
+
+\NormalTok{londonbbox2 <-}\StringTok{ }\KeywordTok{as.vector}\NormalTok{(}\KeywordTok{st_bbox}\NormalTok{(BoroughMapSFWGS84))}
+
+\CommentTok{#this bit of code uses the box we specified and gets map tiles from Stamen Maps (http://maps.stamen.com/#terrain/12/37.7706/-122.3782)}
+
+\CommentTok{# try changing the maptype to watercolor}
+\NormalTok{map <-}\StringTok{ }\KeywordTok{get_stamenmap}\NormalTok{(londonbbox2, }\DataTypeTok{zoom =} \DecValTok{10}\NormalTok{, }\DataTypeTok{maptype =} \StringTok{"toner-lite"}\NormalTok{)}
+
+\KeywordTok{ggmap}\NormalTok{(map) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry=}\NormalTok{geometry, }\DataTypeTok{fill=}\NormalTok{Median.House.Price...U}\FloatTok{.00}\NormalTok{A3.....}\DecValTok{2014}\NormalTok{),}\DataTypeTok{data =}\NormalTok{ BoroughDataMap, }\DataTypeTok{inherit.aes =} \OtherTok{FALSE}\NormalTok{,}\DataTypeTok{alpha=}\FloatTok{0.7}\NormalTok{)}\OperatorTok{+}\KeywordTok{theme_minimal}\NormalTok{()}\OperatorTok{+}\NormalTok{palette1}\OperatorTok{+}\NormalTok{labels}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-88-1.pdf}
+
+\hypertarget{extension}{%
+\subsection{Extension}\label{extension}}
+
+\hypertarget{faceted-plots}{%
+\subsubsection{Faceted plots}\label{faceted-plots}}
+
+One of the nice features of ggplot2 is its faceting function which allows you to lay out subsets of your data in different panels of a grid.
+
+See if you can create a faceted grid of London maps like the one shown below. To do this, you will need to go through several stages:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  You will need to subset your Borough\_geom data frame so that it only contains data on the same scale (you have a number of columns that show percentages, for example) -- you can show facets on different scales, but we will leave this for the time being.
+\item
+  You will also need to make sure your subset includes a few columns of key ID information data at the beginning -- e.g.~ID and geometry.
+\item
+  You will then need to use the reshape2 package to reformat your data using the \texttt{melt()} function, with an argument to specify the columns where your ID data ends (all columns afterwards containing data you want to plot). A call something like:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#warning, this is messy, but it sort-of works...}
+\KeywordTok{library}\NormalTok{(reshape2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'reshape2'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     smiths
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\CommentTok{#use melt to bung all of the variables into a single column on top of each other, but leave out the geometry column or it will throw an error. Make sure you know which coloumn holds the geometry.I'm only going to select 10 coloumns of data here (measure.vars=10:20).}
+
+\NormalTok{borough_melt <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(BoroughDataMap,}\DataTypeTok{id.vars =} \DecValTok{1}\OperatorTok{:}\DecValTok{9}\NormalTok{, }\DataTypeTok{measure.vars =} \DecValTok{10}\OperatorTok{:}\DecValTok{20}\NormalTok{)}
+
+\CommentTok{#have a look at borough_melt now - in this circumstance i find the best way is to click on the data in the enviroment window (top right), what do you notice?}
+
+\CommentTok{#now join the geometry column back on - you will have to join it along with all of the data again.}
+\NormalTok{borough_melt <-}\StringTok{ }\KeywordTok{left_join}\NormalTok{(borough_melt,BoroughDataMap,}\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"GSS_CODE"}\NormalTok{ =}\StringTok{ "GSS_CODE"}\NormalTok{))}
+
+\CommentTok{#here i'm removing everything except the variable coloumn, values and the geometry inforamtion}
+\NormalTok{borough_melt <-}\StringTok{ }\NormalTok{borough_melt[,}\KeywordTok{c}\NormalTok{(}\DecValTok{10}\OperatorTok{:}\DecValTok{11}\NormalTok{,}\DecValTok{84}\NormalTok{)]}
+
+\KeywordTok{library}\NormalTok{(tmap)}
+\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(maptools)}
+
+\KeywordTok{tmap_mode}\NormalTok{(}\StringTok{"plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## tmap mode set to plotting
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{borough_melt <-}\StringTok{ }\KeywordTok{st_as_sf}\NormalTok{(borough_melt)}
+
+\KeywordTok{qtm}\NormalTok{(borough_melt, }\DataTypeTok{fill =} \StringTok{"value"}\NormalTok{, }\DataTypeTok{by =} \StringTok{"variable"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-89-1.pdf}
+
+or, indeed, in ggplot2 like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{()}\OperatorTok{+}\KeywordTok{geom_sf}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{geometry=}\NormalTok{geometry, }\DataTypeTok{fill=}\NormalTok{value),}\DataTypeTok{data =}\NormalTok{ borough_melt)}\OperatorTok{+}\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{variable)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-90-1.pdf}
+
+\hypertarget{interactive-web-maps}{%
+\subsubsection{Interactive web maps}\label{interactive-web-maps}}
+
+So we created an interactive map with \texttt{tmap} earlier and that was pretty cool, but if we want to do even more mind-blowing stuff later on in the course, we will need to get our heads around how to do interactive maps using \texttt{leaflet}.
+
+Leaflet is a Java Script library for producing interactive web maps, and some enterprising coders over at RStudio have produced a package for allowing you to create your own Leaflet maps. All of the documentation for the R Leaflet package can be found here: \url{https://rstudio.github.io/leaflet/}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(leaflet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sf)}
+\KeywordTok{library}\NormalTok{(sp)}
+\KeywordTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'magrittr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggmap':
+## 
+##     inset
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     set_names
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(classInt)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{generating-a-colour-ramp-and-palette}{%
+\paragraph{Generating a colour ramp and palette}\label{generating-a-colour-ramp-and-palette}}
+
+Before we create a leaflet map, we need to specify what the breaks in our data are going to be\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colours<-}\StringTok{ }\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{5}\NormalTok{, }\StringTok{"Blues"}\NormalTok{)}
+\NormalTok{breaks<-}\KeywordTok{classIntervals}\NormalTok{(BoroughDataMap}\OperatorTok{$}\NormalTok{Claimant.Rate.of.Housing.Benefit..}\FloatTok{2015.}\NormalTok{, }\DataTypeTok{n=}\DecValTok{5}\NormalTok{, }\DataTypeTok{style=}\StringTok{"jenks"}\NormalTok{)}
+\NormalTok{graphics}\OperatorTok{::}\KeywordTok{plot}\NormalTok{(breaks, }\DataTypeTok{pal=}\NormalTok{colours)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-94-1.pdf}
+
+So we have now created a breaks object which uses the jenks natural breaks algorithm to divide up our variable into 5 classes. You will notice that breaks is a list of 2 objects. We want only the \texttt{brks} bit which contains the values for the breaks
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(breaks)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Length Class  Mode   
+## var  33     -none- numeric
+## brks  6     -none- numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{breaks <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(breaks}\OperatorTok{$}\NormalTok{brks)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can create out leaflet interactive map.
+
+Here you will see that I am using different syntax to that which has gone before. The \%\textgreater{}\% (pipe) operator is part of the magrittr package - \url{https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html}. magrittr is an entirely new way of thinking about R syntax. Read up on it if you wish, but for now it is useful to think of the pipe operator as simply meaning ``then''. Do this THEN do this THEN do that.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#create a new sp object from the earlier sf object with all of our data in THEN Transform it to WGS84 THEN convert it to SP.  }
+
+\NormalTok{BoroughDataMapSP <-}\StringTok{ }\NormalTok{BoroughDataMap }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{st_transform}\NormalTok{(}\DataTypeTok{crs =} \DecValTok{4326}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{as}\NormalTok{(}\StringTok{"Spatial"}\NormalTok{)}
+
+\CommentTok{#create a colour palette using colorBin colour mapping}
+\NormalTok{pal <-}\StringTok{ }\KeywordTok{colorBin}\NormalTok{(}\DataTypeTok{palette =} \StringTok{"YlOrRd"}\NormalTok{, }
+                \DataTypeTok{domain =}\NormalTok{ BoroughDataMapSP}\OperatorTok{$}\NormalTok{Claimant.Rate.of.Housing.Benefit..}\FloatTok{2015.}\NormalTok{,}
+                \CommentTok{#create bins using the breaks object from earlier}
+                \DataTypeTok{bins =}\NormalTok{ breaks)}
+\CommentTok{# now, add some polygons colour them using your colour palette, #overlay the, on top of a nice backdrop and add a legend. Note the #use of the magrittr pipe operator (%>%) – check the documentation #to understand how this is working…}
+\KeywordTok{leaflet}\NormalTok{(BoroughDataMapSP) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{addPolygons}\NormalTok{(}\DataTypeTok{stroke =} \OtherTok{FALSE}\NormalTok{, }
+              \DataTypeTok{fillOpacity =} \FloatTok{0.5}\NormalTok{, }
+              \DataTypeTok{smoothFactor =} \FloatTok{0.5}\NormalTok{,}
+              \DataTypeTok{color =} \OperatorTok{~}\KeywordTok{pal}\NormalTok{(Claimant.Rate.of.Housing.Benefit..}\FloatTok{2015.}\NormalTok{),}
+              \DataTypeTok{popup =} \OperatorTok{~}\NormalTok{NAME}
+\NormalTok{  ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{addProviderTiles}\NormalTok{(}\StringTok{"CartoDB.DarkMatter"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{addLegend}\NormalTok{(}\StringTok{"bottomright"}\NormalTok{, }
+            \DataTypeTok{pal=}\NormalTok{ pal, }
+            \DataTypeTok{values =} \OperatorTok{~}\NormalTok{Claimant.Rate.of.Housing.Benefit..}\FloatTok{2015.}\NormalTok{, }
+            \DataTypeTok{title =} \StringTok{"Housing Benefit Claimant Rate"}\NormalTok{, }
+            \DataTypeTok{labFormat =} \KeywordTok{labelFormat}\NormalTok{(}\DataTypeTok{prefix =} \StringTok{"Per 1,000 people "}\NormalTok{),}
+            \DataTypeTok{opacity =} \DecValTok{1}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{02-prac2_files/figure-latex/unnamed-chunk-97-1.pdf}
+
+\hypertarget{methods}{%
+\chapter{Methods}\label{methods}}
+
+We describe our methods in this chapter.
+
+\hypertarget{applications}{%
+\chapter{Applications}\label{applications}}
+
+Some \emph{significant} applications are demonstrated in this chapter.
+
+\hypertarget{example-one}{%
+\section{Example one}\label{example-one}}
+
+\hypertarget{example-two}{%
+\section{Example two}\label{example-two}}
+
+\hypertarget{final-words}{%
+\chapter{Final Words}\label{final-words}}
+
+We have finished a nice book.
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

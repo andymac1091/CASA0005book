@@ -481,7 +481,7 @@ To have a quick look what the shapefile looks like enter the following:
 plot(shape)
 ```
 
-![](01-prac1_files/figure-epub3/unnamed-chunk-27-1.png)<!-- -->
+<img src="01-prac1_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 From what we did in QGIS and ArcMap this should look familiar. 
 
@@ -660,7 +660,7 @@ tmap_mode("plot")
 qtm(shape, fill = "X2011_12")
 ```
 
-![](01-prac1_files/figure-epub3/unnamed-chunk-32-1.png)<!-- -->
+<img src="01-prac1_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 ### Export data
 

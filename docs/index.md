@@ -34,9 +34,7 @@ One of the issues with GIS is that many of the files we will be working with are
 
 ## Offline viewing 
 
-If you are unable to access the internet to view this github website most web browsers allow you to save webpages for offline viewieng. 
-
-Insturctions for Google Chrome are provided here: https://support.google.com/chrome/answer/7343019?co=GENIE.Platform%3DDesktop&hl=en&oco=1
+The best way to view this practical book is through the website. However if you are unable to access the internet you can either download the ```.epub``` book or save specific webpages for offline viewing. Insturctions for Google Chrome are provided here: https://support.google.com/chrome/answer/7343019?co=GENIE.Platform%3DDesktop&hl=en&oco=1
 
 
 
