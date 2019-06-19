@@ -1,5 +1,6 @@
 bookdown::gitbook:
   css: style.css
+  split_by: chapter
   config:
     toc:
       before: |
@@ -13,5 +14,5 @@ bookdown::pdf_book:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
-  keep_tex: yes
-bookdown::epub_book: default
+bookdown::epub_book:
+  stylesheet: style.css
