@@ -5,7 +5,7 @@
 * Examine and clean data
 * More advaned data mamipulation 
 * Plot graps and maps
-* Create interative maos
+* Create interative maps
 
 ## Introduction 
 
