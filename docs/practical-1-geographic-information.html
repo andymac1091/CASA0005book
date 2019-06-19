@@ -249,9 +249,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-basics-of-geographic-information" class="section level2">
 <h2><span class="header-section-number">2.2</span> The Basics of Geographic Information</h2>
 <p>Geographic data, geospatial data or geographic inforamtion is data that identifies the location of features on Earth. There are two main types of data which are used in GIS applications to represent the real world. <strong>Vectors</strong> that are composed of points, lines and polygons and <strong>rasters</strong> that are grids of cells with individual values.</p>
-<p><img src="prac1_images/realworld.gif" /><em>Real world</em>
-<img src="prac1_images/raster.gif" /> <em>Raster</em>
-<img src="prac1_images/vector.gif" /><em>Vector</em></p>
 <p>In the above example the features in the real world (e.g. lake, forest, marsh and grassland) have been represented by points, lines and polygons (vector) or discrete grid cells (raster) of a certain size (e.g. 1 x 1m) specifying land cover type.</p>
 <div id="important-gis-data-formats" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Important GIS data formats</h3>
@@ -275,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">2.2.1.3</span> Shapefile and GeoJSON</h4>
 <p>We’re now going to explore a shapefile (<code>.shp</code> ) and GeoJSON (<code>.geojson</code>) in action.</p>
 <p>Go to: <a href="http://geojson.io/#map=16/51.5247/-0.1339" class="uri">http://geojson.io/#map=16/51.5247/-0.1339</a></p>
-<p><img src="prac1_images/JSONwebsite.png" width="700px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/JSONwebsite.png" width="500pt" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>Using the drawing tools to the right of the map window, create 3 objects: a point, line and a polygon as I have done above. Click on your polygon and colour it red and colour your point green</li>
 <li>Using the ‘Save’ option at the top of the map, save two copies of your new data – one in <code>.geojson</code> format and one in <code>.shp</code> format</li>
@@ -304,21 +301,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="geodatabase" class="section level4">
 <h4><span class="header-section-number">2.2.1.6</span> Geodatabase</h4>
 <p>A geodatabase is a collection of geographic data held within a database. Geodatabases were developed by ESRI to overcome some of the limitations of shapefiles. They come in two main types: Personal (upto 1 TB) and File (limited to 250 - 500 MB), with Personal Geodatabases storing everything in a Microsoft Access database (<code>.mdb</code>) file and File Geodatabases offering more flexibility, storing everything as a series of folders in a file system. In the example below we can see that the FCC_Geodatabase (left hand pane) holds multiple points, lines, polygons, tables and raster layers in the contents tab.</p>
-<p><img src="prac1_images/geodatabase.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/geodatabase.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="geopackage" class="section level4">
 <h4><span class="header-section-number">2.2.1.7</span> GeoPackage</h4>
-<p><img src="prac1_images/geopkg.png" width="100px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/geopkg.png" width="100pt" style="display: block; margin: auto;" /></p>
 <p>A GeoPackage is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial data. It stores spatial data layers (vector and raster) as a single file, and is based upon an SQLite database, a widely used relational database management system, permitting code based, reproducible and transparent workflows. As it stores data in a single file it is very easy to share, copy or move.</p>
 </div>
 <div id="spatialite" class="section level4">
 <h4><span class="header-section-number">2.2.1.8</span> SpatiaLite</h4>
-<p><img src="prac1_images/spatialite.png" width="100px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/spatialite.png" width="100pt" style="display: block; margin: auto;" /></p>
 <p>SpatialLite is an open-source library that extends SQLite core. Support is fairly limited and most software that supports SpatiaLite also supports GeoPackage, as they both build upon SQLite. It doesn’t have any clear advantage over GeoPackage, however it is unable to support raster data.</p>
 </div>
 <div id="postgis" class="section level4">
 <h4><span class="header-section-number">2.2.1.9</span> PostGIS</h4>
-<p><img src="prac1_images/postGIS.jpg" width="100px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/postGIS.jpg" width="100pt" style="display: block; margin: auto;" /></p>
 <p>PostGIS is an opensource database extender for PostrgeSQL. Essentially PostgreSQL is a database and PostGIS is an add on which permits spatial functions. The advantages of using PostGIS over a GeoPackage are that it allows users to access the data at the same time, can handle large data more efficiently and reduces processing time. In this example (<a href="https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291" class="uri">https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291</a>) calcualting the number of bars per neighbourhood in Leon, Mexico the processing time reduced from 1.443 seconds (SQLite) to 0.08 seconds in PostGIS. However, data stored in PostGIS is much harder to share, move or copy.</p>
 </div>
 <div id="what-will-i-use" class="section level4">
@@ -360,9 +357,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">2.3.3</span> Data pre-processing</h3>
 <p><strong>Question</strong> Open the <code>.csv</code> in Excel, what do you notice about how the data is stored?</p>
 <p><strong>Answer</strong> The year is a column and for each area the values are repeated for different years. In our analysis it is easier to have the different years as a coloumn and populated for each area. So, we want to go from this…</p>
-<p><img src="prac1_images/csv_original.png" width="600px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/csv_original.png" width="600pt" style="display: block; margin: auto;" /></p>
 <p>To this…</p>
-<p><img src="prac1_images/csv_pivot.png" width="600px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/csv_pivot.png" width="600pt" style="display: block; margin: auto;" /></p>
 <p>As we are going to use this dataset in ArcMap, QGIS and R I’ve done it in Excel using a pivot table.</p>
 <ol style="list-style-type: decimal">
 <li><p>Go to Insert &gt; PivotTable</p></li>
@@ -370,7 +367,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The PivotTable Field box will appear, experiment with the different fields in each of the areas</p></li>
 </ol>
 <p>I’ve used the following:</p>
-<p><img src="prac1_images/pivot_example.png" width="200px" style="display: block; margin: auto;" />
+<p><img src="prac1_images/pivot_example.png" width="200pt" style="display: block; margin: auto;" />
 Note how I’ve altered the total_action_taken to the sum of… as the original was displaying incorrectly, to do so:</p>
 <ol style="list-style-type: decimal">
 <li>Click on drop down button for total_action_taken &gt; Value Field Settings &gt; select Count</li>
@@ -384,7 +381,7 @@ Note how I’ve altered the total_action_taken to the sum of… as the original 
 <div id="data-loading" class="section level3">
 <h3><span class="header-section-number">2.3.4</span> Data loading</h3>
 <p>Now it’s time to load, inspect and do some basic manipulation of this data. As mentioned in the lecture there are several GIS software ‘types’, here we will repeat the same process across ArcGIS, QGIS and R. Each system has specific benefits, but in general there has been a recent shift towards the use of QGIS and R, both being opensource. ArcGIS was the first major spatial analysis software produced by the Environmental Systems Research Institute, Inc. (Esri), founded in 1969 by Jack Dangermond. Due to its high cost and lack of customisation it is now less commonly used within the research community.</p>
-<p><img src="prac1_images/ArcGISvsQGIS.png" width="300px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/ArcGISvsQGIS.png" width="300pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="arcgis" class="section level3">
 <h3><span class="header-section-number">2.3.5</span> ArcGIS</h3>
@@ -429,7 +426,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li><p>Find and run the ArcCatalog piece of software</p></li>
 <li><p>Once ArcCatalog Opens, go to File &gt; Connect To Folder… and navigate to the N:folder, right click in the contents area and create a new Flie Geodatabase.</p></li>
 </ul>
-<p><img src="prac1_images/file_geo.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/file_geo.png" width="500pt" style="display: block; margin: auto;" /></p>
 <p>You can import data layers into a Geodatabase within ArCatalog, however we will do this in ArcMap.</p>
 <p>Close ArcCatalog and never have both ArcCatalog and another ArcGIS product open at the same time.</p>
 </div>
@@ -443,9 +440,9 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Upon opening select the database you just created in the dialogue box</li>
 <li>Click ok</li>
 </ol>
-<p><img src="prac1_images/default_database.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/default_database.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p>When the map document opens you should see something similar to the image below, highlighting some of the key buttons:</p>
-<p><img src="prac1_images/arcmap.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/arcmap.png" width="500pt" style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>It’s important to now set the map document up properly. Go File &gt; Map Document Properties, enter the details you wish. You can see the connection to the Geodatabase we just made. Click store relative pathnames, this means as long as the data stays in the same position relative to the path then ArcMap can load all the layers. For example if you moved your work from the C: drive to an external drive, H:.</li>
 </ol>
@@ -456,7 +453,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Using the <strong>Plus</strong> icon (add data layer) navigate to the extracted folder you saved earlier.</li>
 <li>Open London_Borough_Excluding_MHW.shp, but feel free to explore the other data layers. In the left hand Table Of Contents you can unselect layers to turn them off or drag layers above or below to change the display order. In the example below the wards layer is showing above the borough layer.</li>
 </ol>
-<p><img src="prac1_images/display_order.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/display_order.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p><strong>Note</strong>, while we have loaded the shapefile, it is not stored in our Geodatabase yet.</p>
 <p><strong>Useful tips</strong></p>
 <ul>
@@ -466,7 +463,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <ol start="7" style="list-style-type: decimal">
 <li>Now right click on the borough layer (in the Table of Contents) and open the attribute table. You’ll see the GSS_CODE field, which is the same code we output in our <code>.csv</code>. If you now right click on a field you’ll also be able to see the data type (e.g. string, integer). For example:</li>
 </ol>
-<p><img src="prac1_images/London_attribute_table.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/London_attribute_table.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="join-data" class="section level5">
 <h5><span class="header-section-number">2.3.5.3.3</span> Join data</h5>
@@ -498,9 +495,9 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Under the Symbology tab select Graduated colors</li>
 <li>Select the Value as one of the years of data we joined and change the classificaiton to something of your choice</li>
 </ol>
-<p><img src="prac1_images/symbology.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/symbology.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p>You should have something that looks like this:</p>
-<p><img src="prac1_images/thematicmap.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/thematicmap.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p><strong>We haven’t talked about the Coordiante Reference System (CRS) (or Spatial Reference System (SRS)) of our map document</strong></p>
 <p>A coordinate reference system is a series of paramters that define the coordinate system. Within GIS we use geographic or projected cooridnate systems. The former uses a three-dimesional spherical surface to define locations of Earth, whereas the latter is defined on a flat, two-dimesional surface giving it constat lengths, angles and areas.</p>
 <p>In ArcMap we can specify what CRS we want to use by:</p>
@@ -508,7 +505,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Right clicking on the map document &gt; Data Frame Properties</li>
 </ol>
 <p>You’ll see that it is already set to Projected Coordinate Systems, National Grids, Europe, British National Grid. This is because ArcMap will default to the cooridnate system of the first data layer loaded.</p>
-<p><img src="prac1_images/coorindate_system.png" width="300px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/coorindate_system.png" width="300pt" style="display: block; margin: auto;" /></p>
 <p>Save and then close your ArcMap document. We’re now going to replicate this task in QGIS.</p>
 <p><strong><em>Note</em></strong> As we are going to open the same files in difference GIS systems it is important to close the software before moving on. If you don’t then files can be <em>locked</em> and unreadable as they are still considered to be in use.</p>
 </div>
@@ -528,7 +525,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Search for and open QGIS</li>
 <li>Click on the open data source manager. Just above the word <em>browser</em> in the top left of the screen</li>
 </ol>
-<p><img src="prac1_images/qgis_datamanager.png" width="700px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/qgis_datamanager.png" width="700pt" style="display: block; margin: auto;" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Navigate to the London boroughs layer <code>.shp</code> and add it, you then have to close the data source manager</li>
 </ol>
@@ -539,7 +536,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Under Record and Fields Options make sure the number of header lines to discard is 0 and the First record has field names box is selected (this is assuming you left a title for each coloumn in your <code>.csv</code>)</li>
 <li>Under Geometry Definition select No geometry (attribute table only)</li>
 </ol>
-<p><img src="prac1_images/csv_datamanager.png" width="700px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/csv_datamanager.png" width="700pt" style="display: block; margin: auto;" /></p>
 <p>Does the sample data seem right?</p>
 <ol start="8" style="list-style-type: decimal">
 <li>If so, click add then close</li>
@@ -552,7 +549,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Click the plus button at the bottom of the box</li>
 <li>Complete the dialouge box</li>
 </ol>
-<p><img src="prac1_images/qgis_join.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/qgis_join.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="export-data-1" class="section level4">
 <h4><span class="header-section-number">2.3.6.4</span> Export data</h4>
@@ -562,7 +559,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Select the GeoPackage format and complete the File name (the saved file name for the GeoPackage) and the Layer name (the name for this layer within the GeoPackage). Recall that a GeoPackage can store many data layers as a single file</li>
 <li>The new layer will be added to the map, so you can remove the old one. Make sure you remove the right one</li>
 </ol>
-<p><img src="prac1_images/make_geopkg.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/make_geopkg.png" width="500pt" style="display: block; margin: auto;" /></p>
 <p>We’ve now made a GeoPackage that we can connect our map project to.</p>
 <ol start="15" style="list-style-type: decimal">
 <li>Under <em>Browser</em>, Right click on GeoPackage &gt; New Connection &gt; Navigate to your GeoPackage</li>
@@ -582,7 +579,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>Save your QGIS project</li>
 </ol>
 <p>You should have produced something like this:</p>
-<p><img src="prac1_images/QGIS_final.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/QGIS_final.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p><strong>Spatial reference</strong></p>
 <p>QGIS is similar but different to ArcMap. QGIS defaults to the Coordiante Reference System (CRS) WGS 84, or known by its European Petroleum Survey Group (EPSG) code 4326. However, when you add your first layer in will default to that CRS. We’ll go into the background of EPSG next time.</p>
 <p>You can change the CRS by going File &gt; Properties and selecting CRS in the left hand pane.</p>
@@ -603,7 +600,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <li>File &gt; New File &gt; R Script</li>
 </ol>
 <p>You should be able to see these quadrants:</p>
-<p><img src="prac1_images/RStudio.png" width="800px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/RStudio.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p>Below are bits of code, to start we will work using the <strong>console</strong>. So just copy the bits of code into the console window, changing the file names to where your data is stored. Then at the end of this section I’ll show you how to make a script.</p>
 <p>R works on packages that are collections of functions and data. For this practical we will need the ones listed in the code chunk below. Whilst we’ve installed them, we haven’t yet loaded them. It’s best practice to do all this at the start of your code, however, for demonstration purpoposes I’ll load each one as we need it.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tmap&quot;</span>, <span class="st">&quot;tmaptools&quot;</span>, <span class="st">&quot;RSQLite&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;https://www.stats.bris.ac.uk/R/&quot;</span>)</code></pre>
@@ -864,7 +861,7 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 <h3><span class="header-section-number">2.4.4</span> Edina Digimap</h3>
 <p>Before the Ordnance Survey opened up much of its data for public use, academics and students in the UK could access OS data using the Edina Digimap Service –– this service is still available today and provides access to a number of products in addition to those available from OS Open Data.</p>
 <p>Perhaps the most exciting of the additional OS data products available from Digimap is OS MasterMap. MasterMap is a framework for all OS data and contains layers of data that include details of real world objects such as buildings, roads, paths, rivers, physical structures and land parcels, as well as the complete UK transport network. Whilst we still are required to go through Edina OS have recently annonced plans to make this dataset free in the near future under the new Geospatial Commission.</p>
-<p><img src="prac1_images/mastermap.png" width="500px" style="display: block; margin: auto;" /></p>
+<p><img src="prac1_images/mastermap.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="osm" class="section level3">
 <h3><span class="header-section-number">2.4.5</span> OSM</h3>
