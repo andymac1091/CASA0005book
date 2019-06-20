@@ -1,9 +1,12 @@
 bookdown::gitbook:
+  highlight: tango
   css: style.css
   split_by: chapter
   config:
     toc:
-      before: |
+      collapse: subsection
+      scroll_highlight: yes
+      before: 
         <li><a href="./">CASA0005</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>

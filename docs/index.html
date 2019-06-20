@@ -24,7 +24,7 @@
 <meta name="author" content="Andy MacLachlan and Adam Dennett" />
 
 
-<meta name="date" content="2019-06-19" />
+<meta name="date" content="2019-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 
-<link rel="next" href="practical-1-geographic-information.html">
+<link rel="next" href="geographic-information.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -65,6 +65,68 @@
 <script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -80,197 +142,74 @@
 
 <ul class="summary">
 <li><a href="./">CASA0005</a></li>
-
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-world-of-gis"><i class="fa fa-check"></i><b>1.1</b> The world of GIS</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.2</b> Getting Started</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#offline-viewing"><i class="fa fa-check"></i><b>1.3</b> Offline viewing</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-world-of-gis"><i class="fa fa-check"></i>The world of GIS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i>Getting Started</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#offline-viewing"><i class="fa fa-check"></i>Offline viewing</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html"><i class="fa fa-check"></i><b>2</b> Practical 1 – Geographic Information</a><ul>
-<li class="chapter" data-level="2.1" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#learning-outcomes"><i class="fa fa-check"></i><b>2.1</b> Learning outcomes</a></li>
-<li class="chapter" data-level="2.2" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#the-basics-of-geographic-information"><i class="fa fa-check"></i><b>2.2</b> The Basics of Geographic Information</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#important-gis-data-formats"><i class="fa fa-check"></i><b>2.2.1</b> Important GIS data formats</a></li>
+<li class="chapter" data-level="1" data-path="geographic-information.html"><a href="geographic-information.html"><i class="fa fa-check"></i><b>1</b> Geographic Information</a><ul>
+<li class="chapter" data-level="1.1" data-path="geographic-information.html"><a href="geographic-information.html#learning-outcomes"><i class="fa fa-check"></i><b>1.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.2" data-path="geographic-information.html"><a href="geographic-information.html#the-basics-of-geographic-information"><i class="fa fa-check"></i><b>1.2</b> The Basics of Geographic Information</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="geographic-information.html"><a href="geographic-information.html#important-gis-data-formats"><i class="fa fa-check"></i><b>1.2.1</b> Important GIS data formats</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data"><i class="fa fa-check"></i><b>2.3</b> Data</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#file-paths"><i class="fa fa-check"></i><b>2.3.1</b> File paths</a></li>
-<li class="chapter" data-level="2.3.2" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data-download"><i class="fa fa-check"></i><b>2.3.2</b> Data download</a></li>
-<li class="chapter" data-level="2.3.3" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data-pre-processing"><i class="fa fa-check"></i><b>2.3.3</b> Data pre-processing</a></li>
-<li class="chapter" data-level="2.3.4" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data-loading"><i class="fa fa-check"></i><b>2.3.4</b> Data loading</a></li>
-<li class="chapter" data-level="2.3.5" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#arcgis"><i class="fa fa-check"></i><b>2.3.5</b> ArcGIS</a></li>
-<li class="chapter" data-level="2.3.6" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#qgis"><i class="fa fa-check"></i><b>2.3.6</b> QGIS</a></li>
-<li class="chapter" data-level="2.3.7" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#r"><i class="fa fa-check"></i><b>2.3.7</b> R</a></li>
-<li class="chapter" data-level="2.3.8" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#export-data-2"><i class="fa fa-check"></i><b>2.3.8</b> Export data</a></li>
-<li class="chapter" data-level="2.3.9" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#what-will-i-use-1"><i class="fa fa-check"></i><b>2.3.9</b> What will I use</a></li>
+<li class="chapter" data-level="1.3" data-path="geographic-information.html"><a href="geographic-information.html#data"><i class="fa fa-check"></i><b>1.3</b> Data</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="geographic-information.html"><a href="geographic-information.html#file-paths"><i class="fa fa-check"></i><b>1.3.1</b> File paths</a></li>
+<li class="chapter" data-level="1.3.2" data-path="geographic-information.html"><a href="geographic-information.html#data-download"><i class="fa fa-check"></i><b>1.3.2</b> Data download</a></li>
+<li class="chapter" data-level="1.3.3" data-path="geographic-information.html"><a href="geographic-information.html#data-pre-processing"><i class="fa fa-check"></i><b>1.3.3</b> Data pre-processing</a></li>
+<li class="chapter" data-level="1.3.4" data-path="geographic-information.html"><a href="geographic-information.html#data-loading"><i class="fa fa-check"></i><b>1.3.4</b> Data loading</a></li>
+<li class="chapter" data-level="1.3.5" data-path="geographic-information.html"><a href="geographic-information.html#arcgis"><i class="fa fa-check"></i><b>1.3.5</b> ArcGIS</a></li>
+<li class="chapter" data-level="1.3.6" data-path="geographic-information.html"><a href="geographic-information.html#qgis"><i class="fa fa-check"></i><b>1.3.6</b> QGIS</a></li>
+<li class="chapter" data-level="1.3.7" data-path="geographic-information.html"><a href="geographic-information.html#r"><i class="fa fa-check"></i><b>1.3.7</b> R</a></li>
+<li class="chapter" data-level="1.3.8" data-path="geographic-information.html"><a href="geographic-information.html#export-data-2"><i class="fa fa-check"></i><b>1.3.8</b> Export data</a></li>
+<li class="chapter" data-level="1.3.9" data-path="geographic-information.html"><a href="geographic-information.html#what-will-i-use-1"><i class="fa fa-check"></i><b>1.3.9</b> What will I use</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data-sources-and-task"><i class="fa fa-check"></i><b>2.4</b> Data sources and task</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#uk-data-service"><i class="fa fa-check"></i><b>2.4.1</b> UK Data Service</a></li>
-<li class="chapter" data-level="2.4.2" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#ons"><i class="fa fa-check"></i><b>2.4.2</b> ONS</a></li>
-<li class="chapter" data-level="2.4.3" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#os"><i class="fa fa-check"></i><b>2.4.3</b> OS</a></li>
-<li class="chapter" data-level="2.4.4" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#edina-digimap"><i class="fa fa-check"></i><b>2.4.4</b> Edina Digimap</a></li>
-<li class="chapter" data-level="2.4.5" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#osm"><i class="fa fa-check"></i><b>2.4.5</b> OSM</a></li>
-<li class="chapter" data-level="2.4.6" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#defra"><i class="fa fa-check"></i><b>2.4.6</b> DEFRA</a></li>
-<li class="chapter" data-level="2.4.7" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#data-lists"><i class="fa fa-check"></i><b>2.4.7</b> Data lists</a></li>
+<li class="chapter" data-level="1.4" data-path="geographic-information.html"><a href="geographic-information.html#data-sources-and-task"><i class="fa fa-check"></i><b>1.4</b> Data sources and task</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="geographic-information.html"><a href="geographic-information.html#uk-data-service"><i class="fa fa-check"></i><b>1.4.1</b> UK Data Service</a></li>
+<li class="chapter" data-level="1.4.2" data-path="geographic-information.html"><a href="geographic-information.html#ons"><i class="fa fa-check"></i><b>1.4.2</b> ONS</a></li>
+<li class="chapter" data-level="1.4.3" data-path="geographic-information.html"><a href="geographic-information.html#os"><i class="fa fa-check"></i><b>1.4.3</b> OS</a></li>
+<li class="chapter" data-level="1.4.4" data-path="geographic-information.html"><a href="geographic-information.html#edina-digimap"><i class="fa fa-check"></i><b>1.4.4</b> Edina Digimap</a></li>
+<li class="chapter" data-level="1.4.5" data-path="geographic-information.html"><a href="geographic-information.html#osm"><i class="fa fa-check"></i><b>1.4.5</b> OSM</a></li>
+<li class="chapter" data-level="1.4.6" data-path="geographic-information.html"><a href="geographic-information.html#defra"><i class="fa fa-check"></i><b>1.4.6</b> DEFRA</a></li>
+<li class="chapter" data-level="1.4.7" data-path="geographic-information.html"><a href="geographic-information.html#data-lists"><i class="fa fa-check"></i><b>1.4.7</b> Data lists</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="practical-1-geographic-information.html"><a href="practical-1-geographic-information.html#summary"><i class="fa fa-check"></i><b>2.5</b> Summary</a></li>
+<li class="chapter" data-level="1.5" data-path="geographic-information.html"><a href="geographic-information.html#summary"><i class="fa fa-check"></i><b>1.5</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html"><i class="fa fa-check"></i><b>3</b> Practical 2 – Introduction to R</a><ul>
-<li class="chapter" data-level="3.1" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#learning-outcomes-1"><i class="fa fa-check"></i><b>3.1</b> Learning outcomes</a></li>
-<li class="chapter" data-level="3.2" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#introduction-3"><i class="fa fa-check"></i><b>3.2</b> Introduction</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#online-forums-are-your-friend"><i class="fa fa-check"></i><b>3.2.1</b> Online forums are your friend!!</a></li>
-<li class="chapter" data-level="3.2.2" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#health-warning"><i class="fa fa-check"></i><b>3.2.2</b> Health warning</a></li>
-<li class="chapter" data-level="3.2.3" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#r-and-rstudio"><i class="fa fa-check"></i><b>3.2.3</b> R and RStudio</a></li>
-<li class="chapter" data-level="3.2.4" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#getting-started-1"><i class="fa fa-check"></i><b>3.2.4</b> Getting started</a></li>
-<li class="chapter" data-level="3.2.5" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#basics-1"><i class="fa fa-check"></i><b>3.2.5</b> Basics</a></li>
-<li class="chapter" data-level="3.2.6" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#scripts-and-some-basic-commands"><i class="fa fa-check"></i><b>3.2.6</b> Scripts and some basic commands</a></li>
-<li class="chapter" data-level="3.2.7" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#functions"><i class="fa fa-check"></i><b>3.2.7</b> Functions</a></li>
-<li class="chapter" data-level="3.2.8" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#basic-plotting"><i class="fa fa-check"></i><b>3.2.8</b> Basic plotting</a></li>
-<li class="chapter" data-level="3.2.9" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#help"><i class="fa fa-check"></i><b>3.2.9</b> Help</a></li>
-<li class="chapter" data-level="3.2.10" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>3.2.10</b> Data types</a></li>
-<li class="chapter" data-level="3.2.11" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#elements-of-a-data-frame"><i class="fa fa-check"></i><b>3.2.11</b> Elements of a data frame</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-outcomes-1"><i class="fa fa-check"></i><b>2.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#introduction-3"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#online-forums-are-your-friend"><i class="fa fa-check"></i><b>2.2.1</b> Online forums are your friend!!</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#health-warning"><i class="fa fa-check"></i><b>2.2.2</b> Health warning</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-1"><i class="fa fa-check"></i><b>2.2.4</b> Getting started</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-1"><i class="fa fa-check"></i><b>2.2.5</b> Basics</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#scripts-and-some-basic-commands"><i class="fa fa-check"></i><b>2.2.6</b> Scripts and some basic commands</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2.7</b> Functions</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plotting"><i class="fa fa-check"></i><b>2.2.8</b> Basic plotting</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#help"><i class="fa fa-check"></i><b>2.2.9</b> Help</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.10</b> Data types</a></li>
+<li class="chapter" data-level="2.2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#elements-of-a-data-frame"><i class="fa fa-check"></i><b>2.2.11</b> Elements of a data frame</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#reading-data-into-r"><i class="fa fa-check"></i><b>3.3</b> Reading data into R</a><ul>
-<li class="chapter" data-level="3.3.1" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#old-skool-cleaning"><i class="fa fa-check"></i><b>3.3.1</b> Old skool cleaning</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#reading-data-into-r"><i class="fa fa-check"></i><b>2.3</b> Reading data into R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#old-skool-cleaning"><i class="fa fa-check"></i><b>2.3.1</b> Old skool cleaning</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#new-skool-cleaning"><i class="fa fa-check"></i><b>2.3.2</b> New skool cleaning</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#examining-your-new-data"><i class="fa fa-check"></i><b>2.3.3</b> Examining your new data</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-manipulation-in-r"><i class="fa fa-check"></i><b>2.3.4</b> Data manipulation in R</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.3.5</b> Plotting</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#pimp-my-graph"><i class="fa fa-check"></i><b>2.3.6</b> Pimp my graph!</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#spatial-data-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Spatial Data in R</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#spec_tbl_df-tbl_df-tbl-data.frame"><i class="fa fa-check"></i><b>3.4</b> [1] “spec_tbl_df” “tbl_df” “tbl” “data.frame”</a></li>
-<li class="chapter" data-level="3.5" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#column1-column2"><i class="fa fa-check"></i><b>3.5</b> column1 column2</a></li>
-<li class="chapter" data-level="3.6" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#min.-1.00-min.-101.0"><i class="fa fa-check"></i><b>3.6</b> Min. : 1.00 Min. :101.0</a></li>
-<li class="chapter" data-level="3.7" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#st-qu.-25.75-1st-qu.125.8"><i class="fa fa-check"></i><b>3.7</b> 1st Qu.: 25.75 1st Qu.:125.8</a></li>
-<li class="chapter" data-level="3.8" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#median-50.50-median-150.5"><i class="fa fa-check"></i><b>3.8</b> Median : 50.50 Median :150.5</a></li>
-<li class="chapter" data-level="3.9" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#mean-50.50-mean-150.5"><i class="fa fa-check"></i><b>3.9</b> Mean : 50.50 Mean :150.5</a></li>
-<li class="chapter" data-level="3.10" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#rd-qu.-75.25-3rd-qu.175.2"><i class="fa fa-check"></i><b>3.10</b> 3rd Qu.: 75.25 3rd Qu.:175.2</a></li>
-<li class="chapter" data-level="3.11" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#max.-100.00-max.-200.0"><i class="fa fa-check"></i><b>3.11</b> Max. :100.00 Max. :200.0</a></li>
-<li class="chapter" data-level="3.12" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#ward-name"><i class="fa fa-check"></i><b>3.12</b> [1] “Ward name”</a></li>
-<li class="chapter" data-level="3.13" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#old-code"><i class="fa fa-check"></i><b>3.13</b> [2] “Old code”</a></li>
-<li class="chapter" data-level="3.14" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#new-code"><i class="fa fa-check"></i><b>3.14</b> [3] “New code”</a></li>
-<li class="chapter" data-level="3.15" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#population---2015"><i class="fa fa-check"></i><b>3.15</b> [4] “Population - 2015”</a></li>
-<li class="chapter" data-level="3.16" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#children-aged-0-15---2015"><i class="fa fa-check"></i><b>3.16</b> [5] “Children aged 0-15 - 2015”</a></li>
-<li class="chapter" data-level="3.17" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#working-age-16-64---2015"><i class="fa fa-check"></i><b>3.17</b> [6] “Working-age (16-64) - 2015”</a></li>
-<li class="chapter" data-level="3.18" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#older-people-aged-65---2015"><i class="fa fa-check"></i><b>3.18</b> [7] “Older people aged 65+ - 2015”</a></li>
-<li class="chapter" data-level="3.19" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#all-children-aged-0-15---2015"><i class="fa fa-check"></i><b>3.19</b> [8] “% All Children aged 0-15 - 2015”</a></li>
-<li class="chapter" data-level="3.20" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#all-working-age-16-64---2015"><i class="fa fa-check"></i><b>3.20</b> [9] “% All Working-age (16-64) - 2015”</a></li>
-<li class="chapter" data-level="3.21" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#all-older-people-aged-65---2015"><i class="fa fa-check"></i><b>3.21</b> [10] “% All Older people aged 65+ - 2015”</a></li>
-<li class="chapter" data-level="3.22" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#mean-age---2013"><i class="fa fa-check"></i><b>3.22</b> [11] “Mean Age - 2013”</a></li>
-<li class="chapter" data-level="3.23" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#median-age---2013"><i class="fa fa-check"></i><b>3.23</b> [12] “Median Age - 2013”</a></li>
-<li class="chapter" data-level="3.24" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#area---square-kilometres"><i class="fa fa-check"></i><b>3.24</b> [13] “Area - Square Kilometres”</a></li>
-<li class="chapter" data-level="3.25" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#population-density-persons-per-sq-km---2013"><i class="fa fa-check"></i><b>3.25</b> [14] “Population density (persons per sq km) - 2013”</a></li>
-<li class="chapter" data-level="3.26" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#bame---2011"><i class="fa fa-check"></i><b>3.26</b> [15] “% BAME - 2011”</a></li>
-<li class="chapter" data-level="3.27" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#not-born-in-uk---2011"><i class="fa fa-check"></i><b>3.27</b> [16] “% Not Born in UK - 2011”</a></li>
-<li class="chapter" data-level="3.28" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#english-is-first-language-of-no-one-in-household---2011"><i class="fa fa-check"></i><b>3.28</b> [17] “% English is First Language of no one in household - 2011”</a></li>
-<li class="chapter" data-level="3.29" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#general-fertility-rate---2013"><i class="fa fa-check"></i><b>3.29</b> [18] “General Fertility Rate - 2013”</a></li>
-<li class="chapter" data-level="3.30" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#male-life-expectancy--2009-13"><i class="fa fa-check"></i><b>3.30</b> [19] “Male life expectancy -2009-13”</a></li>
-<li class="chapter" data-level="3.31" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#female-life-expectancy--2009-13"><i class="fa fa-check"></i><b>3.31</b> [20] “Female life expectancy -2009-13”</a></li>
-<li class="chapter" data-level="3.32" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#children-in-reception-year-who-are-obese---201112-to-201314"><i class="fa fa-check"></i><b>3.32</b> [21] “% children in reception year who are obese - 2011/12 to 2013/14”</a></li>
-<li class="chapter" data-level="3.33" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#children-in-year-6-who-are-obese--201112-to-201314"><i class="fa fa-check"></i><b>3.33</b> [22] “% children in year 6 who are obese- 2011/12 to 2013/14”</a></li>
-<li class="chapter" data-level="3.34" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#rate-of-all-ambulance-incidents-per-1000-population---2014"><i class="fa fa-check"></i><b>3.34</b> [23] “Rate of All Ambulance Incidents per 1,000 population - 2014”</a></li>
-<li class="chapter" data-level="3.35" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#rates-of-ambulance-call-outs-for-alcohol-related-illness---2014"><i class="fa fa-check"></i><b>3.35</b> [24] “Rates of ambulance call outs for alcohol related illness - 2014”</a></li>
-<li class="chapter" data-level="3.36" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#number-killed-or-seriously-injured-on-the-roads---2014"><i class="fa fa-check"></i><b>3.36</b> [25] “Number Killed or Seriously Injured on the roads - 2014”</a></li>
-<li class="chapter" data-level="3.37" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#in-employment-16-64---2011"><i class="fa fa-check"></i><b>3.37</b> [26] “In employment (16-64) - 2011”</a></li>
-<li class="chapter" data-level="3.38" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#employment-rate-16-64---2011"><i class="fa fa-check"></i><b>3.38</b> [27] “Employment rate (16-64) - 2011”</a></li>
-<li class="chapter" data-level="3.39" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#number-of-jobs-in-area---2013"><i class="fa fa-check"></i><b>3.39</b> [28] “Number of jobs in area - 2013”</a></li>
-<li class="chapter" data-level="3.40" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#employment-per-head-of-resident-wa-population---2013"><i class="fa fa-check"></i><b>3.40</b> [29] “Employment per head of resident WA population - 2013”</a></li>
-<li class="chapter" data-level="3.41" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#rate-of-new-registrations-of-migrant-workers---201112"><i class="fa fa-check"></i><b>3.41</b> [30] “Rate of new registrations of migrant workers - 2011/12”</a></li>
-<li class="chapter" data-level="3.42" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#median-house-price-u00a3---2014"><i class="fa fa-check"></i><b>3.42</b> [31] “Median House Price (&lt;U+00A3&gt;) - 2014”</a></li>
-<li class="chapter" data-level="3.43" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#number-of-properties-sold---2014"><i class="fa fa-check"></i><b>3.43</b> [32] “Number of properties sold - 2014”</a></li>
-<li class="chapter" data-level="3.44" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#median-household-income-estimate-201213"><i class="fa fa-check"></i><b>3.44</b> [33] “Median Household income estimate (2012/13)”</a></li>
-<li class="chapter" data-level="3.45" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#number-of-household-spaces---2011"><i class="fa fa-check"></i><b>3.45</b> [34] “Number of Household spaces - 2011”</a></li>
-<li class="chapter" data-level="3.46" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#detached-houses---2011"><i class="fa fa-check"></i><b>3.46</b> [35] “% detached houses - 2011”</a></li>
-<li class="chapter" data-level="3.47" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#semi-detached-houses---2011"><i class="fa fa-check"></i><b>3.47</b> [36] “% semi-detached houses - 2011”</a></li>
-<li class="chapter" data-level="3.48" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#terraced-houses---2011"><i class="fa fa-check"></i><b>3.48</b> [37] “% terraced houses - 2011”</a></li>
-<li class="chapter" data-level="3.49" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#flat-maisonette-or-apartment---2011"><i class="fa fa-check"></i><b>3.49</b> [38] “% Flat, maisonette or apartment - 2011”</a></li>
-<li class="chapter" data-level="3.50" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#households-owned---2011"><i class="fa fa-check"></i><b>3.50</b> [39] “% Households Owned - 2011”</a></li>
-<li class="chapter" data-level="3.51" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#households-social-rented---2011"><i class="fa fa-check"></i><b>3.51</b> [40] “% Households Social Rented - 2011”</a></li>
-<li class="chapter" data-level="3.52" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#households-private-rented---2011"><i class="fa fa-check"></i><b>3.52</b> [41] “% Households Private Rented - 2011”</a></li>
-<li class="chapter" data-level="3.53" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#dwellings-in-council-tax-bands-a-or-b---2015"><i class="fa fa-check"></i><b>3.53</b> [42] “% dwellings in council tax bands A or B - 2015”</a></li>
-<li class="chapter" data-level="3.54" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#dwellings-in-council-tax-bands-c-d-or-e---2015"><i class="fa fa-check"></i><b>3.54</b> [43] “% dwellings in council tax bands C, D or E - 2015”</a></li>
-<li class="chapter" data-level="3.55" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#dwellings-in-council-tax-bands-f-g-or-h---2015"><i class="fa fa-check"></i><b>3.55</b> [44] “% dwellings in council tax bands F, G or H - 2015”</a></li>
-<li class="chapter" data-level="3.56" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#claimant-rate-of-key-out-of-work-benefits-working-age-client-group-2014"><i class="fa fa-check"></i><b>3.56</b> [45] “Claimant rate of key out-of-work benefits (working age client group) (2014)”</a></li>
-<li class="chapter" data-level="3.57" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#claimant-rate-of-housing-benefit-2015"><i class="fa fa-check"></i><b>3.57</b> [46] “Claimant Rate of Housing Benefit (2015)”</a></li>
-<li class="chapter" data-level="3.58" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#claimant-rate-of-employment-support-allowance---2014"><i class="fa fa-check"></i><b>3.58</b> [47] “Claimant Rate of Employment Support Allowance - 2014”</a></li>
-<li class="chapter" data-level="3.59" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#rate-of-jobseekers-allowance-jsa-claimants---2015"><i class="fa fa-check"></i><b>3.59</b> [48] “Rate of JobSeekers Allowance (JSA) Claimants - 2015”</a></li>
-<li class="chapter" data-level="3.60" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#dependent-children-0-18-in-out-of-work-households---2014"><i class="fa fa-check"></i><b>3.60</b> [49] “% dependent children (0-18) in out-of-work households - 2014”</a></li>
-<li class="chapter" data-level="3.61" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#of-households-with-no-adults-in-employment-with-dependent-children---2011"><i class="fa fa-check"></i><b>3.61</b> [50] “% of households with no adults in employment with dependent children - 2011”</a></li>
-<li class="chapter" data-level="3.62" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#of-lone-parents-not-in-employment---2011"><i class="fa fa-check"></i><b>3.62</b> [51] “% of lone parents not in employment - 2011”</a></li>
-<li class="chapter" data-level="3.63" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#id2010---rank-of-average-score-within-london---2010"><i class="fa fa-check"></i><b>3.63</b> [52] “(ID2010) - Rank of average score (within London) - 2010”</a></li>
-<li class="chapter" data-level="3.64" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#id2010-of-lsoas-in-worst-50-nationally---2010"><i class="fa fa-check"></i><b>3.64</b> [53] “(ID2010) % of LSOAs in worst 50% nationally - 2010”</a></li>
-<li class="chapter" data-level="3.65" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#average-gcse-capped-point-scores---2014"><i class="fa fa-check"></i><b>3.65</b> [54] “Average GCSE capped point scores - 2014”</a></li>
-<li class="chapter" data-level="3.66" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#unauthorised-absence-in-all-schools---2013"><i class="fa fa-check"></i><b>3.66</b> [55] “Unauthorised Absence in All Schools (%) - 2013”</a></li>
-<li class="chapter" data-level="3.67" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#with-no-qualifications---2011"><i class="fa fa-check"></i><b>3.67</b> [56] “% with no qualifications - 2011”</a></li>
-<li class="chapter" data-level="3.68" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#with-level-4-qualifications-and-above---2011"><i class="fa fa-check"></i><b>3.68</b> [57] “% with Level 4 qualifications and above - 2011”</a></li>
-<li class="chapter" data-level="3.69" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#a-level-average-point-score-per-student---201314"><i class="fa fa-check"></i><b>3.69</b> [58] “A-Level Average Point Score Per Student - 2013/14”</a></li>
-<li class="chapter" data-level="3.70" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#a-level-average-point-score-per-entry-201314"><i class="fa fa-check"></i><b>3.70</b> [59] “A-Level Average Point Score Per Entry; 2013/14”</a></li>
-<li class="chapter" data-level="3.71" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#crime-rate---201415"><i class="fa fa-check"></i><b>3.71</b> [60] “Crime rate - 2014/15”</a></li>
-<li class="chapter" data-level="3.72" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#violence-against-the-person-rate---201415"><i class="fa fa-check"></i><b>3.72</b> [61] “Violence against the person rate - 2014/15”</a></li>
-<li class="chapter" data-level="3.73" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#deliberate-fires-per-1000-population---2014"><i class="fa fa-check"></i><b>3.73</b> [62] “Deliberate Fires per 1,000 population - 2014”</a></li>
-<li class="chapter" data-level="3.74" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#area-that-is-open-space---2014"><i class="fa fa-check"></i><b>3.74</b> [63] “% area that is open space - 2014”</a></li>
-<li class="chapter" data-level="3.75" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#cars-per-household---2011"><i class="fa fa-check"></i><b>3.75</b> [64] “Cars per household - 2011”</a></li>
-<li class="chapter" data-level="3.76" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#average-public-transport-accessibility-score---2014"><i class="fa fa-check"></i><b>3.76</b> [65] “Average Public Transport Accessibility score - 2014”</a></li>
-<li class="chapter" data-level="3.77" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#travel-by-bicycle-to-work---2011"><i class="fa fa-check"></i><b>3.77</b> [66] “% travel by bicycle to work - 2011”</a></li>
-<li class="chapter" data-level="3.78" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#turnout-at-mayoral-election---2012"><i class="fa fa-check"></i><b>3.78</b> [67] “Turnout at Mayoral election - 2012”</a></li>
-<li class="chapter" data-level="3.79" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#sf-data.frame"><i class="fa fa-check"></i><b>3.79</b> [1] “sf” “data.frame”</a></li>
-<li class="chapter" data-level="3.80" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#spatialpolygonsdataframe"><i class="fa fa-check"></i><b>3.80</b> [1] “SpatialPolygonsDataFrame”</a></li>
-<li class="chapter" data-level="3.81" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#attrpackage"><i class="fa fa-check"></i><b>3.81</b> attr(,“package”)</a></li>
-<li class="chapter" data-level="3.82" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#sp"><i class="fa fa-check"></i><b>3.82</b> [1] “sp”</a></li>
-<li class="chapter" data-level="3.83" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#data-contains-duplicated-keys-e09000001"><i class="fa fa-check"></i><b>3.83</b> Data contains duplicated keys: E09000001</a></li>
-<li class="chapter" data-level="3.84" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#over-coverage-626-out-of-659-data-records-were-not-appended.-run-over_coverage-to-get-the-corresponding-data-row-numbers-and-key-values."><i class="fa fa-check"></i><b>3.84</b> Over coverage: 626 out of 659 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.</a></li>
-<li class="chapter" data-level="3.85" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#warning-column-gss_codenew.code-joining-factor-and-character-vector"><i class="fa fa-check"></i><b>3.85</b> Warning: Column <code>GSS_CODE</code>/<code>New.code</code> joining factor and character vector,</a></li>
-<li class="chapter" data-level="3.86" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#coercing-into-character-vector"><i class="fa fa-check"></i><b>3.86</b> coercing into character vector</a></li>
-<li class="chapter" data-level="3.87" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#tmap-mode-set-to-plotting"><i class="fa fa-check"></i><b>3.87</b> tmap mode set to plotting</a></li>
-<li class="chapter" data-level="3.88" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#warning-the-argument-auto.palette.mapping-is-deprecated.-please-use"><i class="fa fa-check"></i><b>3.88</b> Warning: The argument auto.palette.mapping is deprecated. Please use</a></li>
-<li class="chapter" data-level="3.89" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#midpoint-for-numeric-data-and-stretch.palette-for-categorical-data-to"><i class="fa fa-check"></i><b>3.89</b> midpoint for numeric data and stretch.palette for categorical data to</a></li>
-<li class="chapter" data-level="3.90" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#control-the-palette-mapping."><i class="fa fa-check"></i><b>3.90</b> control the palette mapping.</a></li>
-<li class="chapter" data-level="3.91" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#tmap-mode-set-to-interactive-viewing"><i class="fa fa-check"></i><b>3.91</b> tmap mode set to interactive viewing</a></li>
-<li><a href="practical-2-introduction-to-r.html#warning-number-of-levels-of-the-variable-x..children.in.year.-6.who.are.obese..2011.12.to.2013.14-is-31-which-is-larger"><span class="toc-section-number">3.92</span> Warning: Number of levels of the variable “X..children.in.year.
-## 6.who.are.obese..2011.12.to.2013.14” is 31, which is larger</a></li>
-<li class="chapter" data-level="3.93" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#than-max.categories-which-is-5-so-levels-are-combined.-set"><i class="fa fa-check"></i><b>3.93</b> than max.categories (which is 5), so levels are combined. Set</a></li>
-<li class="chapter" data-level="3.94" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#tmap_optionsmax.categories-31-in-the-layer-function-to-show-all-levels."><i class="fa fa-check"></i><b>3.94</b> tmap_options(max.categories = 31) in the layer function to show all levels.</a></li>
-<li class="chapter" data-level="3.95" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#class-spatialpolygonsdataframe"><i class="fa fa-check"></i><b>3.95</b> class : SpatialPolygonsDataFrame</a></li>
-<li class="chapter" data-level="3.96" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#features-33"><i class="fa fa-check"></i><b>3.96</b> features : 33</a></li>
-<li class="chapter" data-level="3.97" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#extent-503568.2-561957.5-155850.8-200933.9-xmin-xmax-ymin-ymax"><i class="fa fa-check"></i><b>3.97</b> extent : 503568.2, 561957.5, 155850.8, 200933.9 (xmin, xmax, ymin, ymax)</a></li>
-<li class="chapter" data-level="3.98" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#crs-projtmerc-lat_049-lon_0-2-k0.999601272-x_0400000-y_0-100000-ellpsairy-towgs84446.448-125.157542.060.15020.2470.8421-20.4894-unitsm-no_defs"><i class="fa fa-check"></i><b>3.98</b> crs : +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.1502,0.247,0.8421,-20.4894 +units=m +no_defs</a></li>
-<li class="chapter" data-level="3.99" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#variables-74"><i class="fa fa-check"></i><b>3.99</b> variables : 74</a></li>
-<li class="chapter" data-level="3.100" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#names-name-gss_code-hectares-nonld_area-ons_inner-sub_2009-sub_2006-ward.name-old.code-new.code-population2015-children.aged.0.152015-working.age..16.64.2015-older.people.aged.65.2015-x..all.children.aged.0.152015"><i class="fa fa-check"></i><b>3.100</b> names : NAME, GSS_CODE, HECTARES, NONLD_AREA, ONS_INNER, SUB_2009, SUB_2006, Ward.name, Old.code, New.code, Population…2015, Children.aged.0.15…2015, Working.age..16.64….2015, Older.people.aged.65….2015, X..All.Children.aged.0.15…2015, …</a></li>
-<li class="chapter" data-level="3.101" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#min-values-barking-and-dagenham-e09000001-314.942-0-f-na-na-barking-and-dagenham-00aa-e09000001-8100-650-6250-1250-8"><i class="fa fa-check"></i><b>3.101</b> min values : Barking and Dagenham, E09000001, 314.942, 0, F, NA, NA, Barking and Dagenham, 00AA, E09000001, 8100, 650, 6250, 1250, 8, …</a></li>
-<li class="chapter" data-level="3.102" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#max-values-westminster-e09000033-15013.487-370.619-t-na-na-westminster-00bk-e09000033-393200-82900-257850-56550-26.1"><i class="fa fa-check"></i><b>3.102</b> max values : Westminster, E09000033, 15013.487, 370.619, T, NA, NA, Westminster, 00BK, E09000033, 393200, 82900, 257850, 56550, 26.1, …</a></li>
-<li class="chapter" data-level="3.103" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#simple-feature-collection-with-33-features-and-7-fields"><i class="fa fa-check"></i><b>3.103</b> Simple feature collection with 33 features and 7 fields</a></li>
-<li class="chapter" data-level="3.104" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#geometry-type-multipolygon"><i class="fa fa-check"></i><b>3.104</b> geometry type: MULTIPOLYGON</a></li>
-<li class="chapter" data-level="3.105" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#dimension-xy"><i class="fa fa-check"></i><b>3.105</b> dimension: XY</a></li>
-<li class="chapter" data-level="3.106" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#bbox-xmin-503568.2-ymin-155850.8-xmax-561957.5-ymax-200933.9"><i class="fa fa-check"></i><b>3.106</b> bbox: xmin: 503568.2 ymin: 155850.8 xmax: 561957.5 ymax: 200933.9</a></li>
-<li class="chapter" data-level="3.107" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#epsg-srid-na"><i class="fa fa-check"></i><b>3.107</b> epsg (SRID): NA</a></li>
-<li class="chapter" data-level="3.108" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#proj4string-projtmerc-lat_049-lon_0-2-k0.999601272-x_0400000-y_0-100000-ellpsairy-towgs84446.448-125.157542.060.15020.2470.8421-20.4894-unitsm-no_defs"><i class="fa fa-check"></i><b>3.108</b> proj4string: +proj=tmerc +lat_0=49 +lon_0=-2 +k=0.999601272 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.1502,0.247,0.8421,-20.4894 +units=m +no_defs</a></li>
-<li class="chapter" data-level="3.109" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#first-10-features"><i class="fa fa-check"></i><b>3.109</b> First 10 features:</a></li>
-<li class="chapter" data-level="3.110" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#name-gss_code-hectares-nonld_area-ons_inner-sub_2009"><i class="fa fa-check"></i><b>3.110</b> NAME GSS_CODE HECTARES NONLD_AREA ONS_INNER SUB_2009</a></li>
-<li class="chapter" data-level="3.111" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#kingston-upon-thames-e09000021-3726.117-0.000-f"><i class="fa fa-check"></i><b>3.111</b> 0 Kingston upon Thames E09000021 3726.117 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.112" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#croydon-e09000008-8649.441-0.000-f"><i class="fa fa-check"></i><b>3.112</b> 1 Croydon E09000008 8649.441 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.113" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#bromley-e09000006-15013.487-0.000-f"><i class="fa fa-check"></i><b>3.113</b> 2 Bromley E09000006 15013.487 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.114" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#hounslow-e09000018-5658.541-60.755-f"><i class="fa fa-check"></i><b>3.114</b> 3 Hounslow E09000018 5658.541 60.755 F <NA></a></li>
-<li class="chapter" data-level="3.115" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#ealing-e09000009-5554.428-0.000-f"><i class="fa fa-check"></i><b>3.115</b> 4 Ealing E09000009 5554.428 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.116" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#havering-e09000016-11445.735-210.763-f"><i class="fa fa-check"></i><b>3.116</b> 5 Havering E09000016 11445.735 210.763 F <NA></a></li>
-<li class="chapter" data-level="3.117" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#hillingdon-e09000017-11570.063-0.000-f"><i class="fa fa-check"></i><b>3.117</b> 6 Hillingdon E09000017 11570.063 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.118" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#harrow-e09000015-5046.330-0.000-f"><i class="fa fa-check"></i><b>3.118</b> 7 Harrow E09000015 5046.330 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.119" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#brent-e09000005-4323.270-0.000-f"><i class="fa fa-check"></i><b>3.119</b> 8 Brent E09000005 4323.270 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.120" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#barnet-e09000003-8674.837-0.000-f"><i class="fa fa-check"></i><b>3.120</b> 9 Barnet E09000003 8674.837 0.000 F <NA></a></li>
-<li class="chapter" data-level="3.121" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#sub_2006-geometry"><i class="fa fa-check"></i><b>3.121</b> SUB_2006 geometry</a></li>
-<li class="chapter" data-level="3.122" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-516401.6-16"><i class="fa fa-check"></i><b>3.122</b> 0 <NA> MULTIPOLYGON (((516401.6 16…</a></li>
-<li class="chapter" data-level="3.123" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-535009.2-15"><i class="fa fa-check"></i><b>3.123</b> 1 <NA> MULTIPOLYGON (((535009.2 15…</a></li>
-<li class="chapter" data-level="3.124" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-540373.6-15"><i class="fa fa-check"></i><b>3.124</b> 2 <NA> MULTIPOLYGON (((540373.6 15…</a></li>
-<li class="chapter" data-level="3.125" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-521975.8-17"><i class="fa fa-check"></i><b>3.125</b> 3 <NA> MULTIPOLYGON (((521975.8 17…</a></li>
-<li class="chapter" data-level="3.126" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-510253.5-18"><i class="fa fa-check"></i><b>3.126</b> 4 <NA> MULTIPOLYGON (((510253.5 18…</a></li>
-<li class="chapter" data-level="3.127" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-549893.9-18"><i class="fa fa-check"></i><b>3.127</b> 5 <NA> MULTIPOLYGON (((549893.9 18…</a></li>
-<li class="chapter" data-level="3.128" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-510599.8-19"><i class="fa fa-check"></i><b>3.128</b> 6 <NA> MULTIPOLYGON (((510599.8 19…</a></li>
-<li class="chapter" data-level="3.129" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-510599.8-19-1"><i class="fa fa-check"></i><b>3.129</b> 7 <NA> MULTIPOLYGON (((510599.8 19…</a></li>
-<li class="chapter" data-level="3.130" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-525201-1825"><i class="fa fa-check"></i><b>3.130</b> 8 <NA> MULTIPOLYGON (((525201 1825…</a></li>
-<li class="chapter" data-level="3.131" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#multipolygon-524579.9-19"><i class="fa fa-check"></i><b>3.131</b> 9 <NA> MULTIPOLYGON (((524579.9 19…</a><ul>
-<li class="chapter" data-level="3.131.1" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#maps-with-extra-features"><i class="fa fa-check"></i><b>3.131.1</b> Maps with extra features</a></li>
-<li class="chapter" data-level="3.131.2" data-path="practical-2-introduction-to-r.html"><a href="practical-2-introduction-to-r.html#extension"><i class="fa fa-check"></i><b>3.131.2</b> Extension</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#making-maps-using-ggplot2"><i class="fa fa-check"></i><b>2.4</b> Making maps using ggplot2</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#changing-projections"><i class="fa fa-check"></i><b>2.4.1</b> Changing projections</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#maps-with-extra-features"><i class="fa fa-check"></i><b>2.4.2</b> Maps with extra features</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extension"><i class="fa fa-check"></i><b>2.4.3</b> Extension</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+<li class="chapter" data-level="3" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>3</b> Applications</a><ul>
+<li class="chapter" data-level="3.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>3.1</b> Example one</a></li>
+<li class="chapter" data-level="3.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>3.2</b> Example two</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="4" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>4</b> Final Words</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -295,15 +234,15 @@
 <div id="header">
 <h1 class="title">CASA0005 Geographic Information Systems and Science</h1>
 <p class="author"><em>Andy MacLachlan and Adam Dennett</em></p>
-<p class="date"><em>2019-06-19</em></p>
+<p class="date"><em>2019-06-20</em></p>
 </div>
-<div id="welcome" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Welcome</h1>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
 <p>Welcome to the CASA0005 Geographic Information Systems and Science online pratical handbook. This website is hosted on Github and holds all the practical instructions and data. All data used within the practicals is aviaiable online, however occasionally websites can undergo maintenance or be inaccessible due to political facors such as the government shutdowns.</p>
-<p>If you need the practical data you can access it from my github repository here: <a href="https://github.com/andrewmaclachlan/CASA0005" class="uri">https://github.com/andrewmaclachlan/CASA0005</a></p>
+<p>If you need the practical data you can access it from my github repository here: <a href="https://github.com/andrewmaclachlan/CASA0005book" class="uri">https://github.com/andrewmaclachlan/CASA0005book</a></p>
 <p>Practical data is divided into the relevant sessions, although sometimes i’ll refer to a dataset used within a previous week.</p>
-<div id="the-world-of-gis" class="section level2">
-<h2><span class="header-section-number">1.1</span> The world of GIS</h2>
+<div id="the-world-of-gis" class="section level2 unnumbered">
+<h2>The world of GIS</h2>
 <p>Spatial analysis can yield fascinating insights into geographical relationships. However, at times it can be difficult to work with. You will get lots of error messages and have software crash. The academic staff are here to help you work through these practicals but we do not know everything. It’s a good idea to become familar with online sources of help, such as:</p>
 <ul>
 <li>Stack Exchange <a href="https://stackexchange.com/" class="uri">https://stackexchange.com/</a></li>
@@ -312,12 +251,12 @@
 <li>ArcGIS help pages <a href="https://support.esri.com/en" class="uri">https://support.esri.com/en</a></li>
 </ul>
 </div>
-<div id="getting-started" class="section level2">
-<h2><span class="header-section-number">1.2</span> Getting Started</h2>
+<div id="getting-started" class="section level2 unnumbered">
+<h2>Getting Started</h2>
 <p>One of the issues with GIS is that many of the files we will be working with are quite large. Fortunately, in recent years, UCL has seriously beefed up the storage available for students. You now get 100GB of free storage, which should be plenty for the work you will be doing this year! The Bartlett faculty has several gigabytes of storage space available on their central servers, so before we get started, we will connect to our N drive to carry out all of our practical work over the coming weeks.</p>
 </div>
-<div id="offline-viewing" class="section level2">
-<h2><span class="header-section-number">1.3</span> Offline viewing</h2>
+<div id="offline-viewing" class="section level2 unnumbered">
+<h2>Offline viewing</h2>
 <p>The best way to view this practical book is through the website. However if you are unable to access the internet you can either download the <code>.epub</code> book or save specific webpages for offline viewing. Insturctions for Google Chrome are provided here: <a href="https://support.google.com/chrome/answer/7343019?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=1" class="uri">https://support.google.com/chrome/answer/7343019?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=1</a></p>
 
 </div>
@@ -328,7 +267,7 @@
         </div>
       </div>
 
-<a href="practical-1-geographic-information.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="geographic-information.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -367,7 +306,8 @@ gitbook.start({
 },
 "download": ["CASA0005.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "subsection",
+"scroll_highlight": true
 }
 });
 });

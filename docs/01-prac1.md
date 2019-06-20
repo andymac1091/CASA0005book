@@ -1,5 +1,5 @@
 
-# Practical 1 – Geographic Information
+# Geographic Information
 
 ## Learning outcomes
 
