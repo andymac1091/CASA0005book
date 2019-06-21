@@ -3,23 +3,23 @@
 ## Learning outcomes
 
 * Examine and clean data
-* More advaned data mamipulation 
-* Plot graps and maps
-* Create interative maps
+* More advanced data manipulation 
+* Plot graphs and maps
+* Create interactive maps
 
 ## Introduction
 
-So far we've only really coinsidered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto). 
+So far we've only really considered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto). 
 
 ## WorldClim data
 
-To start with we are going to use WorldClim data --- this is a set of free global cliamte layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).
+To start with we are going to use WorldClim data --- this is a set of free global climate layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).
 
 To download the data go to: http://worldclim.org/version2
 
-Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrase in a trigonomietrc cosine-based faishon as you move towards the Earth's poles....
+Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth's poles....
 
-<img src="prac3_images/arcseconds.png" width="100pt" style="display: block; margin: auto;" />
+<img src="prac3_images/arcseconds.jpg" width="100pt" style="display: block; margin: auto;" />
 
 Unzip and move the data to your project folder. Now load the data. We could do this individually....
 
@@ -58,7 +58,7 @@ plot(jan)
 
 <img src="03-prac3_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
-However, a better and more effieicent way is to firstly list all the files we are interested stored within our directory
+However, a better and more efficient way is to firstly list all the files we are interested stored within our directory
 
 
 ```r
@@ -96,7 +96,7 @@ worldclimtemp
 ## max values :           34.291,           33.174,           33.904,           34.629,           36.312,           38.400,           43.036,           41.073,           36.389,           33.869,           33.518,           33.667
 ```
 
-So if the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average tempearture data for us in order. To access single layers within the stack:
+So if the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average temperature data for us in order. To access single layers within the stack:
 
 
 ```r
@@ -178,7 +178,7 @@ Perthtemp <- AUcitytemp[3,]
 ## Descriptive statistics
 
 ### Histogram
-Now we have a look at a histrogram for our data. Remember what we're looking at here. The x axis is the tempearture and the y is the frequency of occurance.  
+Now we have a look at a histogram for our data. Remember what we're looking at here. The x axis is the temperature and the y is the frequency of occurrence.  
 
 
 ```r
@@ -187,7 +187,7 @@ hist(Perthtemp)
 
 <img src="03-prac3_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
-That's a pretty simple histogram, let's improve the aestehics 
+That's a pretty simple histogram, let's improve the aesthetics 
 
 
 ```r
@@ -246,9 +246,9 @@ This was a rather basic histogram, what if we wanted to see the distribution of 
 
 First, we need to source and load a vector of Australia. Go to: https://gadm.org/download_country_v3.html
 
-Download the Geopackage
+Download the Geo package
 
-We can check aht layers are within a geopackage using:
+We can check that layers are within a Geo package using:
 
 
 ```r
@@ -272,7 +272,7 @@ st_layers("prac3_data/gadm36_AUS.gpkg")
 ## 3 gadm36_AUS_2 Multi Polygon      569     13
 ```
 
-Then lets read in the Geopackage layer for the whole of Australia 
+Then lets read in the GeoPackage layer for the whole of Australia 
 
 
 ```r
@@ -331,11 +331,11 @@ Austemp
 ## max values :  34.29100,  33.17400,  32.39700,  30.07200,  28.50000,  27.40000,  26.90000,  27.20000,  29.31209,  31.72000,  33.51800,  33.66700
 ```
 
-You'll notice that whislt we have the whole of Australia the raster hasn't been perfectly clipped to the exact outline....the extent just specifes an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:
+You'll notice that whilst we have the whole of Australia the raster hasn't been perfectly clipped to the exact outline....the extent just specifies an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:
 
 
 ```r
-exactAus=mask(Austemp, Ausoutline)
+exactAus=mask(Austemp, Ausoutline, na.rm=TRUE)
 ```
 
 You could also run this using the original worldclimtemp raster, however, it may take some time. I'd recommend cropping to the extent first. 
@@ -344,32 +344,60 @@ Both our Austemp and exactAus are raster bricks. A brick is similar to a stack e
 
 Let's now re-run compute our histogram for Australia in March
 
+We could just use hist like we have done before
+
 
 ```r
-hist(exactAus, col="red")
+hist(exactAus[[3]], col="red")
 ```
 
 <img src="03-prac3_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
+However we have a bit more control with ggplot
 
-vector_filepath = ("prac3_data/gadm36_AUS.gpkg", package = "spData")
-world = st_read("prac3_data/gadm36_AUS.gpkg")
+### Histogram with ggplot
 
-cities_gpkg <- readOGR("prac3_data/gadm36_AUS.gpkg", "gadm36_AUS_0")
-
-
-### Histrogram with ggplot
+Firstly we need to make our raster into a data.frame to be compatible with ggplot2..
 
 
+```r
+alldf=as.data.frame(exactAus)
+```
 
 
-Morocco <- getData('GADM', country="MAR", level=0)
+```r
+library(ggplot2)
+ggplot(alldf, aes(x=Mar)) + geom_histogram()
+```
 
-M.area <- extent(Morocco)
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
 
-mean_m <- crop(worldclimtemp, M.area)
+```
+## Warning: Removed 205103 rows containing non-finite values (stat_bin).
+```
 
-One of the benefits of using a rasterstack is that we can apply
+<img src="03-prac3_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+
+
+
+### Auto data download
+
+In this practical I've shown you how to source the data online, download it and load it into R. However for both WorldClim and GADM we can do this straight from R using the getData function....
+
+
+
+Now for GADM
+
+
+```r
+Aus_auto <- getData('GADM', country="AUS", level=0)
+```
+
+
+
+
 
 
 
@@ -381,10 +409,10 @@ Automatically load worldclim data straight to R
 library(raster)
 library(sp)
 
-#r <- getData("worldclim",var="bio",res=10)
+r <- getData("worldclim",var="tmean",res=5)
 ```
 
-
+Download 
 
 
 
@@ -414,7 +442,7 @@ MODIS
 
 ## MODIS background
 
-NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North cossing the equator in the afternoon. Consqeutnly we are able to obtain twice daily envrionmental data for the majority of locations on Earth such as:
+NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North crossing the equator in the afternoon. Consequently we are able to obtain twice daily environmental data for the majority of locations on Earth such as:
 
 * Total Precipitable Water
 * Cloud Product
@@ -433,7 +461,7 @@ See: https://modis.gsfc.nasa.gov/data/ for more details
 
 ## Loading MODIS data
 
-The MODIStsp package enables us to autmoate the preprocessing of MODIS time series data. Before this I would have to dowload ```.txt``` files with all the iamges I wanted, create other ```.txt``` that specifed the data to download, where to store it and any reprojection information. Then it would have to be loaded into R. 
+The MODIStsp package enables us to automate the preprocessing of MODIS time series data. Before this I would have to download ```.txt``` files with all the images I wanted, create other ```.txt``` that specified the data to download, where to store it and any re-projection information. Then it would have to be loaded into R. 
 
 But don't worry as now we can do it all from R...
 
@@ -445,7 +473,7 @@ But don't worry as now we can do it all from R...
 
 Firstly, create a free account at: https://urs.earthdata.nasa.gov/home
 
-Les't see what data is now available:
+Let's see what data is now available:
 
 
 ```r

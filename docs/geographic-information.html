@@ -213,7 +213,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#descriptive-statistics"><i class="fa fa-check"></i><b>3.5</b> Descriptive statistics</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram"><i class="fa fa-check"></i><b>3.5.1</b> Histogram</a></li>
 <li class="chapter" data-level="3.5.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#using-more-data"><i class="fa fa-check"></i><b>3.5.2</b> Using more data</a></li>
-<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histrogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histrogram with ggplot</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histogram with ggplot</a></li>
+<li class="chapter" data-level="3.5.4" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#auto-data-download"><i class="fa fa-check"></i><b>3.5.4</b> Auto data download</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#modis-background"><i class="fa fa-check"></i><b>3.6</b> MODIS background</a></li>
 <li class="chapter" data-level="3.7" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#loading-modis-data"><i class="fa fa-check"></i><b>3.7</b> Loading MODIS data</a></li>
@@ -256,13 +257,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Describe and explain GIS data formats and databases</li>
 <li>Source and pre-process spatial data</li>
-<li>Load and undertaken some basic manipulcation of spatial data in: ArcMap, QGIS and R</li>
+<li>Load and undertaken some basic manipulation of spatial data in: ArcMap, QGIS and R</li>
 <li>Evaluate the (dis)advantages of each GIS you have used</li>
 </ul>
 </div>
 <div id="the-basics-of-geographic-information" class="section level2">
 <h2><span class="header-section-number">1.2</span> The Basics of Geographic Information</h2>
-<p>Geographic data, geospatial data or geographic inforamtion is data that identifies the location of features on Earth. There are two main types of data which are used in GIS applications to represent the real world. <strong>Vectors</strong> that are composed of points, lines and polygons and <strong>rasters</strong> that are grids of cells with individual values.</p>
+<p>Geographic data, geospatial data or geographic information is data that identifies the location of features on Earth. There are two main types of data which are used in GIS applications to represent the real world. <strong>Vectors</strong> that are composed of points, lines and polygons and <strong>rasters</strong> that are grids of cells with individual values.</p>
 <p>In the above example the features in the real world (e.g. lake, forest, marsh and grassland) have been represented by points, lines and polygons (vector) or discrete grid cells (raster) of a certain size (e.g. 1 x 1m) specifying land cover type.</p>
 <div id="important-gis-data-formats" class="section level3">
 <h3><span class="header-section-number">1.2.1</span> Important GIS data formats</h3>
@@ -295,26 +296,26 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="raster-data" class="section level4">
 <h4><span class="header-section-number">1.2.1.4</span> Raster data</h4>
-<p>Most raster data is now provided in GeoTIFF (<code>.tiff</code>) format, which stands for Geostarionary Earth Orbit Tagged Image File. The GeoTIFF data format was created by NASA and is a standard public domain format. All necesary inforamtion to establish the location of the data on Earth’s surface is embedded into the image. This includes: map projection, coordinate system, ellipsoid and datum type.</p>
+<p>Most raster data is now provided in GeoTIFF (<code>.tiff</code>) format, which stands for Geostarionary Earth Orbit Tagged Image File. The GeoTIFF data format was created by NASA and is a standard public domain format. All necesary information to establish the location of the data on Earth’s surface is embedded into the image. This includes: map projection, coordinate system, ellipsoid and datum type.</p>
 </div>
 <div id="other-data-formats" class="section level4">
 <h4><span class="header-section-number">1.2.1.5</span> Other data formats</h4>
-<p>Aforementioned data types and formats are likely to be the ones you predominately encounter. However there are several more used within spatial analysis. Theres include:</p>
+<p>Aforementioned data types and formats are likely to be the ones you predominately encounter. However there are several more used within spatial analysis. These include:</p>
 <p><strong>Vector</strong></p>
 <ul>
 <li>GML (Geography Markup Language – gave birth to KML) - <a href="http://www.opengeospatial.org/standards/gml" class="uri">http://www.opengeospatial.org/standards/gml</a></li>
 </ul>
 <p><strong>Raster</strong></p>
 <ul>
-<li>Band SeQuential (BSQ) - technically a method for encoding data but commonly refered to as BSQ.</li>
+<li>Band SeQuential (BSQ) - technically a method for encoding data but commonly referred to as BSQ.</li>
 <li>Hierarchical Data Format (HDF)</li>
 <li>Arc Grid</li>
 </ul>
-<p>There are normally valid reasons for storing data in one of these other formats. For example, BSQ are raster data with a seperate text header file (<code>.hdr</code>) providing geographic spatial reference information. Earth observation data often monitors the electromagenitc spectrum in bands. Humans see in the visible range of the spectrum and our vision is composed of red, green and blue wavelengths. If we wanted to analyse just the red wavelength the BSQ format would let us <em>read in</em> only that data. In comaprsion a GeoTIFF might come with all the data ‘packaged’ in one file and when doing analysis over thousands of images would significantly slow things down. That said you can now often find GeoTIFFs seperated in a similar format to BSQ and it’s fairly straightforward to convert between raster formats.</p>
+<p>There are normally valid reasons for storing data in one of these other formats. For example, BSQ are raster data with a separate text header file (<code>.hdr</code>) providing geographic spatial reference information. Earth observation data often monitors the electromagnetic spectrum in bands. Humans see in the visible range of the spectrum and our vision is composed of red, green and blue wavelengths. If we wanted to analyse just the red wavelength the BSQ format would let us <em>read in</em> only that data. In comparison a GeoTIFF might come with all the data ‘packaged’ in one file and when doing analysis over thousands of images would significantly slow things down. That said you can now often find GeoTIFFs separated in a similar format to BSQ and it’s fairly straightforward to convert between raster formats.</p>
 </div>
 <div id="geodatabase" class="section level4">
 <h4><span class="header-section-number">1.2.1.6</span> Geodatabase</h4>
-<p>A geodatabase is a collection of geographic data held within a database. Geodatabases were developed by ESRI to overcome some of the limitations of shapefiles. They come in two main types: Personal (upto 1 TB) and File (limited to 250 - 500 MB), with Personal Geodatabases storing everything in a Microsoft Access database (<code>.mdb</code>) file and File Geodatabases offering more flexibility, storing everything as a series of folders in a file system. In the example below we can see that the FCC_Geodatabase (left hand pane) holds multiple points, lines, polygons, tables and raster layers in the contents tab.</p>
+<p>A geodatabase is a collection of geographic data held within a database. Geodatabases were developed by ESRI to overcome some of the limitations of shapefiles. They come in two main types: Personal (up to 1 TB) and File (limited to 250 - 500 MB), with Personal Geodatabases storing everything in a Microsoft Access database (<code>.mdb</code>) file and File Geodatabases offering more flexibility, storing everything as a series of folders in a file system. In the example below we can see that the FCC_Geodatabase (left hand pane) holds multiple points, lines, polygons, tables and raster layers in the contents tab.</p>
 <p><img src="prac1_images/geodatabase.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="geopackage" class="section level4">
@@ -330,7 +331,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="postgis" class="section level4">
 <h4><span class="header-section-number">1.2.1.9</span> PostGIS</h4>
 <p><img src="prac1_images/postGIS.jpg" width="100pt" style="display: block; margin: auto;" /></p>
-<p>PostGIS is an opensource database extender for PostrgeSQL. Essentially PostgreSQL is a database and PostGIS is an add on which permits spatial functions. The advantages of using PostGIS over a GeoPackage are that it allows users to access the data at the same time, can handle large data more efficiently and reduces processing time. In this example (<a href="https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291" class="uri">https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291</a>) calcualting the number of bars per neighbourhood in Leon, Mexico the processing time reduced from 1.443 seconds (SQLite) to 0.08 seconds in PostGIS. However, data stored in PostGIS is much harder to share, move or copy.</p>
+<p>PostGIS is an opensource database extender for PostrgeSQL. Essentially PostgreSQL is a database and PostGIS is an add on which permits spatial functions. The advantages of using PostGIS over a GeoPackage are that it allows users to access the data at the same time, can handle large data more efficiently and reduces processing time. In this example (<a href="https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291" class="uri">https://medium.com/@GispoLearning/learn-spatial-sql-and-master-geopackage-with-qgis-3-16b1e17f0291</a>) calculating the number of bars per neighbourhood in Leon, Mexico the processing time reduced from 1.443 seconds (SQLite) to 0.08 seconds in PostGIS. However, data stored in PostGIS is much harder to share, move or copy.</p>
 </div>
 <div id="what-will-i-use" class="section level4">
 <h4><span class="header-section-number">1.2.1.10</span> What will I use</h4>
@@ -340,12 +341,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data" class="section level2">
 <h2><span class="header-section-number">1.3</span> Data</h2>
-<p>The volume of geographic information which is freely available for use in the UK is increasing exponentially and spatially referenced data can often be found in many different places. In this practical we’re going to use data from the London data store — a free and open data-sharing portal provided by the Greater London Authrotiy (GLA), also known as City Hall that is the devovled regional governance body of London.</p>
+<p>The volume of geographic information which is freely available for use in the UK is increasing exponentially and spatially referenced data can often be found in many different places. In this practical we’re going to use data from the London data store — a free and open data-sharing portal provided by the Greater London Authority (GLA), also known as City Hall that is the devolved regional governance body of London.</p>
 <p>We are going to get spatial data of the London boroughs and join flytipping (the illegal deposit of waste, commonly on road verges) data that is provided as a <code>.csv</code> file. <code>.csv</code> stands for comma-separated values (CSV) — it uses a comma to separate each value.</p>
-<p>At the end of this document I’ll also run through some common sources of data that will stand you in good stead (be advantagous) for the rest of the course.</p>
+<p>At the end of this document I’ll also run through some common sources of data that will stand you in good stead (be advantageous) for the rest of the course.</p>
 <div id="file-paths" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> File paths</h3>
-<p>In your N drive: create a new folder called GIS and within this a subfolder called wk1. It is up to you how you organise your files. Make sure you change the file paths within where appropraite to your own.</p>
+<p>In your N drive: create a new folder called GIS and within this a sub folder called wk1. It is up to you how you organise your files. Make sure you change the file paths within where appropriate to your own.</p>
 </div>
 <div id="data-download" class="section level3">
 <h3><span class="header-section-number">1.3.2</span> Data download</h3>
@@ -355,7 +356,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <ol style="list-style-type: decimal">
 <li><p>To get the data go to: <a href="https://data.london.gov.uk/" class="uri">https://data.london.gov.uk/</a></p></li>
-<li><p>Seach for Statistical GIS Boundary Files for London</p></li>
+<li><p>Search for Statistical GIS Boundary Files for London</p></li>
 <li><p>Download the statistical-gis-boundaries-london.zip</p></li>
 <li><p>Unzip the data and save it to your wk1 folder.</p></li>
 </ol>
@@ -370,7 +371,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-pre-processing" class="section level3">
 <h3><span class="header-section-number">1.3.3</span> Data pre-processing</h3>
 <p><strong>Question</strong> Open the <code>.csv</code> in Excel, what do you notice about how the data is stored?</p>
-<p><strong>Answer</strong> The year is a column and for each area the values are repeated for different years. In our analysis it is easier to have the different years as a coloumn and populated for each area. So, we want to go from this…</p>
+<p><strong>Answer</strong> The year is a column and for each area the values are repeated for different years. In our analysis it is easier to have the different years as a column and populated for each area. So, we want to go from this…</p>
 <p><img src="prac1_images/csv_original.png" width="600pt" style="display: block; margin: auto;" /></p>
 <p>To this…</p>
 <p><img src="prac1_images/csv_pivot.png" width="600pt" style="display: block; margin: auto;" /></p>
@@ -387,8 +388,8 @@ Note how I’ve altered the total_action_taken to the sum of… as the original 
 <li>Click on drop down button for total_action_taken &gt; Value Field Settings &gt; select Count</li>
 </ol>
 <p>It’s important to think about what data we actually need in the next step and it’s good practice to avoid data redundancy where possible.</p>
-<p><strong>Spoiler</strong> The spatial data we have downloaded already contains borough name, so we don’t need it twice. However, we do need a field to link the two datasets on. You could use borough name, but when using text fields sometimes input variations can affect joins. For example, you had the University of Manchester in one dataset and Manchester University in another the join would fail. Consequntly it’s usually best to join datsets on a code field.</p>
-<p>Now save the Excel sheet that contains the pivot table as a new <code>.csv</code>. Make sure that the first row of data holds the coloumn titles. Remove all empty rows.</p>
+<p><strong>Spoiler</strong> The spatial data we have downloaded already contains borough name, so we don’t need it twice. However, we do need a field to link the two datasets on. You could use borough name, but when using text fields sometimes input variations can affect joins. For example, you had the University of Manchester in one dataset and Manchester University in another the join would fail. Consequently it’s usually best to join datasets on a code field.</p>
+<p>Now save the Excel sheet that contains the pivot table as a new <code>.csv</code>. Make sure that the first row of data holds the column titles. Remove all empty rows.</p>
 <p>When saving the file also avoid any special characters (e.g. -) and spaces, use an underscore instead of spaces.</p>
 <p><strong>Warning</strong> Spatial software (especially ArcGIS) does not like file names with spaces or special characters.</p>
 </div>
@@ -438,10 +439,10 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <h4><span class="header-section-number">1.3.5.2</span> ArcCatalog</h4>
 <ul>
 <li><p>Find and run the ArcCatalog piece of software</p></li>
-<li><p>Once ArcCatalog Opens, go to File &gt; Connect To Folder… and navigate to the N:folder, right click in the contents area and create a new Flie Geodatabase.</p></li>
+<li><p>Once ArcCatalog Opens, go to File &gt; Connect To Folder… and navigate to the N:folder, right click in the contents area and create a new File Geodatabase.</p></li>
 </ul>
 <p><img src="prac1_images/file_geo.png" width="500pt" style="display: block; margin: auto;" /></p>
-<p>You can import data layers into a Geodatabase within ArCatalog, however we will do this in ArcMap.</p>
+<p>You can import data layers into a Geodatabase within ArcCatalog, however we will do this in ArcMap.</p>
 <p>Close ArcCatalog and never have both ArcCatalog and another ArcGIS product open at the same time.</p>
 </div>
 <div id="arcmap" class="section level4">
@@ -481,7 +482,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 </div>
 <div id="join-data" class="section level5">
 <h5><span class="header-section-number">1.3.5.3.3</span> Join data</h5>
-<p>We’re now going to join our flytipping data to the lonon borough shapefile. So:</p>
+<p>We’re now going to join our flytipping data to the London borough shapefile. So:</p>
 <ol start="8" style="list-style-type: decimal">
 <li>Right click on the london borough layer &gt; Joins and Relates &gt; Join<br />
 </li>
@@ -513,12 +514,12 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <p>You should have something that looks like this:</p>
 <p><img src="prac1_images/thematicmap.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p><strong>We haven’t talked about the Coordiante Reference System (CRS) (or Spatial Reference System (SRS)) of our map document</strong></p>
-<p>A coordinate reference system is a series of paramters that define the coordinate system. Within GIS we use geographic or projected cooridnate systems. The former uses a three-dimesional spherical surface to define locations of Earth, whereas the latter is defined on a flat, two-dimesional surface giving it constat lengths, angles and areas.</p>
+<p>A coordinate reference system is a series of parameters that define the coordinate system. Within GIS we use geographic or projected coordinate systems. The former uses a three-dimensional spherical surface to define locations of Earth, whereas the latter is defined on a flat, two-dimensional surface giving it constant lengths, angles and areas.</p>
 <p>In ArcMap we can specify what CRS we want to use by:</p>
 <ol start="20" style="list-style-type: decimal">
 <li>Right clicking on the map document &gt; Data Frame Properties</li>
 </ol>
-<p>You’ll see that it is already set to Projected Coordinate Systems, National Grids, Europe, British National Grid. This is because ArcMap will default to the cooridnate system of the first data layer loaded.</p>
+<p>You’ll see that it is already set to Projected Coordinate Systems, National Grids, Europe, British National Grid. This is because ArcMap will default to the coordinate system of the first data layer loaded.</p>
 <p><img src="prac1_images/coorindate_system.png" width="300pt" style="display: block; margin: auto;" /></p>
 <p>Save and then close your ArcMap document. We’re now going to replicate this task in QGIS.</p>
 <p><strong><em>Note</em></strong> As we are going to open the same files in difference GIS systems it is important to close the software before moving on. If you don’t then files can be <em>locked</em> and unreadable as they are still considered to be in use.</p>
@@ -547,7 +548,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <ol start="4" style="list-style-type: decimal">
 <li>Open the data source manager and select Delimited Text</li>
 <li>Navigate to our <code>.csv</code> file and provide a suitable layer name</li>
-<li>Under Record and Fields Options make sure the number of header lines to discard is 0 and the First record has field names box is selected (this is assuming you left a title for each coloumn in your <code>.csv</code>)</li>
+<li>Under Record and Fields Options make sure the number of header lines to discard is 0 and the First record has field names box is selected (this is assuming you left a title for each column in your <code>.csv</code>)</li>
 <li>Under Geometry Definition select No geometry (attribute table only)</li>
 </ol>
 <p><img src="prac1_images/csv_datamanager.png" width="700pt" style="display: block; margin: auto;" /></p>
@@ -561,7 +562,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <ol start="9" style="list-style-type: decimal">
 <li>Right click on the London boroughs layer &gt; Properties &gt; Joins</li>
 <li>Click the plus button at the bottom of the box</li>
-<li>Complete the dialouge box</li>
+<li>Complete the dialogue box</li>
 </ol>
 <p><img src="prac1_images/qgis_join.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
@@ -569,7 +570,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <h4><span class="header-section-number">1.3.6.4</span> Export data</h4>
 <p>Now instead of using a GeoDatabase, let’s export to a GeoPackage.</p>
 <ol start="12" style="list-style-type: decimal">
-<li>Right click on the London boroughs layer &gt; Export &gt; Save Feautre As</li>
+<li>Right click on the London boroughs layer &gt; Export &gt; Save Feature As</li>
 <li>Select the GeoPackage format and complete the File name (the saved file name for the GeoPackage) and the Layer name (the name for this layer within the GeoPackage). Recall that a GeoPackage can store many data layers as a single file</li>
 <li>The new layer will be added to the map, so you can remove the old one. Make sure you remove the right one</li>
 </ol>
@@ -586,7 +587,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <p>Now let’s make a quick thematic map like we did in ArcMap.</p>
 <ol start="20" style="list-style-type: decimal">
 <li>Right click on your London boroughs layer &gt; Properties &gt; Symbology</li>
-<li>Select categorised and choose a data coloumn and color ramp</li>
+<li>Select categorised and choose a data column and color ramp</li>
 </ol>
 <p>You could also select graduated, however our joined data fields are in the wrong data type. If you wish to change them follow this guide: <a href="https://wiki.tuflow.com/index.php?title=QGIS_Change_Attribute_Type" class="uri">https://wiki.tuflow.com/index.php?title=QGIS_Change_Attribute_Type</a></p>
 <ol start="22" style="list-style-type: decimal">
@@ -595,7 +596,7 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <p>You should have produced something like this:</p>
 <p><img src="prac1_images/QGIS_final.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p><strong>Spatial reference</strong></p>
-<p>QGIS is similar but different to ArcMap. QGIS defaults to the Coordiante Reference System (CRS) WGS 84, or known by its European Petroleum Survey Group (EPSG) code 4326. However, when you add your first layer in will default to that CRS. We’ll go into the background of EPSG next time.</p>
+<p>QGIS is similar but different to ArcMap. QGIS defaults to the Coordinate Reference System (CRS) WGS 84, or known by its European Petroleum Survey Group (EPSG) code 4326. However, when you add your first layer in will default to that CRS. We’ll go into the background of EPSG next time.</p>
 <p>You can change the CRS by going File &gt; Properties and selecting CRS in the left hand pane.</p>
 </div>
 </div>
@@ -604,11 +605,11 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <div id="introduction-2" class="section level4">
 <h4><span class="header-section-number">1.3.7.1</span> Introduction</h4>
 <p>R is both a programming language and software environment, originally designed for statistical computing and graphics. R’s great strength is that it is open-source, can be used on any computer operating system and free for anyone to use and contribute to. Because of this, it is rapidly becoming the statistical language of choice for many academics and has a huge user community with people constantly contributing new packages to carry out all manner of statistical, graphical and importantly for us, geographical tasks.</p>
-<p>The purpose of this practical is just to demostrate data loading and manipulation in different software. The next practical will provide much more detail on R, so don’t worry.</p>
+<p>The purpose of this practical is just to demonstrate data loading and manipulation in different software. The next practical will provide much more detail on R, so don’t worry.</p>
 <p>Search for and open R Studio.</p>
 <p>You can install R Studio on your own machine from: <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></p>
 <p>R studio requires R which you can download from: <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a></p>
-<p>RStudio is a free and open-source integrated development envrionment for R — it makes R much easier to use.</p>
+<p>RStudio is a free and open-source integrated development environment for R — it makes R much easier to use.</p>
 <p>In RStduio go:</p>
 <ol style="list-style-type: decimal">
 <li>File &gt; New File &gt; R Script</li>
@@ -616,11 +617,11 @@ ArcGIS (Version 10.6 is the latest at time of writing, but may have already been
 <p>You should be able to see these quadrants:</p>
 <p><img src="prac1_images/RStudio.png" width="800pt" style="display: block; margin: auto;" /></p>
 <p>Below are bits of code, to start we will work using the <strong>console</strong>. So just copy the bits of code into the console window, changing the file names to where your data is stored. Then at the end of this section I’ll show you how to make a script.</p>
-<p>R works on packages that are collections of functions and data. For this practical we will need the ones listed in the code chunk below. Whilst we’ve installed them, we haven’t yet loaded them. It’s best practice to do all this at the start of your code, however, for demonstration purpoposes I’ll load each one as we need it.</p>
+<p>R works on packages that are collections of functions and data. For this practical we will need the ones listed in the code chunk below. Whilst we’ve installed them, we haven’t yet loaded them. It’s best practice to do all this at the start of your code, however, for demonstration purposes I’ll load each one as we need it.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;sf&quot;</span>, <span class="st">&quot;tmap&quot;</span>, <span class="st">&quot;tmaptools&quot;</span>, <span class="st">&quot;RSQLite&quot;</span>, <span class="dt">repos =</span> <span class="st">&quot;https://www.stats.bris.ac.uk/R/&quot;</span>)</code></pre>
 <p>Packages we’ve installed:</p>
 <ul>
-<li>sf: simple features, standad way to encode spatial vector data</li>
+<li>sf: simple features, standard way to encode spatial vector data</li>
 <li>tmap: layer-based and easy approach to make thematic maps</li>
 <li>tmaptools: set of tools for reading and processing spatial data</li>
 <li>RSQLite: embeds the SQLite database engine in R</li>
@@ -745,7 +746,7 @@ shape &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class=
 <span class="kw">library</span>(tmaptools)
 shape &lt;-<span class="st"> </span><span class="kw">append_data</span>(shape, mycsv, <span class="dt">key.shp=</span><span class="st">&quot;GSS_CODE&quot;</span>, <span class="dt">key.data =</span> <span class="st">&quot;Row.Labels&quot;</span>)</code></pre>
 <pre><code>## Over coverage: 1 out of 34 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.</code></pre>
-<p>Let’s break this down a bit. We just created a data frame (my.csv) where each coloumn has a variable and each row contains a set of values — so basically a normal table. The match simply found the GSS_CODE values in the <code>.csv</code> and joined the data to our shapefile.</p>
+<p>Let’s break this down a bit. We just created a data frame (my.csv) where each column has a variable and each row contains a set of values — so basically a normal table. The match simply found the GSS_CODE values in the <code>.csv</code> and joined the data to our shapefile.</p>
 <p>The message detailing 1 out of the 34 data records were not appended refers to the Grand Total row within the <code>.csv</code>.</p>
 <p>Check the merge was successful, this is just going to show the top 10 rows:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(shape, <span class="dt">n=</span><span class="dv">10</span>)</code></pre>
@@ -788,7 +789,7 @@ shape &lt;-<span class="st"> </span><span class="kw">append_data</span>(shape, m
 ## 15        6409 MULTIPOLYGON (((510599.8 19...
 ## 5        31889 MULTIPOLYGON (((525201 1825...
 ## 3         6541 MULTIPOLYGON (((524579.9 19...</code></pre>
-<p>Now, let’s make a quick thematic map (or a qtm) using the package <code>tmap</code>. I’ve made mine for flytipping between 2011 and 2012 (coloumn X2011_12):</p>
+<p>Now, let’s make a quick thematic map (or a qtm) using the package <code>tmap</code>. I’ve made mine for flytipping between 2011 and 2012 (column X2011_12):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tmap)
 <span class="kw">library</span>(tmaptools)
 <span class="kw">tmap_mode</span>(<span class="st">&quot;plot&quot;</span>)</code></pre>
@@ -800,14 +801,14 @@ shape &lt;-<span class="st"> </span><span class="kw">append_data</span>(shape, m
 <div id="export-data-2" class="section level3">
 <h3><span class="header-section-number">1.3.8</span> Export data</h3>
 <p>Finally write shape to a new GeoPackage (<code>.gpkg</code>) giving it the layer name of your choice:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">st_write</span>(shape, <span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>, <span class="st">&quot;london_boroughs_fly_tippint&quot;</span>, <span class="dt">delete_layer=</span><span class="ot">TRUE</span>)</code></pre>
-<pre><code>## Deleting layer `london_boroughs_fly_tippint&#39; using driver `GPKG&#39;
-## Updating layer `london_boroughs_fly_tippint&#39; to data source `Prac1_data/Rwk1.gpkg&#39; using driver `GPKG&#39;
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">st_write</span>(shape, <span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>, <span class="st">&quot;london_boroughs_fly_tipping&quot;</span>, <span class="dt">delete_layer=</span><span class="ot">TRUE</span>)</code></pre>
+<pre><code>## Deleting layer `london_boroughs_fly_tipping&#39; failed
+## Updating layer `london_boroughs_fly_tipping&#39; to data source `Prac1_data/Rwk1.gpkg&#39; using driver `GPKG&#39;
 ## features:       33
 ## fields:         15
 ## geometry type:  Multi Polygon</code></pre>
-<p>So here, we are saying the shape is the object we want to save, then to the GeoPackage file path, with the layer name of london_boroughs_fly_tippint. I’ve set delete_layer to true so I could overwrite mine when I developed this practical. Changing it to false would generate an error message if you ever tried to re-run the code.</p>
-<p>Let’s also add the <code>.csv</code> as we did in QGIS. This is a bit more complicated as we have to use the SQLite datavase package. Firstly, connect to the <code>.gpkg</code> we just made:</p>
+<p>So here, we are saying the shape is the object we want to save, then to the GeoPackage file path, with the layer name of london_boroughs_fly_tipping. I’ve set delete_layer to true so I could overwrite mine when I developed this practical. Changing it to false would generate an error message if you ever tried to re-run the code.</p>
+<p>Let’s also add the <code>.csv</code> as we did in QGIS. This is a bit more complicated as we have to use the SQLite database package. Firstly, connect to the <code>.gpkg</code> we just made:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSQLite)
 con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(),<span class="dt">dbname=</span><span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>)</code></pre>
 <p>Now examine what is in the <code>.gpkg</code>:</p>
@@ -821,13 +822,18 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 ##  [7] &quot;gpkg_spatial_ref_sys&quot;                         
 ##  [8] &quot;gpkg_tile_matrix&quot;                             
 ##  [9] &quot;gpkg_tile_matrix_set&quot;                         
-## [10] &quot;london_boroughs_fly_tippint&quot;                  
-## [11] &quot;original_csv&quot;                                 
-## [12] &quot;rtree_london_boroughs_fly_tippint_geom&quot;       
-## [13] &quot;rtree_london_boroughs_fly_tippint_geom_node&quot;  
-## [14] &quot;rtree_london_boroughs_fly_tippint_geom_parent&quot;
-## [15] &quot;rtree_london_boroughs_fly_tippint_geom_rowid&quot; 
-## [16] &quot;sqlite_sequence&quot;</code></pre>
+## [10] &quot;london_boroughs_fly_tipping&quot;                  
+## [11] &quot;london_boroughs_fly_tippint&quot;                  
+## [12] &quot;original_csv&quot;                                 
+## [13] &quot;rtree_london_boroughs_fly_tipping_geom&quot;       
+## [14] &quot;rtree_london_boroughs_fly_tipping_geom_node&quot;  
+## [15] &quot;rtree_london_boroughs_fly_tipping_geom_parent&quot;
+## [16] &quot;rtree_london_boroughs_fly_tipping_geom_rowid&quot; 
+## [17] &quot;rtree_london_boroughs_fly_tippint_geom&quot;       
+## [18] &quot;rtree_london_boroughs_fly_tippint_geom_node&quot;  
+## [19] &quot;rtree_london_boroughs_fly_tippint_geom_parent&quot;
+## [20] &quot;rtree_london_boroughs_fly_tippint_geom_rowid&quot; 
+## [21] &quot;sqlite_sequence&quot;</code></pre>
 <p>Then add add our <code>.csv</code> and disconnect from the <code>.gpkg</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbWriteTable</span>(con,<span class="st">&quot;original_csv&quot;</span>, mycsv, <span class="dt">overwrite=</span><span class="ot">TRUE</span>)
 <span class="kw">dbDisconnect</span>(con)</code></pre>
@@ -841,7 +847,7 @@ mycsv =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st
 shape&lt;-<span class="kw">append_data</span>(shape, mycsv, <span class="dt">key.shp=</span><span class="st">&quot;GSS_CODE&quot;</span>, <span class="dt">key.data =</span> <span class="st">&quot;Row.Labels&quot;</span>)
 <span class="kw">tmap_mode</span>(<span class="st">&quot;plot&quot;</span>)
 <span class="kw">qtm</span>(shape, <span class="dt">fill =</span> <span class="st">&quot;X2011_12&quot;</span>)
-<span class="kw">st_write</span>(shape, <span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>, <span class="st">&quot;london_boroughs_fly_tippint&quot;</span>, <span class="dt">delete_layer=</span><span class="ot">TRUE</span>)
+<span class="kw">st_write</span>(shape, <span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>, <span class="st">&quot;london_boroughs_fly_tipping&quot;</span>, <span class="dt">delete_layer=</span><span class="ot">TRUE</span>)
 con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw">SQLite</span>(),<span class="dt">dbname=</span><span class="st">&quot;Prac1_data/Rwk1.gpkg&quot;</span>)
 <span class="kw">dbListTables</span>(con)
 <span class="kw">dbWriteTable</span>(con,<span class="st">&quot;original_csv&quot;</span>, mycsv, <span class="dt">overwrite=</span><span class="ot">TRUE</span>)
@@ -851,12 +857,12 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 </div>
 <div id="what-will-i-use-1" class="section level3">
 <h3><span class="header-section-number">1.3.9</span> What will I use</h3>
-<p>Well… it depends. If you wanted to quickly open a dataset to explore its contents then i’d use QGIS or ArcMap. However, if you had 100 raster images that you wanted to clip to your study area, i’d automate it in R. There are also specfic packages developed for each type of software that might dictate what you use, for example I recently made use of the Urban Multi-sacle Envrionmental Predictor (UMEP) plugin in QGIS. That said, as I needed to match different hourly meterological varaibles over a three year period I automated the first part of the analysis in R and loaded a <code>.csv</code> into QGIS.</p>
+<p>Well… it depends. If you wanted to quickly open a dataset to explore its contents then I’d use QGIS or ArcMap. However, if you had 100 raster images that you wanted to clip to your study area, I’d automate it in R. There are also specific packages developed for each type of software that might dictate what you use, for example I recently made use of the Urban Multi-scale Environmental Predictor (UMEP) plugin in QGIS. That said, as I needed to match different hourly meteorological variables over a three year period I automated the first part of the analysis in R and loaded a <code>.csv</code> into QGIS.</p>
 </div>
 </div>
 <div id="data-sources-and-task" class="section level2">
 <h2><span class="header-section-number">1.4</span> Data sources and task</h2>
-<p>Below i’ve listed a few good data sources. <strong>For this week’s task</strong> explore these and any others you can find and get an interesting dataset (e.g. in this practical our flytipping <code>.csv</code>) that you could join to some spatial data (e.g. in this practical the London boroughs <code>.shp</code>). This could be for any location in the world.</p>
+<p>Below I’ve listed a few good data sources. <strong>For this week’s task</strong> explore these and any others you can find and get an interesting dataset (e.g. in this practical our flytipping <code>.csv</code>) that you could join to some spatial data (e.g. in this practical the London boroughs <code>.shp</code>). This could be for any location in the world.</p>
 <div id="uk-data-service" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> UK Data Service</h3>
 <p>The UK Data Service geography service (<a href="https://census.edina.ac.uk/" class="uri">https://census.edina.ac.uk/</a>) has a library of hundreds of current and former boundary datasets for which attribute data are produced in the UK.</p>
@@ -874,7 +880,7 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 <div id="edina-digimap" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> Edina Digimap</h3>
 <p>Before the Ordnance Survey opened up much of its data for public use, academics and students in the UK could access OS data using the Edina Digimap Service –– this service is still available today and provides access to a number of products in addition to those available from OS Open Data.</p>
-<p>Perhaps the most exciting of the additional OS data products available from Digimap is OS MasterMap. MasterMap is a framework for all OS data and contains layers of data that include details of real world objects such as buildings, roads, paths, rivers, physical structures and land parcels, as well as the complete UK transport network. Whilst we still are required to go through Edina OS have recently annonced plans to make this dataset free in the near future under the new Geospatial Commission.</p>
+<p>Perhaps the most exciting of the additional OS data products available from Digimap is OS MasterMap. MasterMap is a framework for all OS data and contains layers of data that include details of real world objects such as buildings, roads, paths, rivers, physical structures and land parcels, as well as the complete UK transport network. Whilst we still are required to go through Edina OS have recently announced plans to make this dataset free in the near future under the new Geospatial Commission.</p>
 <p><img src="prac1_images/mastermap.png" width="500pt" style="display: block; margin: auto;" /></p>
 </div>
 <div id="osm" class="section level3">
@@ -884,7 +890,7 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 </div>
 <div id="defra" class="section level3">
 <h3><span class="header-section-number">1.4.6</span> DEFRA</h3>
-<p>The Department for Environmen and Rural Affairs (DEFRA) have recently created the Data Services Platform to openly distribute envrionmental data. See: <a href="https://environment.data.gov.uk/" class="uri">https://environment.data.gov.uk/</a></p>
+<p>The Department for Environment and Rural Affairs (DEFRA) have recently created the Data Services Platform to openly distribute environmental data. See: <a href="https://environment.data.gov.uk/" class="uri">https://environment.data.gov.uk/</a></p>
 </div>
 <div id="data-lists" class="section level3">
 <h3><span class="header-section-number">1.4.7</span> Data lists</h3>
@@ -894,7 +900,7 @@ con =<span class="st"> </span><span class="kw">dbConnect</span>(<span class="kw"
 </div>
 <div id="summary" class="section level2">
 <h2><span class="header-section-number">1.5</span> Summary</h2>
-<p>Within this practical we have explored the different types, formats and software used to store, analyse and manipulate spatial data. In relfecting upon this practical you should consider the (dis)advtanges of each, where and when they might be approraite and the overall practicality. Next week we will delve further into R and RStudio.</p>
+<p>Within this practical we have explored the different types, formats and software used to store, analyse and manipulate spatial data. In reflecting upon this practical you should consider the (dis)advantages of each, where and when they might be appropriate and the overall practicality. Next week we will delve further into R and RStudio.</p>
 
 </div>
 </div>

@@ -213,7 +213,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#descriptive-statistics"><i class="fa fa-check"></i><b>3.5</b> Descriptive statistics</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram"><i class="fa fa-check"></i><b>3.5.1</b> Histogram</a></li>
 <li class="chapter" data-level="3.5.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#using-more-data"><i class="fa fa-check"></i><b>3.5.2</b> Using more data</a></li>
-<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histrogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histrogram with ggplot</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histogram with ggplot</a></li>
+<li class="chapter" data-level="3.5.4" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#auto-data-download"><i class="fa fa-check"></i><b>3.5.4</b> Auto data download</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#modis-background"><i class="fa fa-check"></i><b>3.6</b> MODIS background</a></li>
 <li class="chapter" data-level="3.7" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#loading-modis-data"><i class="fa fa-check"></i><b>3.7</b> Loading MODIS data</a></li>
@@ -254,21 +255,21 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Learning outcomes</h2>
 <ul>
 <li>Examine and clean data</li>
-<li>More advaned data mamipulation</li>
-<li>Plot graps and maps</li>
-<li>Create interative maps</li>
+<li>More advanced data manipulation</li>
+<li>Plot graphs and maps</li>
+<li>Create interactive maps</li>
 </ul>
 </div>
 <div id="introduction-4" class="section level2">
 <h2><span class="header-section-number">3.2</span> Introduction</h2>
-<p>So far we’ve only really coinsidered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto).</p>
+<p>So far we’ve only really considered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto).</p>
 </div>
 <div id="worldclim-data" class="section level2">
 <h2><span class="header-section-number">3.3</span> WorldClim data</h2>
-<p>To start with we are going to use WorldClim data — this is a set of free global cliamte layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).</p>
+<p>To start with we are going to use WorldClim data — this is a set of free global climate layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).</p>
 <p>To download the data go to: <a href="http://worldclim.org/version2" class="uri">http://worldclim.org/version2</a></p>
-<p>Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrase in a trigonomietrc cosine-based faishon as you move towards the Earth’s poles….</p>
-<p><img src="prac3_images/arcseconds.png" width="100pt" style="display: block; margin: auto;" /></p>
+<p>Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth’s poles….</p>
+<p><img src="prac3_images/arcseconds.jpg" width="100pt" style="display: block; margin: auto;" /></p>
 <p>Unzip and move the data to your project folder. Now load the data. We could do this individually….</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)</code></pre>
 <pre><code>## Loading required package: sp</code></pre>
@@ -286,7 +287,7 @@ jan</code></pre>
 <p>Then have a quick look at the data</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(jan)</code></pre>
 <p><img src="03-prac3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>However, a better and more effieicent way is to firstly list all the files we are interested stored within our directory</p>
+<p>However, a better and more efficient way is to firstly list all the files we are interested stored within our directory</p>
 <pre class="sourceCode r"><code class="sourceCode r">listfiles &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;prac3_data&quot;</span>, <span class="st">&quot;.tif&quot;</span>, <span class="dt">full.names=</span><span class="ot">TRUE</span>)
 
 <span class="co">#have a look at the file names </span>
@@ -309,7 +310,7 @@ worldclimtemp</code></pre>
 ## names      : wc2.0_5m_tavg_01, wc2.0_5m_tavg_02, wc2.0_5m_tavg_03, wc2.0_5m_tavg_04, wc2.0_5m_tavg_05, wc2.0_5m_tavg_06, wc2.0_5m_tavg_07, wc2.0_5m_tavg_08, wc2.0_5m_tavg_09, wc2.0_5m_tavg_10, wc2.0_5m_tavg_11, wc2.0_5m_tavg_12 
 ## min values :          -46.697,          -44.559,          -57.107,          -62.996,          -63.541,          -63.096,          -66.785,          -64.600,          -62.600,          -54.400,          -42.000,          -45.340 
 ## max values :           34.291,           33.174,           33.904,           34.629,           36.312,           38.400,           43.036,           41.073,           36.389,           33.869,           33.518,           33.667</code></pre>
-<p>So if the raster stack you’ll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average tempearture data for us in order. To access single layers within the stack:</p>
+<p>So if the raster stack you’ll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average temperature data for us in order. To access single layers within the stack:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># access the january layer</span>
 worldclimtemp[[<span class="dv">1</span>]]</code></pre>
 <pre><code>## class      : RasterLayer 
@@ -355,10 +356,10 @@ AUcitytemp&lt;-<span class="st"> </span><span class="kw">extract</span>(worldcli
 <h2><span class="header-section-number">3.5</span> Descriptive statistics</h2>
 <div id="histogram" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Histogram</h3>
-<p>Now we have a look at a histrogram for our data. Remember what we’re looking at here. The x axis is the tempearture and the y is the frequency of occurance.</p>
+<p>Now we have a look at a histogram for our data. Remember what we’re looking at here. The x axis is the temperature and the y is the frequency of occurrence.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(Perthtemp)</code></pre>
 <p><img src="03-prac3_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>That’s a pretty simple histogram, let’s improve the aestehics</p>
+<p>That’s a pretty simple histogram, let’s improve the aesthetics</p>
 <pre class="sourceCode r"><code class="sourceCode r">userbreak&lt;-<span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>,<span class="dv">26</span>)
 <span class="kw">hist</span>(Perthtemp, <span class="dt">breaks=</span>userbreak, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
 <p><img src="03-prac3_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
@@ -399,8 +400,8 @@ AUcitytemp&lt;-<span class="st"> </span><span class="kw">extract</span>(worldcli
 <h3><span class="header-section-number">3.5.2</span> Using more data</h3>
 <p>This was a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data).</p>
 <p>First, we need to source and load a vector of Australia. Go to: <a href="https://gadm.org/download_country_v3.html" class="uri">https://gadm.org/download_country_v3.html</a></p>
-<p>Download the Geopackage</p>
-<p>We can check aht layers are within a geopackage using:</p>
+<p>Download the Geo package</p>
+<p>We can check that layers are within a Geo package using:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre>
 <pre><code>## Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">st_layers</span>(<span class="st">&quot;prac3_data/gadm36_AUS.gpkg&quot;</span>)</code></pre>
@@ -410,7 +411,7 @@ AUcitytemp&lt;-<span class="st"> </span><span class="kw">extract</span>(worldcli
 ## 1 gadm36_AUS_0 Multi Polygon        1      2
 ## 2 gadm36_AUS_1 Multi Polygon       11     10
 ## 3 gadm36_AUS_2 Multi Polygon      569     13</code></pre>
-<p>Then lets read in the Geopackage layer for the whole of Australia</p>
+<p>Then lets read in the GeoPackage layer for the whole of Australia</p>
 <pre class="sourceCode r"><code class="sourceCode r">Ausoutline &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;prac3_data/gadm36_AUS.gpkg&quot;</span>, <span class="dt">layer=</span><span class="st">&#39;gadm36_AUS_0&#39;</span>)</code></pre>
 <pre><code>## Reading layer `gadm36_AUS_0&#39; from data source `N:\Documents\Teaching\CASA0005practicals\CASA0005book\prac3_data\gadm36_AUS.gpkg&#39; using driver `GPKG&#39;
 ## Simple feature collection with 1 feature and 2 fields
@@ -444,28 +445,37 @@ Austemp</code></pre>
 ## names      :       Jan,       Feb,       Mar,       Apr,       May,       Jun,       Jul,       Aug,       Sep,       Oct,       Nov,       Dec 
 ## min values :  6.360000,  6.287500,  5.554286,  4.051429,  2.542857, -0.171000, -1.945000, -1.677000,  0.677000,  3.054286,  3.842424,  5.433333 
 ## max values :  34.29100,  33.17400,  32.39700,  30.07200,  28.50000,  27.40000,  26.90000,  27.20000,  29.31209,  31.72000,  33.51800,  33.66700</code></pre>
-<p>You’ll notice that whislt we have the whole of Australia the raster hasn’t been perfectly clipped to the exact outline….the extent just specifes an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:</p>
-<pre class="sourceCode r"><code class="sourceCode r">exactAus=<span class="kw">mask</span>(Austemp, Ausoutline)</code></pre>
+<p>You’ll notice that whilst we have the whole of Australia the raster hasn’t been perfectly clipped to the exact outline….the extent just specifies an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:</p>
+<pre class="sourceCode r"><code class="sourceCode r">exactAus=<span class="kw">mask</span>(Austemp, Ausoutline, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre>
 <p>You could also run this using the original worldclimtemp raster, however, it may take some time. I’d recommend cropping to the extent first.</p>
 <p>Both our Austemp and exactAus are raster bricks. A brick is similar to a stack except it is now stored as one file instead of a collection.</p>
 <p>Let’s now re-run compute our histogram for Australia in March</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(exactAus, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<p>We could just use hist like we have done before</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(exactAus[[<span class="dv">3</span>]], <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
 <p><img src="03-prac3_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>vector_filepath = (“prac3_data/gadm36_AUS.gpkg”, package = “spData”)
-world = st_read(“prac3_data/gadm36_AUS.gpkg”)</p>
-<p>cities_gpkg &lt;- readOGR(“prac3_data/gadm36_AUS.gpkg”, “gadm36_AUS_0”)</p>
+<p>However we have a bit more control with ggplot</p>
 </div>
-<div id="histrogram-with-ggplot" class="section level3">
-<h3><span class="header-section-number">3.5.3</span> Histrogram with ggplot</h3>
-<p>Morocco &lt;- getData(‘GADM’, country=“MAR”, level=0)</p>
-<p>M.area &lt;- extent(Morocco)</p>
-<p>mean_m &lt;- crop(worldclimtemp, M.area)</p>
-<p>One of the benefits of using a rasterstack is that we can apply</p>
+<div id="histogram-with-ggplot" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Histogram with ggplot</h3>
+<p>Firstly we need to make our raster into a data.frame to be compatible with ggplot2..</p>
+<pre class="sourceCode r"><code class="sourceCode r">alldf=<span class="kw">as.data.frame</span>(exactAus)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">ggplot</span>(alldf, <span class="kw">aes</span>(<span class="dt">x=</span>Mar)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 205103 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="auto-data-download" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> Auto data download</h3>
+<p>In this practical I’ve shown you how to source the data online, download it and load it into R. However for both WorldClim and GADM we can do this straight from R using the getData function….</p>
+<p>Now for GADM</p>
+<pre class="sourceCode r"><code class="sourceCode r">Aus_auto &lt;-<span class="st"> </span><span class="kw">getData</span>(<span class="st">&#39;GADM&#39;</span>, <span class="dt">country=</span><span class="st">&quot;AUS&quot;</span>, <span class="dt">level=</span><span class="dv">0</span>)</code></pre>
 <p>Automatically load worldclim data straight to R</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 <span class="kw">library</span>(sp)
 
-<span class="co">#r &lt;- getData(&quot;worldclim&quot;,var=&quot;bio&quot;,res=10)</span></code></pre>
+r &lt;-<span class="st"> </span><span class="kw">getData</span>(<span class="st">&quot;worldclim&quot;</span>,<span class="dt">var=</span><span class="st">&quot;tmean&quot;</span>,<span class="dt">res=</span><span class="dv">5</span>)</code></pre>
+<p>Download</p>
 <p>ggplot(sumofstack, aes(x=weight)) + geom_histogram()</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(sf)</span>
 <span class="co">#layers &lt;- st_read(&quot;prac3_data/gadm36.gpkg&quot;)</span></code></pre>
@@ -475,7 +485,7 @@ world = st_read(“prac3_data/gadm36_AUS.gpkg”)</p>
 </div>
 <div id="modis-background" class="section level2">
 <h2><span class="header-section-number">3.6</span> MODIS background</h2>
-<p>NASA’s Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North cossing the equator in the afternoon. Consqeutnly we are able to obtain twice daily envrionmental data for the majority of locations on Earth such as:</p>
+<p>NASA’s Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North crossing the equator in the afternoon. Consequently we are able to obtain twice daily environmental data for the majority of locations on Earth such as:</p>
 <ul>
 <li>Total Precipitable Water</li>
 <li>Cloud Product</li>
@@ -494,12 +504,12 @@ world = st_read(“prac3_data/gadm36_AUS.gpkg”)</p>
 </div>
 <div id="loading-modis-data" class="section level2">
 <h2><span class="header-section-number">3.7</span> Loading MODIS data</h2>
-<p>The MODIStsp package enables us to autmoate the preprocessing of MODIS time series data. Before this I would have to dowload <code>.txt</code> files with all the iamges I wanted, create other <code>.txt</code> that specifed the data to download, where to store it and any reprojection information. Then it would have to be loaded into R.</p>
+<p>The MODIStsp package enables us to automate the preprocessing of MODIS time series data. Before this I would have to download <code>.txt</code> files with all the images I wanted, create other <code>.txt</code> that specified the data to download, where to store it and any re-projection information. Then it would have to be loaded into R.</p>
 <p>But don’t worry as now we can do it all from R…</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;rt&quot;)</span>
 <span class="co">#library(rts)</span></code></pre>
 <p>Firstly, create a free account at: <a href="https://urs.earthdata.nasa.gov/home" class="uri">https://urs.earthdata.nasa.gov/home</a></p>
-<p>Les’t see what data is now available:</p>
+<p>Let’s see what data is now available:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co">#modisProducts()</span></code></pre>
 <p>MYD11A1</p>
 <p>ModisDownload(MYD11A1, h, v, version=‘005’,dates, mosaic=FALSE, MRTpath, bands_subset = "“, del=FALSE, proj= FALSE, UL =”“, LR=”“, resample_type=”NEAREST_NEIGHBOR“, proj_type=”UTM", proj_params, utm_zone,pixel_size)</p>

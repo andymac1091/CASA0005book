@@ -3,13 +3,13 @@
 ## Learning outcomes
 
 * Examine and clean data
-* More advaned data mamipulation 
-* Plot graps and maps
-* Create interative maps
+* More advanced data manipulation 
+* Plot graphs and maps
+* Create interactive maps
 
 ## Introduction 
 
-This practical is **LONG** but it will take you from not knowing much about R to making freaking cool interactive maps in one practial. As you can imagine, this will be a steep learning curve.
+This practical is **LONG** but it will take you from not knowing much about R to making freaking cool interactive maps in one practical. As you can imagine, this will be a steep learning curve.
 
 I will give you all the code you need, it’s your job to read through the text very carefully and try to understand what bits of code are doing as you go.
 
@@ -35,7 +35,7 @@ If you want to really be up to date with the state of the art in R, then https:/
 
 With almost every problem you encounter with R, someone else will have had the same problem before you and posted it on a forum – someone will then post a solution below.
 
-My usual route is to google the problem and I’ll then be directed to a post, usually on StackOverflow, StackExchange or CrossValidated. When doing so try to think about the minimal working (or not working) example (MWE), by this i mean remove anything very specific to your problem. I’ve rarely not found a solution to a problem this way. 
+My usual route is to Google the problem and I’ll then be directed to a post, usually on Stack Overflow, Stack Exchange or Cross Validated. When doing so try to think about the minimal working (or not working) example (MWE), by this i mean remove anything very specific to your problem. I’ve rarely not found a solution to a problem this way. 
 
 ### Health warning
 
@@ -283,7 +283,7 @@ Leave the replace box empty each time and click Replace All to remove these from
 LondonDataOSK<- read.csv("prac2_data/london_catalogue.csv")
 ```
 
-*Note*, i've made an R project for all these practicals, which is why my file path starts with ```prac2_data/```. If you save the ```.csv``` in the same folder as the ```.Rproj``` then you can just use:
+*Note*, I've made an R project for all these practicals, which is why my file path starts with ```prac2_data/```. If you save the ```.csv``` in the same folder as the ```.Rproj``` then you can just use:
 
 ```{r eval=FALSE}
 LondonDataOSK<- read.csv("LondonData.csv")
@@ -395,7 +395,7 @@ head(LondonBoroughs)
 
 What that function is saying is *“grep (get) me all of the rows from the London Data data frame where the text in column 3 starts with (^) E09”*
 
-You will notice that you will have two rows at the top for the City of London. This is becuase it features twice in the data set. That’s fine, we can just drop this row from our dataset:
+You will notice that you will have two rows at the top for the City of London. This is because it features twice in the data set. That’s fine, we can just drop this row from our dataset:
 
 ```{r}
 LondonBoroughs <- LondonBoroughs[2:34,]
@@ -495,7 +495,7 @@ library(geojsonio)
 
 R has a very well developed ecosystem of packages for working with Spatial Data. Early pioneers like Roger Bivand and Edzer Pebesma along with various colleagues were instrumental in writing packages to interface with some powerful open source libraries for working with spatial data, such as GDAL and GEOS. These were accessed via the ```rgdal``` and ```rgeos``` packages. The  ```maptools``` package by Roger Bivand, amongst other things, allowed Shapefiles to be read into R. The ```sp``` package (along with  ```spdep```) by Edzer Pebesma was very important for defining a series of classes and methods for spatial data natively in R which then allowed others to write software to work with these formats. Other packages like ```raster``` advanced the analysis of gridded spatial data, while packages like ```classint``` and ```RColorbrewer``` facilitated the binning of data and colouring of choropleth maps.
 
-Whilst these packages were extremely important for advancing spatial data analysis in R, they were not always the most straighforward to use - making a map in R could take quite a lot of effort and they were static and visually basic. However, more recently new packages have arrived to change this. Now ```leaflet``` enables R to interface with the leaflet javascript library for online, dynamic maps. ```ggplot2``` which was developed by Hadley Wickam and colleagues radically changed the way that people thought about and created graphical objects in R, including maps, and introduced a graphical style which has been the envy of other software to the extent that there are now libraries in Python which copy the ggplot2 style!
+Whilst these packages were extremely important for advancing spatial data analysis in R, they were not always the most straightforward to use - making a map in R could take quite a lot of effort and they were static and visually basic. However, more recently new packages have arrived to change this. Now ```leaflet``` enables R to interface with the leaflet javascript library for online, dynamic maps. ```ggplot2``` which was developed by Hadley Wickam and colleagues radically changed the way that people thought about and created graphical objects in R, including maps, and introduced a graphical style which has been the envy of other software to the extent that there are now libraries in Python which copy the ggplot2 style!
 
 Building on all of these, the new ```tmap``` (Thematic Map) package has changed the game completely and now enables us to read, write and manipulate spatial data and produce visually impressive and interactive maps, very easily. In parallel, the ```sf``` (Simple Features) package is helping us re-think the way that spatial data can be stored and manipulated. It’s exciting times for geographic information / spatial data science!
 
@@ -799,7 +799,7 @@ BoroughMapSP <- read_shape("prac1_data/statistical-gis-boundaries-london/ESRI/Lo
 BoroughMapSF <- st_read("prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp") %>% st_set_crs(27700)
 ```
 
-27. Another option is to assign the coordinates reference system after the shapefile has been read in, for example. However as we have already assigned a CRS to BoroughMapSP R in the fucntion read_shape R will through an error. So let's read the shape again using ```readOGR ``` from the rgdal package:
+27. Another option is to assign the coordinates reference system after the shapefile has been read in, for example. However as we have already assigned a CRS to BoroughMapSP R in the function read_shape R will through an error. So let's read the shape again using ```readOGR ``` from the rgdal package:
 
 ```{r, message=FALSE, warning=FALSE}
 BoroughMapSP <- readOGR("prac1_data/statistical-gis-boundaries-london/ESRI/London_Borough_Excluding_MHW.shp")
@@ -822,11 +822,11 @@ print(BoroughMapSF)
 
 #### Reprojecting your spatial data
 
-Reprojecting your data is something that you might have to (or want to) do, on occasion. Why? Well, one example might be if you want to measure the distance of a line object, or the distance between two polygons. This can be done far more easily in a projected coordinate system like British National Grid (where the units are measured in metres) than it can a geographic coordiante system such as WGS84 (where the units are degrees).
+Reprojecting your data is something that you might have to (or want to) do, on occasion. Why? Well, one example might be if you want to measure the distance of a line object, or the distance between two polygons. This can be done far more easily in a projected coordinate system like British National Grid (where the units are measured in metres) than it can a geographic coordinate system such as WGS84 (where the units are degrees).
 
 For generating maps in packages like ```leaflet```, your maps will also need to be in WGS84, rather than British National Grid.
 
-28. So once your data has a coordinates system to work with, we can re-project or transfrom to anything we like. The most commonly used is the global latitude and longitude system (WGS84). With SP objects, this is carried out using the ```spTransform() ``` function:
+28. So once your data has a coordinates system to work with, we can re-project or transform to anything we like. The most commonly used is the global latitude and longitude system (WGS84). With SP objects, this is carried out using the ```spTransform() ``` function:
 
 ```{r}
 BoroughMapSPWGS84 <-spTransform(BoroughMapSP, CRS("+proj=longlat +datum=WGS84"))
