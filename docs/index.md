@@ -1,7 +1,7 @@
 --- 
 title: "CASA0005 Geographic Information Systems and Science"
 author: "Andy MacLachlan and Adam Dennett"
-date: "2019-06-20"
+date: "2019-06-21"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -12,7 +12,7 @@ github-repo: rstudio/bookdown-demo
 description: ""
 ---
 
-# Preface {-}
+# Welcome {-}
 
 Welcome to the CASA0005 Geographic Information Systems and Science online pratical handbook. This website is hosted on Github and holds all the practical instructions and data. All data used within the practicals is aviaiable online, however occasionally websites can undergo maintenance or be inaccessible due to political facors such as the government shutdowns.  
 
@@ -29,7 +29,7 @@ Spatial analysis can yield fascinating insights into geographical relationships.
 * R documentation https://www.rdocumentation.org/
 * ArcGIS help pages https://support.esri.com/en
 
-## Getting Started {-}
+## Getting started {-}
 
 One of the issues with GIS is that many of the files we will be working with are quite large. Fortunately, in recent years, UCL has seriously beefed up the storage available for students. You now get 100GB of free storage, which should be plenty for the work you will be doing this year! The Bartlett faculty has several gigabytes of storage space available on their central servers, so before we get started, we will connect to our N drive to carry out all of our practical work over the coming weeks. 
 

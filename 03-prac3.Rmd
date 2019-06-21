@@ -1,0 +1,292 @@
+# Rasters and descriptive statistics
+
+## Learning outcomes
+
+* Examine and clean data
+* More advaned data mamipulation 
+* Plot graps and maps
+* Create interative maps
+
+## Introduction
+
+So far we've only really coinsidered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto). 
+
+## WorldClim data
+
+To start with we are going to use WorldClim data --- this is a set of free global cliamte layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).
+
+To download the data go to: http://worldclim.org/version2
+
+Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrase in a trigonomietrc cosine-based faishon as you move towards the Earth's poles....
+
+```{r echo=FALSE, out.width = "100pt", fig.align='center'}
+knitr::include_graphics('prac3_images/arcseconds.png')
+```
+
+Unzip and move the data to your project folder. Now load the data. We could do this individually....
+
+```{r}
+library(raster)
+jan=raster("prac3_data/wc2.0_5m_tavg_01.tif")
+# have a look at the raster layer jan
+jan
+```
+
+Then have a quick look at the data
+
+```{r}
+plot(jan)
+```
+
+However, a better and more effieicent way is to firstly list all the files we are interested stored within our directory
+
+```{r}
+listfiles <- list.files("prac3_data", ".tif", full.names=TRUE)
+
+#have a look at the file names 
+listfiles
+```
+
+Then load all of the data straight into a raster stack
+```{r}
+worldclimtemp <- stack(listfiles)
+#have a look at the raster stack
+worldclimtemp
+```
+
+So if the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average tempearture data for us in order. To access single layers within the stack:
+
+```{r}
+# access the january layer
+worldclimtemp[[1]]
+```
+
+We can also rename our layers:
+
+```{r}
+month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+names(worldclimtemp) <- month
+```
+
+Now we could also use:
+
+```{r}
+worldclimtemp$Jan
+```
+To access just the January raster layer
+
+## Point data from a raster
+Using a raster stack we can access data with a single command, for example let's make a data frame of some sample sites
+
+```{r}
+site <- c("Brisbane", "Melbourne", "Perth", "Sydney")
+lon <- c(153.03, 144.96, 115.86, 151.21)
+lat <- c(-27.47, -37.91, -31.95, -33.87)
+samples <- data.frame(site, lon, lat, row.names="site")
+# Extract data from RasterLayer
+AUcitytemp<- extract(worldclimtemp, samples)
+```
+
+Let's also add the city names to the rows
+```{r}
+row.names(AUcitytemp)<-site
+```
+
+Now we're going to look at some basic descriptive statistics. To start with let's just look at Perth. We can subset our data either using the row name:
+
+```{r}
+Perthtemp <- subset(AUcitytemp, rownames(AUcitytemp) == "Perth")
+```
+
+Or the row location 
+
+```{r}
+Perthtemp <- AUcitytemp[3,]
+```
+
+## Descriptive statistics
+
+### Histogram
+Now we have a look at a histrogram for our data. Remember what we're looking at here. The x axis is the tempearture and the y is the frequency of occurance.  
+
+```{r}
+hist(Perthtemp)
+```
+
+That's a pretty simple histogram, let's improve the aestehics 
+
+```{r}
+userbreak<-c(8,10,12,14,16,18,20,22,24,26)
+hist(Perthtemp, breaks=userbreak, col="red")
+```
+
+Have a look at the histogram information R generated
+
+```{r}
+histinfo<-hist(Perthtemp)
+histinfo
+```
+Here we have:
+
+* breaks --- the cut off points for the bins (or bars), we just specified these
+* counts --- the number of cells in each bin
+* midpoints --- the middle value for each bin
+* density --- the density of data per bin
+
+### Using more data
+
+This was a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data).
+
+First, we need to source and load a vector of Australia. Go to: https://gadm.org/download_country_v3.html
+
+Download the Geopackage
+
+We can check aht layers are within a geopackage using:
+
+```{r}
+library(sf)
+st_layers("prac3_data/gadm36_AUS.gpkg")
+```
+
+Then lets read in the Geopackage layer for the whole of Australia 
+
+```{r}
+Ausoutline <- st_read("prac3_data/gadm36_AUS.gpkg", layer='gadm36_AUS_0')
+#Check the layer
+plot(Ausoutline)
+```
+Now let's set our extent to the outline of Australia then crop our WorldClim dataset to it
+
+```{r}
+Ausarea <- extent(Ausoutline)
+# check the extent
+Ausarea
+# now crop our temp data to the extemt
+Austemp <- crop(worldclimtemp, Ausoutline)
+# plot the output
+Austemp
+```
+
+You'll notice that whislt we have the whole of Australia the raster hasn't been perfectly clipped to the exact outline....the extent just specifes an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:
+
+```{r}
+exactAus=mask(Austemp, Ausoutline)
+```
+
+You could also run this using the original worldclimtemp raster, however, it may take some time. I'd recommend cropping to the extent first. 
+
+Both our Austemp and exactAus are raster bricks. A brick is similar to a stack except it is now stored as one file instead of a collection.
+
+Let's now re-run compute our histogram for Australia in March
+
+```{r}
+hist(exactAus, col="red")
+```
+
+
+vector_filepath = ("prac3_data/gadm36_AUS.gpkg", package = "spData")
+world = st_read("prac3_data/gadm36_AUS.gpkg")
+
+cities_gpkg <- readOGR("prac3_data/gadm36_AUS.gpkg", "gadm36_AUS_0")
+
+
+### Histrogram with ggplot
+
+
+
+
+Morocco <- getData('GADM', country="MAR", level=0)
+
+M.area <- extent(Morocco)
+
+mean_m <- crop(worldclimtemp, M.area)
+
+One of the benefits of using a rasterstack is that we can apply
+
+
+
+
+Automatically load worldclim data straight to R
+
+```{r}
+library(raster)
+library(sp)
+
+#r <- getData("worldclim",var="bio",res=10)
+```
+
+
+
+
+
+
+
+
+
+ggplot(sumofstack, aes(x=weight)) + geom_histogram()
+
+```{r}
+#library(sf)
+#layers <- st_read("prac3_data/gadm36.gpkg")
+```
+
+
+
+sumstack=sum(stack)
+
+
+
+
+
+
+MODIS
+
+
+## MODIS background
+
+NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North cossing the equator in the afternoon. Consqeutnly we are able to obtain twice daily envrionmental data for the majority of locations on Earth such as:
+
+* Total Precipitable Water
+* Cloud Product
+* Atmospheric Profiles
+* Land Surface Temperature and Emissivity (MOD11)
+* Land Cover Products
+* Chlorophyll-a Concentration
+* Thermal Anomalies - Active Fires
+* Fraction of Photosynthetically Active Radiation (FPAR) / Leaf Area Index (LAI)
+* Evapotranspiration
+* Gross Primary Productivity (GPP) / Net Primary Productivity (NPP)
+* Sea Ice and Ice Surface Temperature
+* Remote Sensing Reflectance
+
+See: https://modis.gsfc.nasa.gov/data/ for more details
+
+## Loading MODIS data
+
+The MODIStsp package enables us to autmoate the preprocessing of MODIS time series data. Before this I would have to dowload ```.txt``` files with all the iamges I wanted, create other ```.txt``` that specifed the data to download, where to store it and any reprojection information. Then it would have to be loaded into R. 
+
+But don't worry as now we can do it all from R...
+
+```{r}
+#install.packages("rt")
+#library(rts)
+```
+
+Firstly, create a free account at: https://urs.earthdata.nasa.gov/home
+
+Les't see what data is now available:
+
+```{r}
+#modisProducts()
+
+```
+
+MYD11A1
+
+ModisDownload(MYD11A1, h, v, version='005',dates, mosaic=FALSE, MRTpath, bands_subset = "", del=FALSE, proj= FALSE, UL ="", LR="", resample_type="NEAREST_NEIGHBOR", proj_type="UTM", proj_params, utm_zone,pixel_size)
+
+
+
+
+
+

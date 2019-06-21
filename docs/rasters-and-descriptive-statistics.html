@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Rasters and descriptive statistics | CASA0005 Geographic Information Systems and Science</title>
+  <meta name="description" content="Chapter 3 Rasters and descriptive statistics | CASA0005 Geographic Information Systems and Science" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Rasters and descriptive statistics | CASA0005 Geographic Information Systems and Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Rasters and descriptive statistics | CASA0005 Geographic Information Systems and Science" />
+  
+  
+  
+
+<meta name="author" content="Andy MacLachlan and Adam Dennett" />
+
+
+<meta name="date" content="2019-06-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r.html">
+<link rel="next" href="applications.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">CASA0005</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-world-of-gis"><i class="fa fa-check"></i>The world of GIS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#offline-viewing"><i class="fa fa-check"></i>Offline viewing</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="geographic-information.html"><a href="geographic-information.html"><i class="fa fa-check"></i><b>1</b> Geographic Information</a><ul>
+<li class="chapter" data-level="1.1" data-path="geographic-information.html"><a href="geographic-information.html#learning-outcomes"><i class="fa fa-check"></i><b>1.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.2" data-path="geographic-information.html"><a href="geographic-information.html#the-basics-of-geographic-information"><i class="fa fa-check"></i><b>1.2</b> The Basics of Geographic Information</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="geographic-information.html"><a href="geographic-information.html#important-gis-data-formats"><i class="fa fa-check"></i><b>1.2.1</b> Important GIS data formats</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="geographic-information.html"><a href="geographic-information.html#data"><i class="fa fa-check"></i><b>1.3</b> Data</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="geographic-information.html"><a href="geographic-information.html#file-paths"><i class="fa fa-check"></i><b>1.3.1</b> File paths</a></li>
+<li class="chapter" data-level="1.3.2" data-path="geographic-information.html"><a href="geographic-information.html#data-download"><i class="fa fa-check"></i><b>1.3.2</b> Data download</a></li>
+<li class="chapter" data-level="1.3.3" data-path="geographic-information.html"><a href="geographic-information.html#data-pre-processing"><i class="fa fa-check"></i><b>1.3.3</b> Data pre-processing</a></li>
+<li class="chapter" data-level="1.3.4" data-path="geographic-information.html"><a href="geographic-information.html#data-loading"><i class="fa fa-check"></i><b>1.3.4</b> Data loading</a></li>
+<li class="chapter" data-level="1.3.5" data-path="geographic-information.html"><a href="geographic-information.html#arcgis"><i class="fa fa-check"></i><b>1.3.5</b> ArcGIS</a></li>
+<li class="chapter" data-level="1.3.6" data-path="geographic-information.html"><a href="geographic-information.html#qgis"><i class="fa fa-check"></i><b>1.3.6</b> QGIS</a></li>
+<li class="chapter" data-level="1.3.7" data-path="geographic-information.html"><a href="geographic-information.html#r"><i class="fa fa-check"></i><b>1.3.7</b> R</a></li>
+<li class="chapter" data-level="1.3.8" data-path="geographic-information.html"><a href="geographic-information.html#export-data-2"><i class="fa fa-check"></i><b>1.3.8</b> Export data</a></li>
+<li class="chapter" data-level="1.3.9" data-path="geographic-information.html"><a href="geographic-information.html#what-will-i-use-1"><i class="fa fa-check"></i><b>1.3.9</b> What will I use</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="geographic-information.html"><a href="geographic-information.html#data-sources-and-task"><i class="fa fa-check"></i><b>1.4</b> Data sources and task</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="geographic-information.html"><a href="geographic-information.html#uk-data-service"><i class="fa fa-check"></i><b>1.4.1</b> UK Data Service</a></li>
+<li class="chapter" data-level="1.4.2" data-path="geographic-information.html"><a href="geographic-information.html#ons"><i class="fa fa-check"></i><b>1.4.2</b> ONS</a></li>
+<li class="chapter" data-level="1.4.3" data-path="geographic-information.html"><a href="geographic-information.html#os"><i class="fa fa-check"></i><b>1.4.3</b> OS</a></li>
+<li class="chapter" data-level="1.4.4" data-path="geographic-information.html"><a href="geographic-information.html#edina-digimap"><i class="fa fa-check"></i><b>1.4.4</b> Edina Digimap</a></li>
+<li class="chapter" data-level="1.4.5" data-path="geographic-information.html"><a href="geographic-information.html#osm"><i class="fa fa-check"></i><b>1.4.5</b> OSM</a></li>
+<li class="chapter" data-level="1.4.6" data-path="geographic-information.html"><a href="geographic-information.html#defra"><i class="fa fa-check"></i><b>1.4.6</b> DEFRA</a></li>
+<li class="chapter" data-level="1.4.7" data-path="geographic-information.html"><a href="geographic-information.html#data-lists"><i class="fa fa-check"></i><b>1.4.7</b> Data lists</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="geographic-information.html"><a href="geographic-information.html#summary"><i class="fa fa-check"></i><b>1.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-outcomes-1"><i class="fa fa-check"></i><b>2.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#introduction-3"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#online-forums-are-your-friend"><i class="fa fa-check"></i><b>2.2.1</b> Online forums are your friend!!</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#health-warning"><i class="fa fa-check"></i><b>2.2.2</b> Health warning</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-1"><i class="fa fa-check"></i><b>2.2.4</b> Getting started</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-1"><i class="fa fa-check"></i><b>2.2.5</b> Basics</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#scripts-and-some-basic-commands"><i class="fa fa-check"></i><b>2.2.6</b> Scripts and some basic commands</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2.7</b> Functions</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plotting"><i class="fa fa-check"></i><b>2.2.8</b> Basic plotting</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#help"><i class="fa fa-check"></i><b>2.2.9</b> Help</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.10</b> Data types</a></li>
+<li class="chapter" data-level="2.2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#elements-of-a-data-frame"><i class="fa fa-check"></i><b>2.2.11</b> Elements of a data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#reading-data-into-r"><i class="fa fa-check"></i><b>2.3</b> Reading data into R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#old-skool-cleaning"><i class="fa fa-check"></i><b>2.3.1</b> Old skool cleaning</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#new-skool-cleaning"><i class="fa fa-check"></i><b>2.3.2</b> New skool cleaning</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#examining-your-new-data"><i class="fa fa-check"></i><b>2.3.3</b> Examining your new data</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-manipulation-in-r"><i class="fa fa-check"></i><b>2.3.4</b> Data manipulation in R</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.3.5</b> Plotting</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#pimp-my-graph"><i class="fa fa-check"></i><b>2.3.6</b> Pimp my graph!</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#spatial-data-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Spatial Data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#making-maps-using-ggplot2"><i class="fa fa-check"></i><b>2.4</b> Making maps using ggplot2</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#changing-projections"><i class="fa fa-check"></i><b>2.4.1</b> Changing projections</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#maps-with-extra-features"><i class="fa fa-check"></i><b>2.4.2</b> Maps with extra features</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extension"><i class="fa fa-check"></i><b>2.4.3</b> Extension</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html"><i class="fa fa-check"></i><b>3</b> Rasters and descriptive statistics</a><ul>
+<li class="chapter" data-level="3.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#learning-outcomes-2"><i class="fa fa-check"></i><b>3.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="3.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#introduction-4"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#worldclim-data"><i class="fa fa-check"></i><b>3.3</b> WorldClim data</a></li>
+<li class="chapter" data-level="3.4" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#point-data-from-a-raster"><i class="fa fa-check"></i><b>3.4</b> Point data from a raster</a></li>
+<li class="chapter" data-level="3.5" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#descriptive-statistics"><i class="fa fa-check"></i><b>3.5</b> Descriptive statistics</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram"><i class="fa fa-check"></i><b>3.5.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.5.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#using-more-data"><i class="fa fa-check"></i><b>3.5.2</b> Using more data</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histrogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histrogram with ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#modis-background"><i class="fa fa-check"></i><b>3.6</b> MODIS background</a></li>
+<li class="chapter" data-level="3.7" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#loading-modis-data"><i class="fa fa-check"></i><b>3.7</b> Loading MODIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmarkdown-git-and-github.html"><a href="rmarkdown-git-and-github.html"><i class="fa fa-check"></i><b>5</b> RMarkdown, Git and GitHub</a><ul>
+<li class="chapter" data-level="5.1" data-path="rmarkdown-git-and-github.html"><a href="rmarkdown-git-and-github.html#learning-outcomes-3"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="rmarkdown-git-and-github.html"><a href="rmarkdown-git-and-github.html#introduction-5"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">CASA0005 Geographic Information Systems and Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rasters-and-descriptive-statistics" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Rasters and descriptive statistics</h1>
+<div id="learning-outcomes-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Learning outcomes</h2>
+<ul>
+<li>Examine and clean data</li>
+<li>More advaned data mamipulation</li>
+<li>Plot graps and maps</li>
+<li>Create interative maps</li>
+</ul>
+</div>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">3.2</span> Introduction</h2>
+<p>So far we’ve only really coinsidered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto).</p>
+</div>
+<div id="worldclim-data" class="section level2">
+<h2><span class="header-section-number">3.3</span> WorldClim data</h2>
+<p>To start with we are going to use WorldClim data — this is a set of free global cliamte layers (rasters) with a spatial resolution of between 1(km^2) and 240(km^2).</p>
+<p>To download the data go to: <a href="http://worldclim.org/version2" class="uri">http://worldclim.org/version2</a></p>
+<p>Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrase in a trigonomietrc cosine-based faishon as you move towards the Earth’s poles….</p>
+<p><img src="prac3_images/arcseconds.png" width="100pt" style="display: block; margin: auto;" /></p>
+<p>Unzip and move the data to your project folder. Now load the data. We could do this individually….</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)</code></pre>
+<pre><code>## Loading required package: sp</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">jan=<span class="kw">raster</span>(<span class="st">&quot;prac3_data/wc2.0_5m_tavg_01.tif&quot;</span>)
+<span class="co"># have a look at the raster layer jan</span>
+jan</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 2160, 4320, 9331200  (nrow, ncol, ncell)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : N:/Documents/Teaching/CASA0005practicals/CASA0005book/prac3_data/wc2.0_5m_tavg_01.tif 
+## names      : wc2.0_5m_tavg_01 
+## values     : -46.697, 34.291  (min, max)</code></pre>
+<p>Then have a quick look at the data</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(jan)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>However, a better and more effieicent way is to firstly list all the files we are interested stored within our directory</p>
+<pre class="sourceCode r"><code class="sourceCode r">listfiles &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;prac3_data&quot;</span>, <span class="st">&quot;.tif&quot;</span>, <span class="dt">full.names=</span><span class="ot">TRUE</span>)
+
+<span class="co">#have a look at the file names </span>
+listfiles</code></pre>
+<pre><code>##  [1] &quot;prac3_data/wc2.0_5m_tavg_01.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_02.tif&quot;
+##  [3] &quot;prac3_data/wc2.0_5m_tavg_03.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_04.tif&quot;
+##  [5] &quot;prac3_data/wc2.0_5m_tavg_05.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_06.tif&quot;
+##  [7] &quot;prac3_data/wc2.0_5m_tavg_07.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_08.tif&quot;
+##  [9] &quot;prac3_data/wc2.0_5m_tavg_09.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_10.tif&quot;
+## [11] &quot;prac3_data/wc2.0_5m_tavg_11.tif&quot; &quot;prac3_data/wc2.0_5m_tavg_12.tif&quot;</code></pre>
+<p>Then load all of the data straight into a raster stack</p>
+<pre class="sourceCode r"><code class="sourceCode r">worldclimtemp &lt;-<span class="st"> </span><span class="kw">stack</span>(listfiles)
+<span class="co">#have a look at the raster stack</span>
+worldclimtemp</code></pre>
+<pre><code>## class      : RasterStack 
+## dimensions : 2160, 4320, 9331200, 12  (nrow, ncol, ncell, nlayers)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## names      : wc2.0_5m_tavg_01, wc2.0_5m_tavg_02, wc2.0_5m_tavg_03, wc2.0_5m_tavg_04, wc2.0_5m_tavg_05, wc2.0_5m_tavg_06, wc2.0_5m_tavg_07, wc2.0_5m_tavg_08, wc2.0_5m_tavg_09, wc2.0_5m_tavg_10, wc2.0_5m_tavg_11, wc2.0_5m_tavg_12 
+## min values :          -46.697,          -44.559,          -57.107,          -62.996,          -63.541,          -63.096,          -66.785,          -64.600,          -62.600,          -54.400,          -42.000,          -45.340 
+## max values :           34.291,           33.174,           33.904,           34.629,           36.312,           38.400,           43.036,           41.073,           36.389,           33.869,           33.518,           33.667</code></pre>
+<p>So if the raster stack you’ll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average tempearture data for us in order. To access single layers within the stack:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># access the january layer</span>
+worldclimtemp[[<span class="dv">1</span>]]</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 2160, 4320, 9331200  (nrow, ncol, ncell)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : N:/Documents/Teaching/CASA0005practicals/CASA0005book/prac3_data/wc2.0_5m_tavg_01.tif 
+## names      : wc2.0_5m_tavg_01 
+## values     : -46.697, 34.291  (min, max)</code></pre>
+<p>We can also rename our layers:</p>
+<pre class="sourceCode r"><code class="sourceCode r">month &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>, <span class="st">&quot;Apr&quot;</span>, <span class="st">&quot;May&quot;</span>, <span class="st">&quot;Jun&quot;</span>, <span class="st">&quot;Jul&quot;</span>, <span class="st">&quot;Aug&quot;</span>, <span class="st">&quot;Sep&quot;</span>, <span class="st">&quot;Oct&quot;</span>, <span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span>)
+<span class="kw">names</span>(worldclimtemp) &lt;-<span class="st"> </span>month</code></pre>
+<p>Now we could also use:</p>
+<pre class="sourceCode r"><code class="sourceCode r">worldclimtemp<span class="op">$</span>Jan</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 2160, 4320, 9331200  (nrow, ncol, ncell)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : N:/Documents/Teaching/CASA0005practicals/CASA0005book/prac3_data/wc2.0_5m_tavg_01.tif 
+## names      : Jan 
+## values     : -46.697, 34.291  (min, max)</code></pre>
+<p>To access just the January raster layer</p>
+</div>
+<div id="point-data-from-a-raster" class="section level2">
+<h2><span class="header-section-number">3.4</span> Point data from a raster</h2>
+<p>Using a raster stack we can access data with a single command, for example let’s make a data frame of some sample sites</p>
+<pre class="sourceCode r"><code class="sourceCode r">site &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Brisbane&quot;</span>, <span class="st">&quot;Melbourne&quot;</span>, <span class="st">&quot;Perth&quot;</span>, <span class="st">&quot;Sydney&quot;</span>)
+lon &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">153.03</span>, <span class="fl">144.96</span>, <span class="fl">115.86</span>, <span class="fl">151.21</span>)
+lat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="fl">27.47</span>, <span class="fl">-37.91</span>, <span class="fl">-31.95</span>, <span class="fl">-33.87</span>)
+samples &lt;-<span class="st"> </span><span class="kw">data.frame</span>(site, lon, lat, <span class="dt">row.names=</span><span class="st">&quot;site&quot;</span>)
+<span class="co"># Extract data from RasterLayer</span>
+AUcitytemp&lt;-<span class="st"> </span><span class="kw">extract</span>(worldclimtemp, samples)</code></pre>
+<p>Let’s also add the city names to the rows</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">row.names</span>(AUcitytemp)&lt;-site</code></pre>
+<p>Now we’re going to look at some basic descriptive statistics. To start with let’s just look at Perth. We can subset our data either using the row name:</p>
+<pre class="sourceCode r"><code class="sourceCode r">Perthtemp &lt;-<span class="st"> </span><span class="kw">subset</span>(AUcitytemp, <span class="kw">rownames</span>(AUcitytemp) <span class="op">==</span><span class="st"> &quot;Perth&quot;</span>)</code></pre>
+<p>Or the row location</p>
+<pre class="sourceCode r"><code class="sourceCode r">Perthtemp &lt;-<span class="st"> </span>AUcitytemp[<span class="dv">3</span>,]</code></pre>
+</div>
+<div id="descriptive-statistics" class="section level2">
+<h2><span class="header-section-number">3.5</span> Descriptive statistics</h2>
+<div id="histogram" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Histogram</h3>
+<p>Now we have a look at a histrogram for our data. Remember what we’re looking at here. The x axis is the tempearture and the y is the frequency of occurance.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(Perthtemp)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>That’s a pretty simple histogram, let’s improve the aestehics</p>
+<pre class="sourceCode r"><code class="sourceCode r">userbreak&lt;-<span class="kw">c</span>(<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>,<span class="dv">26</span>)
+<span class="kw">hist</span>(Perthtemp, <span class="dt">breaks=</span>userbreak, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Have a look at the histogram information R generated</p>
+<pre class="sourceCode r"><code class="sourceCode r">histinfo&lt;-<span class="kw">hist</span>(Perthtemp)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">histinfo</code></pre>
+<pre><code>## $breaks
+## [1] 12 14 16 18 20 22 24 26
+## 
+## $counts
+## [1] 1 3 2 2 1 1 2
+## 
+## $density
+## [1] 0.04166667 0.12500000 0.08333333 0.08333333 0.04166667 0.04166667
+## [7] 0.08333333
+## 
+## $mids
+## [1] 13 15 17 19 21 23 25
+## 
+## $xname
+## [1] &quot;Perthtemp&quot;
+## 
+## $equidist
+## [1] TRUE
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;histogram&quot;</code></pre>
+<p>Here we have:</p>
+<ul>
+<li>breaks — the cut off points for the bins (or bars), we just specified these</li>
+<li>counts — the number of cells in each bin</li>
+<li>midpoints — the middle value for each bin</li>
+<li>density — the density of data per bin</li>
+</ul>
+</div>
+<div id="using-more-data" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Using more data</h3>
+<p>This was a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data).</p>
+<p>First, we need to source and load a vector of Australia. Go to: <a href="https://gadm.org/download_country_v3.html" class="uri">https://gadm.org/download_country_v3.html</a></p>
+<p>Download the Geopackage</p>
+<p>We can check aht layers are within a geopackage using:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">st_layers</span>(<span class="st">&quot;prac3_data/gadm36_AUS.gpkg&quot;</span>)</code></pre>
+<pre><code>## Driver: GPKG 
+## Available layers:
+##     layer_name geometry_type features fields
+## 1 gadm36_AUS_0 Multi Polygon        1      2
+## 2 gadm36_AUS_1 Multi Polygon       11     10
+## 3 gadm36_AUS_2 Multi Polygon      569     13</code></pre>
+<p>Then lets read in the Geopackage layer for the whole of Australia</p>
+<pre class="sourceCode r"><code class="sourceCode r">Ausoutline &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;prac3_data/gadm36_AUS.gpkg&quot;</span>, <span class="dt">layer=</span><span class="st">&#39;gadm36_AUS_0&#39;</span>)</code></pre>
+<pre><code>## Reading layer `gadm36_AUS_0&#39; from data source `N:\Documents\Teaching\CASA0005practicals\CASA0005book\prac3_data\gadm36_AUS.gpkg&#39; using driver `GPKG&#39;
+## Simple feature collection with 1 feature and 2 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 112.9211 ymin: -55.11694 xmax: 159.1092 ymax: -9.142176
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Check the layer</span>
+<span class="kw">plot</span>(Ausoutline)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+Now let’s set our extent to the outline of Australia then crop our WorldClim dataset to it</p>
+<pre class="sourceCode r"><code class="sourceCode r">Ausarea &lt;-<span class="st"> </span><span class="kw">extent</span>(Ausoutline)
+<span class="co"># check the extent</span>
+Ausarea</code></pre>
+<pre><code>## class      : Extent 
+## xmin       : 112.9211 
+## xmax       : 159.1092 
+## ymin       : -55.11694 
+## ymax       : -9.142176</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># now crop our temp data to the extemt</span>
+Austemp &lt;-<span class="st"> </span><span class="kw">crop</span>(worldclimtemp, Ausoutline)
+<span class="co"># plot the output</span>
+Austemp</code></pre>
+<pre><code>## class      : RasterBrick 
+## dimensions : 551, 554, 305254, 12  (nrow, ncol, ncell, nlayers)
+## resolution : 0.08333333, 0.08333333  (x, y)
+## extent     : 112.9167, 159.0833, -55.08333, -9.166667  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## source     : memory
+## names      :       Jan,       Feb,       Mar,       Apr,       May,       Jun,       Jul,       Aug,       Sep,       Oct,       Nov,       Dec 
+## min values :  6.360000,  6.287500,  5.554286,  4.051429,  2.542857, -0.171000, -1.945000, -1.677000,  0.677000,  3.054286,  3.842424,  5.433333 
+## max values :  34.29100,  33.17400,  32.39700,  30.07200,  28.50000,  27.40000,  26.90000,  27.20000,  29.31209,  31.72000,  33.51800,  33.66700</code></pre>
+<p>You’ll notice that whislt we have the whole of Australia the raster hasn’t been perfectly clipped to the exact outline….the extent just specifes an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:</p>
+<pre class="sourceCode r"><code class="sourceCode r">exactAus=<span class="kw">mask</span>(Austemp, Ausoutline)</code></pre>
+<p>You could also run this using the original worldclimtemp raster, however, it may take some time. I’d recommend cropping to the extent first.</p>
+<p>Both our Austemp and exactAus are raster bricks. A brick is similar to a stack except it is now stored as one file instead of a collection.</p>
+<p>Let’s now re-run compute our histogram for Australia in March</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(exactAus, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre>
+<p><img src="03-prac3_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>vector_filepath = (“prac3_data/gadm36_AUS.gpkg”, package = “spData”)
+world = st_read(“prac3_data/gadm36_AUS.gpkg”)</p>
+<p>cities_gpkg &lt;- readOGR(“prac3_data/gadm36_AUS.gpkg”, “gadm36_AUS_0”)</p>
+</div>
+<div id="histrogram-with-ggplot" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> Histrogram with ggplot</h3>
+<p>Morocco &lt;- getData(‘GADM’, country=“MAR”, level=0)</p>
+<p>M.area &lt;- extent(Morocco)</p>
+<p>mean_m &lt;- crop(worldclimtemp, M.area)</p>
+<p>One of the benefits of using a rasterstack is that we can apply</p>
+<p>Automatically load worldclim data straight to R</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
+<span class="kw">library</span>(sp)
+
+<span class="co">#r &lt;- getData(&quot;worldclim&quot;,var=&quot;bio&quot;,res=10)</span></code></pre>
+<p>ggplot(sumofstack, aes(x=weight)) + geom_histogram()</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(sf)</span>
+<span class="co">#layers &lt;- st_read(&quot;prac3_data/gadm36.gpkg&quot;)</span></code></pre>
+<p>sumstack=sum(stack)</p>
+<p>MODIS</p>
+</div>
+</div>
+<div id="modis-background" class="section level2">
+<h2><span class="header-section-number">3.6</span> MODIS background</h2>
+<p>NASA’s Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North cossing the equator in the afternoon. Consqeutnly we are able to obtain twice daily envrionmental data for the majority of locations on Earth such as:</p>
+<ul>
+<li>Total Precipitable Water</li>
+<li>Cloud Product</li>
+<li>Atmospheric Profiles</li>
+<li>Land Surface Temperature and Emissivity (MOD11)</li>
+<li>Land Cover Products</li>
+<li>Chlorophyll-a Concentration</li>
+<li>Thermal Anomalies - Active Fires</li>
+<li>Fraction of Photosynthetically Active Radiation (FPAR) / Leaf Area Index (LAI)</li>
+<li>Evapotranspiration</li>
+<li>Gross Primary Productivity (GPP) / Net Primary Productivity (NPP)</li>
+<li>Sea Ice and Ice Surface Temperature</li>
+<li>Remote Sensing Reflectance</li>
+</ul>
+<p>See: <a href="https://modis.gsfc.nasa.gov/data/" class="uri">https://modis.gsfc.nasa.gov/data/</a> for more details</p>
+</div>
+<div id="loading-modis-data" class="section level2">
+<h2><span class="header-section-number">3.7</span> Loading MODIS data</h2>
+<p>The MODIStsp package enables us to autmoate the preprocessing of MODIS time series data. Before this I would have to dowload <code>.txt</code> files with all the iamges I wanted, create other <code>.txt</code> that specifed the data to download, where to store it and any reprojection information. Then it would have to be loaded into R.</p>
+<p>But don’t worry as now we can do it all from R…</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&quot;rt&quot;)</span>
+<span class="co">#library(rts)</span></code></pre>
+<p>Firstly, create a free account at: <a href="https://urs.earthdata.nasa.gov/home" class="uri">https://urs.earthdata.nasa.gov/home</a></p>
+<p>Les’t see what data is now available:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#modisProducts()</span></code></pre>
+<p>MYD11A1</p>
+<p>ModisDownload(MYD11A1, h, v, version=‘005’,dates, mosaic=FALSE, MRTpath, bands_subset = "“, del=FALSE, proj= FALSE, UL =”“, LR=”“, resample_type=”NEAREST_NEIGHBOR“, proj_type=”UTM", proj_params, utm_zone,pixel_size)</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-prac3.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["CASA0005.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>
