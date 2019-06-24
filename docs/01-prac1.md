@@ -671,7 +671,7 @@ st_write(shape, "Prac1_data/Rwk1.gpkg", "london_boroughs_fly_tipping", delete_la
 ```
 
 ```
-## Deleting layer `london_boroughs_fly_tipping' failed
+## Deleting layer `london_boroughs_fly_tipping' using driver `GPKG'
 ## Updating layer `london_boroughs_fly_tipping' to data source `Prac1_data/Rwk1.gpkg' using driver `GPKG'
 ## features:       33
 ## fields:         15

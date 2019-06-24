@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Git, GitHub and RMarkdown | CASA0005 Geographic Information Systems and Science</title>
+  <meta name="description" content="Chapter 5 Git, GitHub and RMarkdown | CASA0005 Geographic Information Systems and Science" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Git, GitHub and RMarkdown | CASA0005 Geographic Information Systems and Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Git, GitHub and RMarkdown | CASA0005 Geographic Information Systems and Science" />
+  
+  
+  
+
+<meta name="author" content="Andy MacLachlan and Adam Dennett" />
+
+
+<meta name="date" content="2019-06-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="applications.html">
+<link rel="next" href="final-words.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">CASA0005</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#the-world-of-gis"><i class="fa fa-check"></i>The world of GIS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i>Getting started</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#offline-viewing"><i class="fa fa-check"></i>Offline viewing</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="geographic-information.html"><a href="geographic-information.html"><i class="fa fa-check"></i><b>1</b> Geographic Information</a><ul>
+<li class="chapter" data-level="1.1" data-path="geographic-information.html"><a href="geographic-information.html#learning-outcomes"><i class="fa fa-check"></i><b>1.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="1.2" data-path="geographic-information.html"><a href="geographic-information.html#the-basics-of-geographic-information"><i class="fa fa-check"></i><b>1.2</b> The Basics of Geographic Information</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="geographic-information.html"><a href="geographic-information.html#important-gis-data-formats"><i class="fa fa-check"></i><b>1.2.1</b> Important GIS data formats</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="geographic-information.html"><a href="geographic-information.html#data"><i class="fa fa-check"></i><b>1.3</b> Data</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="geographic-information.html"><a href="geographic-information.html#file-paths"><i class="fa fa-check"></i><b>1.3.1</b> File paths</a></li>
+<li class="chapter" data-level="1.3.2" data-path="geographic-information.html"><a href="geographic-information.html#data-download"><i class="fa fa-check"></i><b>1.3.2</b> Data download</a></li>
+<li class="chapter" data-level="1.3.3" data-path="geographic-information.html"><a href="geographic-information.html#data-pre-processing"><i class="fa fa-check"></i><b>1.3.3</b> Data pre-processing</a></li>
+<li class="chapter" data-level="1.3.4" data-path="geographic-information.html"><a href="geographic-information.html#data-loading"><i class="fa fa-check"></i><b>1.3.4</b> Data loading</a></li>
+<li class="chapter" data-level="1.3.5" data-path="geographic-information.html"><a href="geographic-information.html#arcgis"><i class="fa fa-check"></i><b>1.3.5</b> ArcGIS</a></li>
+<li class="chapter" data-level="1.3.6" data-path="geographic-information.html"><a href="geographic-information.html#qgis"><i class="fa fa-check"></i><b>1.3.6</b> QGIS</a></li>
+<li class="chapter" data-level="1.3.7" data-path="geographic-information.html"><a href="geographic-information.html#r"><i class="fa fa-check"></i><b>1.3.7</b> R</a></li>
+<li class="chapter" data-level="1.3.8" data-path="geographic-information.html"><a href="geographic-information.html#export-data-2"><i class="fa fa-check"></i><b>1.3.8</b> Export data</a></li>
+<li class="chapter" data-level="1.3.9" data-path="geographic-information.html"><a href="geographic-information.html#what-will-i-use-1"><i class="fa fa-check"></i><b>1.3.9</b> What will I use</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="geographic-information.html"><a href="geographic-information.html#data-sources-and-task"><i class="fa fa-check"></i><b>1.4</b> Data sources and task</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="geographic-information.html"><a href="geographic-information.html#uk-data-service"><i class="fa fa-check"></i><b>1.4.1</b> UK Data Service</a></li>
+<li class="chapter" data-level="1.4.2" data-path="geographic-information.html"><a href="geographic-information.html#ons"><i class="fa fa-check"></i><b>1.4.2</b> ONS</a></li>
+<li class="chapter" data-level="1.4.3" data-path="geographic-information.html"><a href="geographic-information.html#os"><i class="fa fa-check"></i><b>1.4.3</b> OS</a></li>
+<li class="chapter" data-level="1.4.4" data-path="geographic-information.html"><a href="geographic-information.html#edina-digimap"><i class="fa fa-check"></i><b>1.4.4</b> Edina Digimap</a></li>
+<li class="chapter" data-level="1.4.5" data-path="geographic-information.html"><a href="geographic-information.html#osm"><i class="fa fa-check"></i><b>1.4.5</b> OSM</a></li>
+<li class="chapter" data-level="1.4.6" data-path="geographic-information.html"><a href="geographic-information.html#defra"><i class="fa fa-check"></i><b>1.4.6</b> DEFRA</a></li>
+<li class="chapter" data-level="1.4.7" data-path="geographic-information.html"><a href="geographic-information.html#data-lists"><i class="fa fa-check"></i><b>1.4.7</b> Data lists</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="geographic-information.html"><a href="geographic-information.html#summary"><i class="fa fa-check"></i><b>1.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#learning-outcomes-1"><i class="fa fa-check"></i><b>2.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#introduction-3"><i class="fa fa-check"></i><b>2.2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#online-forums-are-your-friend"><i class="fa fa-check"></i><b>2.2.1</b> Online forums are your friend!!</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#health-warning"><i class="fa fa-check"></i><b>2.2.2</b> Health warning</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> R and RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-1"><i class="fa fa-check"></i><b>2.2.4</b> Getting started</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-1"><i class="fa fa-check"></i><b>2.2.5</b> Basics</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#scripts-and-some-basic-commands"><i class="fa fa-check"></i><b>2.2.6</b> Scripts and some basic commands</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions"><i class="fa fa-check"></i><b>2.2.7</b> Functions</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basic-plotting"><i class="fa fa-check"></i><b>2.2.8</b> Basic plotting</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#help"><i class="fa fa-check"></i><b>2.2.9</b> Help</a></li>
+<li class="chapter" data-level="2.2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-types"><i class="fa fa-check"></i><b>2.2.10</b> Data types</a></li>
+<li class="chapter" data-level="2.2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#elements-of-a-data-frame"><i class="fa fa-check"></i><b>2.2.11</b> Elements of a data frame</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#reading-data-into-r"><i class="fa fa-check"></i><b>2.3</b> Reading data into R</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#old-skool-cleaning"><i class="fa fa-check"></i><b>2.3.1</b> Old skool cleaning</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#new-skool-cleaning"><i class="fa fa-check"></i><b>2.3.2</b> New skool cleaning</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#examining-your-new-data"><i class="fa fa-check"></i><b>2.3.3</b> Examining your new data</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-manipulation-in-r"><i class="fa fa-check"></i><b>2.3.4</b> Data manipulation in R</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#plotting"><i class="fa fa-check"></i><b>2.3.5</b> Plotting</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#pimp-my-graph"><i class="fa fa-check"></i><b>2.3.6</b> Pimp my graph!</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#spatial-data-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Spatial Data in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#making-maps-using-ggplot2"><i class="fa fa-check"></i><b>2.4</b> Making maps using ggplot2</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#changing-projections"><i class="fa fa-check"></i><b>2.4.1</b> Changing projections</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#maps-with-extra-features"><i class="fa fa-check"></i><b>2.4.2</b> Maps with extra features</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extension"><i class="fa fa-check"></i><b>2.4.3</b> Extension</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html"><i class="fa fa-check"></i><b>3</b> Rasters and descriptive statistics</a><ul>
+<li class="chapter" data-level="3.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#learning-outcomes-2"><i class="fa fa-check"></i><b>3.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="3.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#introduction-4"><i class="fa fa-check"></i><b>3.2</b> Introduction</a></li>
+<li class="chapter" data-level="3.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#worldclim-data"><i class="fa fa-check"></i><b>3.3</b> WorldClim data</a></li>
+<li class="chapter" data-level="3.4" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#point-data-from-a-raster"><i class="fa fa-check"></i><b>3.4</b> Point data from a raster</a></li>
+<li class="chapter" data-level="3.5" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#descriptive-statistics"><i class="fa fa-check"></i><b>3.5</b> Descriptive statistics</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram"><i class="fa fa-check"></i><b>3.5.1</b> Histogram</a></li>
+<li class="chapter" data-level="3.5.2" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#using-more-data"><i class="fa fa-check"></i><b>3.5.2</b> Using more data</a></li>
+<li class="chapter" data-level="3.5.3" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#histogram-with-ggplot"><i class="fa fa-check"></i><b>3.5.3</b> Histogram with ggplot</a></li>
+<li class="chapter" data-level="3.5.4" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#auto-data-download"><i class="fa fa-check"></i><b>3.5.4</b> Auto data download</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#modis-background"><i class="fa fa-check"></i><b>3.6</b> MODIS background</a></li>
+<li class="chapter" data-level="3.7" data-path="rasters-and-descriptive-statistics.html"><a href="rasters-and-descriptive-statistics.html#loading-modis-data"><i class="fa fa-check"></i><b>3.7</b> Loading MODIS data</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>4</b> Applications</a><ul>
+<li class="chapter" data-level="4.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>4.1</b> Example one</a></li>
+<li class="chapter" data-level="4.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>4.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html"><i class="fa fa-check"></i><b>5</b> Git, GitHub and RMarkdown</a><ul>
+<li class="chapter" data-level="5.1" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#learning-outcomes-3"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#introduction-5"><i class="fa fa-check"></i><b>5.2</b> Introduction</a></li>
+<li class="chapter" data-level="5.3" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#set-up-your-github"><i class="fa fa-check"></i><b>5.3</b> Set up your GitHub</a></li>
+<li class="chapter" data-level="5.4" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#using-rstudio-with-git"><i class="fa fa-check"></i><b>5.4</b> Using RStudio with Git</a></li>
+<li class="chapter" data-level="5.5" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#using-git-outside-rstudio"><i class="fa fa-check"></i><b>5.5</b> Using Git outside RStudio</a></li>
+<li class="chapter" data-level="5.6" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#push-to-github"><i class="fa fa-check"></i><b>5.6</b> Push to Github</a></li>
+<li class="chapter" data-level="5.7" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#pull-from-github"><i class="fa fa-check"></i><b>5.7</b> Pull from GitHub</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#troubleshooting"><i class="fa fa-check"></i><b>5.7.1</b> Troubleshooting</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#fork-a-repository"><i class="fa fa-check"></i><b>5.8</b> Fork a repository</a></li>
+<li class="chapter" data-level="5.9" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#branches"><i class="fa fa-check"></i><b>5.9</b> Branches</a></li>
+<li class="chapter" data-level="5.10" data-path="git-github-and-rmarkdown.html"><a href="git-github-and-rmarkdown.html#health-warning-1"><i class="fa fa-check"></i><b>5.10</b> Health warning</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">CASA0005 Geographic Information Systems and Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="git-github-and-rmarkdown" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Git, GitHub and RMarkdown</h1>
+<div id="learning-outcomes-3" class="section level2">
+<h2><span class="header-section-number">5.1</span> Learning outcomes</h2>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<div id="introduction-5" class="section level2">
+<h2><span class="header-section-number">5.2</span> Introduction</h2>
+<p>In this practical session, you will learn how to produce work that is open, reproducible and portable using RStudio, RMarkdown, Git and Github. You will be able to use the information contained in this guide to prepare the submission for Part 1 of the assessment for this course. The tools you will use are:</p>
+<ul>
+<li><p>RStudio is a graphical user interface (that you should already be familiar with) - it contains a number of features which make it excellent for authoring reproducible and open geographic data science work.</p></li>
+<li><p>RMarkdown is a version of the Markdown markup language which enables plain text to be formatted to contain links to data, code to run, text to explain what you a producing and metadata to tell your software what kinds of outputs to generate from your markdown code. For more information on RMarkdown, visit here.</p></li>
+<li><p>Git is a software version control system which allows you to keep track of the code you produce and the changes that you or others make to it.</p></li>
+<li><p>GitHub is an online repository that allows anyone to view the code you have produced (in whatever language you choose to program in) and use/scrutinise/contribute to/comment on it.</p></li>
+</ul>
+</div>
+<div id="set-up-your-github" class="section level2">
+<h2><span class="header-section-number">5.3</span> Set up your GitHub</h2>
+<ol style="list-style-type: decimal">
+<li><p>If you are working on your own computer, you will first need to install git - <a href="https://git-scm.com/" class="uri">https://git-scm.com/</a> - if you are working on the UCL Remote Desktop, you won’t need to do this as it is already installed for you.</p></li>
+<li><p>Go to <a href="http://github.com" class="uri">http://github.com</a> and install github (if working on your own computer). Create an account and create a new repository (call it anything you like - ‘gis_code’ or something similar), making sure it is public and you check the box that says ‘initialise new repository with a README’ - click ‘create repository’ at the bottom</p></li>
+</ol>
+<p><img src="prac4_images/github.png" width="600pt" style="display: block; margin: auto;" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Your new repository (‘repo’) will be created and this is where you will be able to store your code online. You will notice that a README.md markdown file has also been created. This can be edited to tell people what they are likely to find in this repository.</p></li>
+<li><p>Now you have created your repo online, you need to ‘clone’ it so that there is an identical copy of it in a local folder on your computer.</p></li>
+</ol>
+<p>There are a couple of ways of doing this, but the easy one is to use the GUI that comes packaged with your git installation.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>The first thing you need to do is copy the Clone URL for your repo from the github website — click the green button in your repo for ‘Clone or Download’ and copy the link:</li>
+</ol>
+<p><img src="prac4_images/githubrepodownload.png" width="600pt" style="display: block; margin: auto;" /></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Now in the windows start menu, go to Git &gt; GUI</p></li>
+<li><p>Select ‘Clone Existing Repository’ and paste the link from your GitHub account into the top box and the local directory that you want to create to store your repo in the bottom box (note, you will need to add a name for a new folder, once you have selected an existing directory, don’t create a new folder in windows explorer you have to specify it in the file path).</p></li>
+</ol>
+<p><img src="prac4_images/gitsetup.png" width="600pt" style="display: block; margin: auto;" /></p>
+<ol start="8" style="list-style-type: decimal">
+<li>After a few moments, you should now be able to view a copy of your GitHub repo on your local machine. This is where you will be able to store all of your code and some other files for your reproducible research.</li>
+</ol>
+</div>
+<div id="using-rstudio-with-git" class="section level2">
+<h2><span class="header-section-number">5.4</span> Using RStudio with Git</h2>
+<p>Now, as I’ve mentioned before, RStudio is totally bad-ass. Not only does it make R fun to use, but the lovely people who created it also built in support for things like git!</p>
+<p>For a full and excellent tutorial on using Git with R Studio, watch this webinar: <a href="https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-managing-part-2/" class="uri">https://www.rstudio.com/resources/webinars/rstudio-essentials-webinar-series-managing-part-2/</a></p>
+<p>If you don’t want to watch the vid, I’ll do a quick summary below. So, to use git, first you need to enable it in RStudio:</p>
+<p>At the time of writing, because of the way that RStudio has been installed on the UCL Remote Desktop, git integration does not work. As such, if you are working on the remote desktop, DO NOT follow instructions 9 to 19 below, jump straight to instruction 20. If you are working on your own computer then fine, carry on.</p>
+<ol start="9" style="list-style-type: decimal">
+<li><p>Open RStudio. In RStudio Tools &gt; Global Options, under ‘Git/SVN’ check the box to allow version control and locate the folder on your computer where the git.exe file is located. Allow Version Control for new Projects and navigate to where the git.exe file is on your computer. Click OK.</p></li>
+<li><p>Now in RStudio, you should create a new project in an existing directory - File &gt; New Project &gt; Existing directory - choose your new git repository as your new project folder. You should not see a git tab in the environment window of RStudio (top right).</p></li>
+</ol>
+<p><strong>Note</strong> You could also link your Git directly from RStudio following: File &gt; New Project &gt; Version control &gt; Git. But carry on using these insturctions for now.</p>
+<ol start="11" style="list-style-type: decimal">
+<li><p>Open a new R Notebook in RStudio: File &gt; New File R Notebook</p></li>
+<li><p>Type some stuff (anything so that’s it’s not a blank empty file) at the top of the file and save it.</p></li>
+</ol>
+<p>You should see the files appear under the Git tab</p>
+<p><img src="prac4_images/makeafile.png" width="600pt" style="display: block; margin: auto;" /></p>
+<ol start="13" style="list-style-type: decimal">
+<li>As well as saving, which saves a copy to our local directory, we will also ‘commit’ or create a save point for our work on git. To do this, you should click the ‘Git’ icon and up will pop a menu like the one below:</li>
+</ol>
+<p><img src="prac4_images/comitt1.png" width="600pt" style="display: block; margin: auto;" /></p>
+<p>You can also click the Git tab that will have appeared in the top-right window of RStudio. Up will then pop another window that looks a little like the one below:</p>
+<p><img src="prac4_images/comitt2.png" width="600pt" style="display: block; margin: auto;" /></p>
+<ol start="14" style="list-style-type: decimal">
+<li><p>Stage the changes, add a commit message so you can monitor the changes you make, then click commit</p></li>
+<li><p>Make some more changes to your file and save it. Click comitt again then in the review changes box you will be able to see what has changed within your file. Add a comitt message and click commit:</p></li>
+</ol>
+<p><img src="prac4_images/comitt3.png" width="600pt" style="display: block; margin: auto;" /></p>
+</div>
+<div id="using-git-outside-rstudio" class="section level2">
+<h2><span class="header-section-number">5.5</span> Using Git outside RStudio</h2>
+<p>Sometimes RStudio Git can be a bit temperamental. For example, when staging the files they can take some time to appear with the ticked box (I think this is because we are working from the Network). A way around this in RStudio is to click the commit button, select to stage all the files, wait a few seconds then close the review changes box and commit from the buttons in the Git tab in the environment quadrant.</p>
+<p>Alternatively if you would like to use Git but you’re working on the UCL Remote Desktop or you are experiening other problems with getting git working in RStudio, fear not, you can just use your raw Git installation.</p>
+<ol start="17" style="list-style-type: decimal">
+<li><p>In the Start Menu, open the git GUI. Start &gt; Git &gt; Git GUI. You should open the existing repository that you have just created.</p></li>
+<li><p>Whenever you have made some changes to your files in your cloned repo, you can use git to review the changes and ‘Commit’ (save) them and then ‘Push’ them up to your master repository on GitHub.</p></li>
+<li><p>To review and commit your changes, in the commit menu, simply:</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>scan for changes</li>
+<li>stage them ready for committing</li>
+<li>commit the changes</li>
+<li>push the changes to your GitHub repo</li>
+</ol>
+</div>
+<div id="push-to-github" class="section level2">
+<h2><span class="header-section-number">5.6</span> Push to Github</h2>
+<p>Now we can push our changes to github using the up arrow either in the RStudio git tab (envrionment quadrant), or from the review changes box (opens when you click commit).</p>
+<ol start="16" style="list-style-type: decimal">
+<li>To do this, first make sure you have committed any changes to your local cloned repo and then click the ‘Push’ button to whizz your code up to your master GitHub repo — you will probably be prompted to enter your github username and password to enable this…</li>
+</ol>
+<p>But….if the push button is greyed out go to the section <a href="git-github-and-rmarkdown.html#greyed-out-push-button">Greyed out push button</a></p>
+</div>
+<div id="pull-from-github" class="section level2">
+<h2><span class="header-section-number">5.7</span> Pull from GitHub</h2>
+<p>Pull will take any changes to the global repo and bring them into your local repo. Go to your example GitHub repo (online) and click on your test file &gt; edit this file.</p>
+<p>Add a line of code or a comment, preview the changes then commit directly to the master branch.</p>
+<p><img src="prac4_images/pullexample.png" width="600pt" style="display: block; margin: auto;" /></p>
+<p>Now in RStudio click the down arrow (Pull) request. Your file should update in RStudio.</p>
+<p>If you were to update your file on GitHub and your local one in RStudio seperately you would receive an error message in RStudio when you attempted to commit.</p>
+<div id="troubleshooting" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> Troubleshooting</h3>
+<div id="were-you-challenged-for-your-password" class="section level4">
+<h4><span class="header-section-number">5.7.1.1</span> Were you challenged for your password?</h4>
+<p>As of January 2019 it is possible that Git will use a credential helper provided by the operating system. So you should be asked for your GitHub username and password only once. As I am already logged into mine and I started using GitHub a while ago i’m not exactly sure when you will be asked for you details.</p>
+<p>You can however set your usename and email manually using the git prompt.</p>
+<p>Go Tools &gt; Shell and enter:</p>
+<pre class="sourceCode r"><code class="sourceCode r">git config <span class="op">--</span>global user.name <span class="st">&#39;yourGitHubUsername&#39;</span>
+git config <span class="op">--</span>global user.email <span class="st">&#39;name@provider.com&#39;</span></code></pre>
+<p>These only need to be set once.</p>
+</div>
+<div id="greyed-out-push-button" class="section level4">
+<h4><span class="header-section-number">5.7.1.2</span> Greyed out push button</h4>
+<p>Is your push button greyed out? Mine was… Fear not….</p>
+<p>First, let’s check your local repostiority (Git) is connected to a remote one (GitHub).</p>
+<p>Open the Shell again (Tools &gt; Shell) and enter:</p>
+<pre class="sourceCode r"><code class="sourceCode r">git remote <span class="op">-</span>v
+<span class="co">## output</span>
+
+origin  https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>andrewmaclachlan<span class="op">/</span><span class="kw">example.git</span> (fetch)
+origin  https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>andrewmaclachlan<span class="op">/</span><span class="kw">example.git</span> (push)</code></pre>
+<p>The fetch and push should be your repository on GitHub. If you need to set the remote repo use:</p>
+<pre class="sourceCode r"><code class="sourceCode r">git remote add origin https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>andrewmaclachlanc<span class="op">/</span>myrepo.git</code></pre>
+<p><strong>Replace my name and myrepo with your account and repo</strong></p>
+<p>Was it setup correctly ? Yes…</p>
+<p>Then check the current branch in RStudio (and Git) is tracking a branch on the remote repo — mine wasn’t.</p>
+<pre class="sourceCode r"><code class="sourceCode r">git branch <span class="op">-</span>vv
+
+<span class="co">## output</span>
+master 3abe929 [origin<span class="op">/</span>master] test3</code></pre>
+<p>Origin/master shows that the local master is tracking the origin/master on the remote repo. If you can’t see origin/master then set it using:</p>
+<pre class="sourceCode r"><code class="sourceCode r">git push <span class="op">--</span>set<span class="op">-</span>upstream origin master</code></pre>
+<p>For more trouble shooting on Git and GitHub have a look at the book Happy Git and GitHub for the useR: <a href="https://happygitwithr.com/rstudio-git-github.html" class="uri">https://happygitwithr.com/rstudio-git-github.html</a></p>
+</div>
+</div>
+</div>
+<div id="fork-a-repository" class="section level2">
+<h2><span class="header-section-number">5.8</span> Fork a repository</h2>
+<p>A <em>Fork</em> in github is a copy of someone elses repository. You could use it as a base starting point for your project or to make a fix and then submit a pull request to the original owner who would then <em>pull</em> your changes to their repository.</p>
+<p>You can fork a github example repository from: <a href="https://github.com/octocat/Spoon-Knife" class="uri">https://github.com/octocat/Spoon-Knife</a></p>
+<p>Once you fork it, you should see it in your repositories</p>
+</div>
+<div id="branches" class="section level2">
+<h2><span class="header-section-number">5.9</span> Branches</h2>
+<p>Each repository you make in git has a default branch but you can create new branches to isolate development of specific areas of work without affecting other branches — like a test envrionment.</p>
+<p>Go to the test repository you just forked on github. Click the branch drop down and type in the name for a new branch:</p>
+<p><img src="prac4_images/branch.png" width="600pt" style="display: block; margin: auto;" /></p>
+<p>Now click on the README.md file &gt; edit this file</p>
+<p>Add some changes, preview them and complete the commit changes box at the bottom of the screen.</p>
+<p><img src="prac4_images/branchtest.png" width="600pt" style="display: block; margin: auto;" /></p>
+<p>Here, we’re going to commit directly to the new branch. We could have made this changes to the master branch and then made a new branch for them at this stage. Commit the changes.</p>
+<p>Go to the home page of our example branch (click the branch down arrow and select your example branch). You’ll see that our example branch is now 1 commit ahead of the master.</p>
+<p>Now let’s create a <em>pull</em> reqest to the master branch. It you had modified someone elses code, then you would send a reqest to them to pull in the changes. Here we are doing a pull request for ourselves — from our example branch to our master.</p>
+<p>Click New pull request.</p>
+<p>At the top you will see the branches that are being compared — the base defaults to githubs example repository, change it to yours.</p>
+<p><img src="prac4_images/branchcompare.png" width="600pt" style="display: block; margin: auto;" /></p>
+<p>Now scroll down and you will see the comaparison of between the two branches. Click create pull request.</p>
+<p>Select squash and merge &gt; confirm squash and merge. This means that all our commits on the exmaple branch and squashed into one, as we only have one it doesn’t matter but could be useful in future.</p>
+<p>Got back to your master branch repositry and you should see the changes from the example branch have been merged.</p>
+</div>
+<div id="health-warning-1" class="section level2">
+<h2><span class="header-section-number">5.10</span> Health warning</h2>
+<p>To avoid merge conflicts be careful with your commits, pushes and pulls. Think about what you are doing each time. GitHub help pages are quite comprehensive..https://help.github.com/en/articles/resolving-a-merge-conflict-on-github</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="applications.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-prac4.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["CASA0005.epub"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+</body>
+
+</html>

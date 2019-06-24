@@ -1,7 +1,7 @@
 --- 
 title: "CASA0005 Geographic Information Systems and Science"
 author: "Andy MacLachlan and Adam Dennett"
-date: "2019-06-21"
+date: "2019-06-24"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
