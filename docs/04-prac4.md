@@ -1,5 +1,7 @@
 # Git, GitHub and RMarkdown
 
+Allison Hill's website: https://alison.rbind.io/post/
+
 ## Learning outcomes
 
 * 
@@ -9,7 +11,9 @@
 
 ## Introduction 
 
-In this practical session, you will learn how to produce work that is open, reproducible and portable using RStudio, RMarkdown, Git and Github. You will be able to use the information contained in this guide to prepare the submission for Part 1 of the assessment for this course. The tools you will use are:
+Technically this practical doesn't hold much on GIS methods, but...you will learn how to produce work that is open, reproducible, shareable and portable using RStudio, RMarkdown, Git and Github. As more and more researchers and organisations publish assocaited code with their manusripts or documents it's very imporant to become adept at using these tools.
+
+You will be able to use the information contained in this guide to prepare the submission for Part 1 of the assessment for this course. The tools you will use are:
 
 * RStudio is a graphical user interface (that you should already be familiar with) - it contains a number of features which make it excellent for authoring reproducible and open geographic data science work.
 
@@ -71,17 +75,17 @@ You should see the files appear under the Git tab
 
 13. As well as saving, which saves a copy to our local directory, we will also ‘commit’ or create a save point for our work on git. To do this, you should click the ‘Git’ icon and up will pop a menu like the one below:
 
-<img src="prac4_images/comitt1.png" width="600pt" style="display: block; margin: auto;" />
+<img src="prac4_images/commit1.png" width="600pt" style="display: block; margin: auto;" />
 
 You can also click the Git tab that will have appeared in the top-right window of RStudio. Up will then pop another window that looks a little like the one below:
 
-<img src="prac4_images/comitt2.png" width="600pt" style="display: block; margin: auto;" />
+<img src="prac4_images/commit2.png" width="600pt" style="display: block; margin: auto;" />
 
 14. Stage the changes, add a commit message so you can monitor the changes you make, then click commit
 
 15. Make some more changes to your file and save it. Click comitt again then in the review changes box you will be able to see what has changed within your file. Add a comitt message and click commit:
 
-<img src="prac4_images/comitt3.png" width="600pt" style="display: block; margin: auto;" />
+<img src="prac4_images/committ3.png" width="600pt" style="display: block; margin: auto;" />
 
 ## Using Git outside RStudio
 
@@ -229,6 +233,23 @@ Got back to your master branch repositry and you should see the changes from the
 
 To avoid merge conflicts be careful with your commits, pushes and pulls. Think about what you are doing each time. GitHub help pages are quite comprehensive..https://help.github.com/en/articles/resolving-a-merge-conflict-on-github
 
+## RMarkdown
+
+OK, so now you have set everything up so that you can become a reproducable research ninja! All that remains is to do some reproducable research!
+
+For the definitive guide on R Markdown, please read [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) --- obviously! It will tell you everything you need to know, far beyond what I am telling you here.
+
+There is also an excellent guide on the R Studio website -https://rmarkdown.rstudio.com/lesson-1.html
+
+And a quick cheatsheet here: https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf
+
+And an older one here: http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf
+
+One of the awesome things about R Markdown is it can be converted into a range of different formats - html for webpages, word documents, PDFs, blogs, books - virtually everything!
+
+Now, earlier on in this exercise, I got you to open a new R Notebook or R Markdown file. They are both R Markdown Documents, but the Notebook allows chunks of code to be run independently.
+
+....Add Rmarkdown, making a website then bookdown as advanced section. 
 
 
 
