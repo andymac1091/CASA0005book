@@ -13,15 +13,15 @@ So far we've only really considered vector data. Within this practical we will e
 
 ## WorldClim data
 
-To start with we are going to use WorldClim data --- this is a set of free global climate layers (rasters) with a spatial resolution of between 1 $$km^2$$ and 240 $$km^2$$.
+To start with we are going to use WorldClim data --- this is a set of free global climate layers (rasters) with a spatial resolution of between 1$km^2$ and 240$km^2$.
 
-To download the data go to: http://worldclim.org/version2
+1. Download the data from: http://worldclim.org/version2
 
-Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth's poles....
+2. Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth's poles....
 
-<img src="prac3_images/arcseconds.jpg" width="600pt" style="display: block; margin: auto;" />
+<img src="prac3_images/arcseconds.jpg" width="400pt" style="display: block; margin: auto;" />
 
-Unzip and move the data to your project folder. Now load the data. We could do this individually....
+3. Unzip and move the data to your project folder. Now load the data. We could do this individually....
 
 
 ```r
@@ -49,7 +49,7 @@ jan
 ## values     : -46.697, 34.291  (min, max)
 ```
 
-Then have a quick look at the data
+4. Then have a quick look at the data
 
 
 ```r
@@ -77,7 +77,8 @@ listfiles
 ## [11] "prac3_data/wc2.0_5m_tavg_11.tif" "prac3_data/wc2.0_5m_tavg_12.tif"
 ```
 
-Then load all of the data straight into a raster stack. A raster stack is a collection of raster layers with the same spatial extent and resolution.
+5. Then load all of the data straight into a raster stack. A raster stack is a collection of raster layers with the same spatial extent and resolution.
+
 
 ```r
 worldclimtemp <- stack(listfiles)
@@ -96,7 +97,9 @@ worldclimtemp
 ## max values :           34.291,           33.174,           33.904,           34.629,           36.312,           38.400,           43.036,           41.073,           36.389,           33.869,           33.518,           33.667
 ```
 
-So if the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average temperature data for us in order. To access single layers within the stack:
+In the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average temperature data for us in order. 
+
+6. To access single layers within the stack:
 
 
 ```r
@@ -115,7 +118,7 @@ worldclimtemp[[1]]
 ## values     : -46.697, 34.291  (min, max)
 ```
 
-We can also rename our layers:
+7. We can also rename our layers within the stack:
 
 
 ```r
@@ -123,7 +126,7 @@ month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
 names(worldclimtemp) <- month
 ```
 
-Now we could also use the following to access just the January raster layer
+8. Now to get data for just Janruary use the our new layer name
 
 
 ```r
@@ -143,7 +146,7 @@ worldclimtemp$Jan
 
 ## Point data from a raster
 
-Using a raster stack we can extract data with a single command from the entire stack, for example let's make a dataframe of some sample sites --- Australian cities.
+9. Using a raster stack we can extract data with a single command from the entire stack, for example let's make a dataframe of some sample sites --- Australian cities/towns.
 
 
 ```r
@@ -151,24 +154,27 @@ site <- c("Brisbane", "Melbourne", "Perth", "Sydney", "Broome", "Darwin", "Orang
 lon <- c(153.03, 144.96, 115.86, 151.21, 122.23, 130.84, 149.10, 115.64, 145.77, 138.6, 153.43, 149.13, 151.78, 150.89, 153.12)
 lat <- c(-27.47, -37.91, -31.95, -33.87, 17.96, -12.46, -33.28, -33.33, -16.92, -34.93, -28, -35.28, -32.93, -34.42, -27.64)
 samples <- data.frame(site, lon, lat, row.names="site")
-# Extract data from RasterLayer
+# Extract the data from Rasterstack for all points 
 AUcitytemp<- extract(worldclimtemp, samples)
 ```
 
-Let's also add the city names to the rows of AUcitytemp
+10. Add the city names to the rows of AUcitytemp
+
 
 ```r
 row.names(AUcitytemp)<-site
 ```
 
-Now we're going to look at some basic descriptive statistics. To start with let's take Perth as an example. We can subset our data either using the row name:
+Now we're going to look at some basic descriptive statistics. 
+
+11. To start with let's take Perth as an example. We can subset our data either using the row name:
 
 
 ```r
 Perthtemp <- subset(AUcitytemp, rownames(AUcitytemp) == "Perth")
 ```
 
-Or the row location:
+12. Or the row location:
 
 
 ```r
@@ -177,11 +183,13 @@ Perthtemp <- AUcitytemp[3,]
 
 ## Descriptive statistics
 
-Descriptive statistics provide a summary of our data often forming the base of quantitiatve analysis leading to inferential statistics which we use to make infereces about our data (e.g. make judegements of the porbability that the observed difference between two datasets is not by chance) 
+Descriptive statistics provide a summary of our data, often forming the base of quantitiatve analysis leading to inferential statistics which we use to make infereces about our data (e.g.  judegements of the probability that the observed difference between two datasets is not by chance) 
 
 ### Histogram
 
-A histogram lets us see the frequency of distribution of our data:
+A histogram lets us see the frequency of distribution of our data.
+
+14. Make a histogram of Perth's temperature 
 
 
 ```r
@@ -190,24 +198,26 @@ hist(Perthtemp)
 
 <img src="03-prac3_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
-Remember what we're looking at here. The ```x``` axis is the temperature and the ```y``` is the frequency of occurrence. That's a pretty simple histogram, let's improve the aesthetics 
+Remember what we're looking at here. The ```x``` axis is the temperature and the ```y``` is the frequency of occurrence. 
+
+15. That's a pretty simple histogram, let's improve the aesthetics a bit. 
 
 
 ```r
+#define where you want the breaks in the historgram
 userbreak<-c(8,10,12,14,16,18,20,22,24,26)
-hist(Perthtemp, breaks=userbreak, col="red")
+hist(Perthtemp, breaks=userbreak, col="red", main="Histogram of Perth Temperature", xlab="Temperature", ylab="Frequency")
 ```
 
 <img src="03-prac3_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
-Have a look at the histogram information R generated
+16. Check out the histogram information R generated
 
 
 ```r
 histinfo<-hist(Perthtemp)
 ```
 
-<img src="03-prac3_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 ```r
 histinfo
@@ -244,24 +254,18 @@ Here we have:
 * midpoints --- the middle value for each bin
 * density --- the density of data per bin
 
+
 ### Using more data
 
-This was a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data).
+This was still a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data) as opposed to just our point for Perth.
 
-First, we need to source and load a vector of Australia. Go to: https://gadm.org/download_country_v3.html and download the GeoPackage
+17. First, we need to source and load a vector of Australia. Go to: https://gadm.org/download_country_v3.html and download the GeoPackage
 
-We can check that layers are within a Geo package using:
+18. Check what layers are within a Geo package using:
 
 
 ```r
 library(sf)
-```
-
-```
-## Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3
-```
-
-```r
 st_layers("prac3_data/gadm36_AUS.gpkg")
 ```
 
@@ -274,7 +278,7 @@ st_layers("prac3_data/gadm36_AUS.gpkg")
 ## 3 gadm36_AUS_2 Multi Polygon      569     13
 ```
 
-Then lets read in the GeoPackage layer for the whole of Australia 
+19. Then lets read in the GeoPackage layer for the whole of Australia 
 
 
 ```r
@@ -292,13 +296,13 @@ Ausoutline <- st_read("prac3_data/gadm36_AUS.gpkg", layer='gadm36_AUS_0')
 ```
 
 ```r
-#Check the layer
-plot(Ausoutline)
+#Check the layer by plotting the geometry
+plot(Ausoutline$geom)
 ```
 
-<img src="03-prac3_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="03-prac3_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
-Next, set our map extent to the outline of Australia then crop our WorldClim dataset to it
+20. Next, set our map extent to the outline of Australia then crop our WorldClim dataset to it
 
 
 ```r
@@ -334,7 +338,9 @@ Austemp
 ## max values :  34.29100,  33.17400,  32.39700,  30.07200,  28.50000,  27.40000,  26.90000,  27.20000,  29.31209,  31.72000,  33.51800,  33.66700
 ```
 
-You'll notice that whilst we have the whole of Australia the raster hasn't been perfectly clipped to the exact outline....the extent just specifies an extent box that will cover the whole of the shape. If want to just get raster data within the outline of the shape:
+You'll notice that whilst we have the whole of Australia the raster hasn't been perfectly clipped to the exact outline....the extent just specifies an extent box that will cover the whole of the shape. 
+
+21. If want to just get raster data within the outline of the shape:
 
 
 ```r
@@ -345,22 +351,20 @@ You could also run this using the original worldclimtemp raster, however, it may
 
 Both our Austemp and exactAus are raster bricks. A brick is similar to a stack except it is now stored as one file instead of a collection.
 
-Let's re-compute our histogram for Australia in March
-
-We could just use hist like we have done before
+22. Let's re-compute our histogram for Australia in January. We could just use hist like we have done before
 
 
 ```r
 hist(exactAus[[3]], col="red")
 ```
 
-<img src="03-prac3_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="03-prac3_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 However we have a bit more control with ggplot...
 
 ### Histogram with ggplot
 
-Firstly we need to make our raster into a data.frame to be compatible with ggplot2
+23. We need to make our raster into a data.frame to be compatible with ggplot2
 
 
 ```r
@@ -370,18 +374,130 @@ alldf=as.data.frame(exactAus)
 
 ```r
 library(ggplot2)
-ggplot(alldf, aes(x=Mar)) + geom_histogram()
+gghist <- ggplot(alldf, aes(x=Mar)) + geom_histogram(color="black", fill="white")+
+  labs(title="Ggplot2 histogram of Australian March temperatures", x="Temperature", y="Frequency")
+gghist + geom_vline(aes(xintercept=mean(Mar, na.rm=TRUE)),
+            color="blue", linetype="dashed", size=1)
+```
+
+<img src="03-prac3_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+
+How about plotting multiple months of temperature data on the same histogram 
+
+24. As we did in practical 2, we need to put our variaible (months) into a one coloumn using ```melt```. We will do this based on the names of our coloumns in alldf...
+
+
+```r
+library(reshape2)
+squishdata <- melt(alldf, measure.vars=names(alldf))
+```
+
+25. Then subset the data, selecting two months
+
+
+```r
+twomonths<-subset(squishdata, variable=="Jan" | variable=="Jun")
+```
+
+26. Get the mean for each month we selected
+
+
+```r
+library(plyr)
+meantwomonths <- ddply(twomonths, "variable", summarise, grp.mean=mean(value, na.rm=TRUE))
+colnames(meantwomonths)[colnames(meantwomonths)=="variable"] <- "Month"
+
+head(meantwomonths)
 ```
 
 ```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+##   Month grp.mean
+## 1   Jan 28.11321
+## 2   Jun 14.96415
+```
+
+27. Select the colour (here color in the code) and fill based on the variable (which is our month). The intercept is the mean we just calculated, with the lines also based on the coloumn variable (from mu).
+
+
+```r
+#rename the coloumn from variable to month so it looks nice in the legend of the histogram
+colnames(twomonths)[colnames(twomonths)=="variable"] <- "Month"
+
+ggplot(twomonths, aes(x=value, color=Month, fill=Month)) +
+  geom_histogram(position="identity", alpha=0.5)+
+  geom_vline(data=meantwomonths, aes(xintercept=grp.mean, color=Month),
+             linetype="dashed")+
+  labs(title="Ggplot2 histogram of Australian Jan and Jun temperatures", x="Temperature",    y="Frequency")+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+<img src="03-prac3_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+
+```r
+# note how i adjusted the title after i selected the theme, if i had done this before the theme defaults would have overwritten my command.
+```
+
+28. Have you been getting an annoying error message about bin size and non-finate values? Me too!...Bin size defaults to 30 in ggplot2 and the non-finate values is referring to lots of NAs (no data) that we have in our dataset. In the code below i've selected a bin width of 5 and removed all the NAs with ```complete.cases``` and produced a faceted plot...
+
+
+```r
+# Remove all NAs
+data_complete_cases <- squishdata[complete.cases(squishdata), ]
+# How many rows are left
+dim(data_complete_cases)
 ```
 
 ```
-## Warning: Removed 205103 rows containing non-finite values (stat_bin).
+## [1] 1201812       2
 ```
 
-<img src="03-prac3_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+```r
+# How many were there to start with
+dim(squishdata)
+```
+
+```
+## [1] 3663048       2
+```
+
+```r
+# Plot faceted histogram
+ggplot(data_complete_cases, aes(x=value, na.rm=TRUE))+
+  geom_histogram(color="black", fill="white", binwidth = 5)+
+  labs(title="Ggplot2 faceted histogram of Australian temperatures", x="Temperature",        y="Frequency")+
+  facet_grid(variable ~ .)+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+<img src="03-prac3_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+
+Does this seem right to you? Well...yes. It shows that the distribution of temperature is higher (or warmer) in the Australian summer (Dec-Feb) than the rest of the year. 
+
+Ok so enough with the histograms...the point is to think about how to best display your data both effectively and efficiently. 
+
+29. Let's change the pace a bit and do a quickfire of other descrptive statistics you might want to use...
+
+
+```r
+# mean per month
+meanofall <- ddply(squishdata, "variable", summarise, grp.mean=mean(value, na.rm=TRUE))
+# standard deviation per month
+sdofall <- ddply(squishdata, "variable", summarise, grp.sd=sd(value, na.rm=TRUE))
+# maximum per month
+maxofall <- ddply(squishdata, "variable", summarise, grp.mx=max(value, na.rm=TRUE))
+# minimum per month
+minofall <- ddply(squishdata, "variable", summarise, grp.min=min(value, na.rm=TRUE))
+# Interquartlie range per month
+IQRofall <- ddply(squishdata, "variable", summarise, grp.IQR=IQR(value, na.rm=TRUE))
+
+# perhaps you want to store multiple outputs in one list..
+lotsofthem <- ddply(squishdata, "variable", summarise, grp.min=min(value, na.rm=TRUE),grp.mx=max(value, na.rm=TRUE))
+
+# or you want to know the mean (or some other stat) for the whole year as opposed to each month...
+meanwholeyear=mean(squishdata$value, na.rm=TRUE)
+```
+
 
 
 ## Interpolation 
@@ -406,6 +522,13 @@ library(dplyr)
 ```
 ## 
 ## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:plyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize
 ```
 
 ```
@@ -447,7 +570,7 @@ plot(Ausoutline$geom)
 plot(dsp, col="red", add=TRUE)
 ```
 
-<img src="03-prac3_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="03-prac3_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 Let's interpolate using Inverse Distance Weighting, or IDW as it's more commonly known
 
