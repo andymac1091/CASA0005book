@@ -12,7 +12,7 @@ By the end of this practical you should be able to:
 
 ## Introduction 
 
-Technically this practical doesn't hold much on GIS methods, but...you will learn how to produce work that is open, reproducible, shareable and portable using RStudio, RMarkdown, Git and Github. As more and more researchers and organisations publish assocaited code with their manusripts or documents it's very imporant to become adept at using these tools.
+In this practical you will learn how to produce work that is open, reproducible, shareable and portable using RStudio, RMarkdown, Git and GitHub. As more and more researchers and organisations publish assocaited code with their manusripts or documents it's very imporant to become adept at using these tools.
 
 You will be able to use the information contained in this guide to prepare the submission for Part 1 of the assessment for this course. The tools you will use are:
 
