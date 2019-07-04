@@ -2,10 +2,13 @@
 
 ## Learning outcomes
 
-* Examine and clean data
-* More advanced data manipulation 
-* Plot graphs and maps
-* Create interactive maps
+By the end of this practical you should be able to:
+
+* Execute basic processing in R
+* Examine, clean and manipulate comma seperate value (```.csv```) data
+* Examine, clean and manipulate and plot spatial (```.csv```) data 
+* Produce interactive maps
+* Evaluate the benefits of different data manipulation and mapping techniques
 
 ## Introduction 
 

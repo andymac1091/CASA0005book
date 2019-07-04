@@ -3,6 +3,8 @@
 
 ## Learning outcomes
 
+By the end of this practical you should be able to:
+
 * 
 * 
 * 

@@ -1,16 +1,23 @@
-# Rasters and descriptive statistics
+# Rasters, descriptive statistics and interpolation
 
 ## Learning outcomes
+
+By the end of this practical you should be able to:
 
 * Load, manipulate and interpret raster layers
 * Observe and critique different descriptive data manipulation methods and outputs
 * Exceute interpolation of points to a raster layer
+* Construct a methodology for comparing raster datasets
 
-## Introduction
+## Introduction 
+
+This practical is composed of three parts. To start with we're going to load some global raster data into R. In the second part we extract data points (cities and towns) from this data and generate some descriptive statistics and histograms. In the final section we explore interpolation using point data. 
+
+## Part 1 rasters
 
 So far we've only really considered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority (basically all) of remote sensing data.
 
-## WorldClim data
+### WorldClim data
 
 To start with we are going to use WorldClim data --- this is a dataset of free global climate layers (rasters) with a spatial resolution of between 1$km^2$ and 240$km^2$.
 
@@ -21,6 +28,10 @@ To start with we are going to use WorldClim data --- this is a dataset of free g
 ```{r echo=FALSE, out.width = "400pt", fig.align='center'}
 knitr::include_graphics('prac3_images/arcseconds.jpg')
 ```
+
+If you are still a bit confused by coordiate reference systems have a look at the following:
+* https://communityhub.esriuk.com/geoxchange/2012/3/26/coordinate-systems-and-projections-for-beginners.html
+* https://en.wikipedia.org/wiki/Spatial_reference_system
 
 3. Unzip and move the data to your project folder. Now load the data. We could do this individually....
 
@@ -66,7 +77,8 @@ worldclimtemp[[1]]
 8. We can also rename our layers within the stack:
 
 ```{r}
-month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 names(worldclimtemp) <- month
 ```
 
@@ -76,12 +88,14 @@ names(worldclimtemp) <- month
 worldclimtemp$Jan
 ```
 
-## Location data from a raster
+### Location data from a raster
 
 10. Using a raster stack we can extract data with a single command!! For example let's make a dataframe of some sample sites --- Australian cities/towns.
 
 ```{r}
-site <- c("Brisbane", "Melbourne", "Perth", "Sydney", "Broome", "Darwin", "Orange", "Bunbury", "Cairns", "Adelaide", "Gold Coast", "Canberra", "Newcastle", "Wollongong", "Logan City" )
+site <- c("Brisbane", "Melbourne", "Perth", "Sydney", "Broome", "Darwin", "Orange", 
+          "Bunbury", "Cairns", "Adelaide", "Gold Coast", "Canberra", "Newcastle", 
+          "Wollongong", "Logan City" )
 lon <- c(153.03, 144.96, 115.86, 151.21, 122.23, 130.84, 149.10, 115.64, 145.77, 
          138.6, 153.43, 149.13, 151.78, 150.89, 153.12)
 lat <- c(-27.47, -37.91, -31.95, -33.87, 17.96, -12.46, -33.28, -33.33, -16.92, 
@@ -99,7 +113,7 @@ row.names(AUcitytemp)<-site
 ```
 
 
-## Descriptive statistics
+## Part 2 descriptive statistics
 
 Descriptive statistics provide a summary of our data, often forming the base of quantitiatve analysis leading to inferential statistics which we use to make infereces about our data (e.g.  judegements of the probability that the observed difference between two datasets is not by chance) 
 
@@ -264,7 +278,8 @@ ggplot(twomonths, aes(x=value, color=Month, fill=Month)) +
   geom_histogram(position="identity", alpha=0.5)+
   geom_vline(data=meantwomonths, aes(xintercept=grp.mean, color=Month),
              linetype="dashed")+
-  labs(title="Ggplot2 histogram of Australian Jan and Jun temperatures", x="Temperature",    y="Frequency")+
+  labs(title="Ggplot2 histogram of Australian Jan and Jun
+       temperatures",x="Temperature",y="Frequency")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
 ```
@@ -295,7 +310,7 @@ How about an interactive histogram using ```plotly```...
 
 29. See if you can understand what is going on in the code below. Run each line seperately.
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(plotly)
 # split the data for plotly based on month
 jan<-subset(squishdata, variable=="Jan", na.rm=TRUE)
@@ -318,16 +333,18 @@ ihist<-plot_ly(alpha = 0.6) %>%
 
 ihist
 ```
-
 This format of code where you set lots of varaibles then call them within a plot, package or fuction is sometihng you should become more familiar with as it's considerd good practice. If you were to go on and produce multiple plots using the same legends / aesthetics you only ahve to set them once. 
 
 Ok so enough with the histograms...the point is to think about how to best display your data both effectively and efficiently. 
 
 30. Let's change the pace a bit and do a quickfire of other descrptive statistics you might want to use...
 
-```{r}
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
 # mean per month
 meanofall <- ddply(squishdata, "variable", summarise, grp.mean=mean(value, na.rm=TRUE))
+# print the top 1
+top_n(meanofall, 1)
 # standard deviation per month
 sdofall <- ddply(squishdata, "variable", summarise, grp.sd=sd(value, na.rm=TRUE))
 # maximum per month
@@ -338,13 +355,15 @@ minofall <- ddply(squishdata, "variable", summarise, grp.min=min(value, na.rm=TR
 IQRofall <- ddply(squishdata, "variable", summarise, grp.IQR=IQR(value, na.rm=TRUE))
 
 # perhaps you want to store multiple outputs in one list..
-lotsofthem <- ddply(squishdata, "variable", summarise, grp.min=min(value, na.rm=TRUE),grp.mx=max(value, na.rm=TRUE))
+lotsofthem <- ddply(squishdata, "variable", 
+                    summarise,grp.min=min(value,na.rm=TRUE),
+                    grp.mx=max(value, na.rm=TRUE))
 
 # or you want to know the mean (or some other stat) for the whole year as opposed to each month...
 meanwholeyear=mean(squishdata$value, na.rm=TRUE)
 ```
 
-## Part 2 Interpolation 
+## Part 3 interpolation 
 
 What if you had a selection of points over a spatial area but wanted to generate a complete raster. For this example, we will take our sample points (Australian cities) and estimate data between them using interpolation.
 
@@ -365,7 +384,9 @@ spatialpt <- SpatialPointsDataFrame(spatialpt, samplestemp)
 
 ```{r, eval=FALSE}
 spatialpt <- SpatialPoints(samplestemp[13:14], 
-                           proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+                           proj4string = CRS("+proj=longlat
+                                             +datum=WGS84+no_defs+ellps=WGS84
+                                             +towgs84=0,0,0"))
 ```
 
 Would give us a headache as coloumns 13 and 14 might no longer be longitude and latitude.
@@ -388,7 +409,8 @@ spatialpt<-as(spatialpt, 'Spatial')
 
 library(gstat)
 
-# Create an empty grid where n is the total number of cells, however this is overwritten based on cell size.
+# Create an empty grid where cellsize is the spatial resolution
+# Cellsize will overwrite the number of pixels we specified (n)
 emptygrd <- as.data.frame(spsample(spatialpt, n=1000, type="regular", cellsize=0.2))
 names(emptygrd) <- c("X", "Y")
 coordinates(emptygrd) <- c("X", "Y")
@@ -413,7 +435,7 @@ rasmask
 
 I've been a bit lazy here, if you recall from the previous practical session there are different ways to reproject data based if you have an SP or SF object. SP objects require you to specify the entire CRS string, so i just convered it to SF, used the ESPG code and converted it back to SP. The main reason for doing this is that i  made a grid to store my interpolation and having a remote sensing background i wanted to specify the pixel size. The equivalent function if SF won't let you specify pixel size or there is no easy and straightforward way to do it (at least to my knowledge).
 
-Wait... didn't we use ```crop``` earlier and now we are using ```mask```?....Yes. For most circumstances you could use either, but check the RDocumentation[https://www.rdocumentation.org/] for more information.  
+Wait... didn't we use ```crop``` earlier and now we are using ```mask```?....Yes. For most circumstances you could use either, but check the [RDocumentation](https://www.rdocumentation.org/) for more information.  
 
 There are also many more methods for interpolation, check out: https://mgimond.github.io/Spatial/interpolation-in-r.html
 
@@ -421,8 +443,9 @@ There are also many more methods for interpolation, check out: https://mgimond.g
 
 In this practical I've shown you how to source the data online, download it and load it into R. However for both WorldClim and GADM we can do this straight from R using the ```getData``` function....i'm sorry for making you do it the long way, but it's good to do things manually to see how they work.
 
+WARNING, this may take some time. I've changed the resolution to 10 degrees, but I'd advise not running this in the practical session.
+
 ```{r, eval=FALSE}
-##WARNING, this may take some time. I've changed the resolution to 10 degrees, but I'd advise not running this in the practical session.
 tmean_auto <- getData("worldclim", res=10, var="tmean")
 ```
 
