@@ -2,22 +2,21 @@
 
 ## Learning outcomes
 
-* Examine and clean data
-* More advanced data manipulation 
-* Plot graphs and maps
-* Create interactive maps
+* Load, manipulate and interpret raster layers
+* Observe and critique different descriptive data manipulation methods and outputs
+* Exceute interpolation of points to a raster layer
 
 ## Introduction
 
-So far we've only really considered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority of remote sensing data (well all but LiDAR - which we will get onto). 
+So far we've only really considered vector data. Within this practical we will explore some raster data sources and processing techniques. If you recall rasters are grids of cell with individual values. There are many, many possible sources to obtain raster data from as it is the data type used for the majority (basically all) of remote sensing data.
 
 ## WorldClim data
 
-To start with we are going to use WorldClim data --- this is a set of free global climate layers (rasters) with a spatial resolution of between 1$km^2$ and 240$km^2$.
+To start with we are going to use WorldClim data --- this is a dataset of free global climate layers (rasters) with a spatial resolution of between 1$km^2$ and 240$km^2$.
 
 1. Download the data from: http://worldclim.org/version2
 
-2. Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain basically almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth's poles....
+2. Select any variable you want at the 5 minute second resolution. What is a 5 minute resolution i hear you ask? Well, this geographic reference system treats the globe as if it was a sphere divided into 360 equal parts called degrees. Each degree has 60 minutes and each minute has 60 seconds. Arc-seconds of latitude remain almost constant whilst arc-seconds of longitude decrease in a trigonometric cosine-based fashion as you move towards the Earth's poles....
 
 ```{r echo=FALSE, out.width = "400pt", fig.align='center'}
 knitr::include_graphics('prac3_images/arcseconds.jpg')
@@ -25,7 +24,7 @@ knitr::include_graphics('prac3_images/arcseconds.jpg')
 
 3. Unzip and move the data to your project folder. Now load the data. We could do this individually....
 
-```{r}
+```{r ,message=FALSE}
 library(raster)
 jan=raster("prac3_data/wc2.0_5m_tavg_01.tif")
 # have a look at the raster layer jan
@@ -38,7 +37,7 @@ jan
 plot(jan)
 ```
 
-However, a better and more efficient way is to firstly list all the files we are interested stored within our directory
+5. A better and more efficient way is to firstly list all the files stored within our directory
 
 ```{r}
 listfiles <- list.files("prac3_data", ".tif", full.names=TRUE)
@@ -47,7 +46,7 @@ listfiles <- list.files("prac3_data", ".tif", full.names=TRUE)
 listfiles
 ```
 
-5. Then load all of the data straight into a raster stack. A raster stack is a collection of raster layers with the same spatial extent and resolution.
+6. Then load all of the data straight into a raster stack. A raster stack is a collection of raster layers with the same spatial extent and resolution.
 
 ```{r}
 worldclimtemp <- stack(listfiles)
@@ -57,62 +56,66 @@ worldclimtemp
 
 In the raster stack you'll notice that under dimensions there are 12 layers (nlayers). The stack has loaded the 12 months of average temperature data for us in order. 
 
-6. To access single layers within the stack:
+7. To access single layers within the stack:
 
 ```{r}
 # access the january layer
 worldclimtemp[[1]]
 ```
 
-7. We can also rename our layers within the stack:
+8. We can also rename our layers within the stack:
 
 ```{r}
 month <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 names(worldclimtemp) <- month
 ```
 
-8. Now to get data for just Janruary use the our new layer name
+9. Now to get data for just January use our new layer name
 
 ```{r}
 worldclimtemp$Jan
 ```
 
-## Point data from a raster
+## Location data from a raster
 
-9. Using a raster stack we can extract data with a single command from the entire stack, for example let's make a dataframe of some sample sites --- Australian cities/towns.
+10. Using a raster stack we can extract data with a single command!! For example let's make a dataframe of some sample sites --- Australian cities/towns.
 
 ```{r}
 site <- c("Brisbane", "Melbourne", "Perth", "Sydney", "Broome", "Darwin", "Orange", "Bunbury", "Cairns", "Adelaide", "Gold Coast", "Canberra", "Newcastle", "Wollongong", "Logan City" )
-lon <- c(153.03, 144.96, 115.86, 151.21, 122.23, 130.84, 149.10, 115.64, 145.77, 138.6, 153.43, 149.13, 151.78, 150.89, 153.12)
-lat <- c(-27.47, -37.91, -31.95, -33.87, 17.96, -12.46, -33.28, -33.33, -16.92, -34.93, -28, -35.28, -32.93, -34.42, -27.64)
+lon <- c(153.03, 144.96, 115.86, 151.21, 122.23, 130.84, 149.10, 115.64, 145.77, 
+         138.6, 153.43, 149.13, 151.78, 150.89, 153.12)
+lat <- c(-27.47, -37.91, -31.95, -33.87, 17.96, -12.46, -33.28, -33.33, -16.92, 
+         -34.93, -28, -35.28, -32.93, -34.42, -27.64)
+#Put all of this inforamtion into one list 
 samples <- data.frame(site, lon, lat, row.names="site")
-# Extract the data from Rasterstack for all points 
+# Extract the data from the Rasterstack for all points 
 AUcitytemp<- extract(worldclimtemp, samples)
 ```
 
-10. Add the city names to the rows of AUcitytemp
+11. Add the city names to the rows of AUcitytemp
 
 ```{r}
 row.names(AUcitytemp)<-site
 ```
 
-Now we're going to look at some basic descriptive statistics. 
 
-11. To start with let's take Perth as an example. We can subset our data either using the row name:
+## Descriptive statistics
+
+Descriptive statistics provide a summary of our data, often forming the base of quantitiatve analysis leading to inferential statistics which we use to make infereces about our data (e.g.  judegements of the probability that the observed difference between two datasets is not by chance) 
+
+### Data preparation 
+
+12. Let's take Perth as an example. We can subset our data either using the row name:
 
 ```{r}
 Perthtemp <- subset(AUcitytemp, rownames(AUcitytemp) == "Perth")
 ```
 
-12. Or the row location:
+13. Or the row location:
 
 ```{r}
 Perthtemp <- AUcitytemp[3,]
 ```
-
-## Descriptive statistics
-
-Descriptive statistics provide a summary of our data, often forming the base of quantitiatve analysis leading to inferential statistics which we use to make infereces about our data (e.g.  judegements of the probability that the observed difference between two datasets is not by chance) 
 
 ### Histogram
 
@@ -131,7 +134,8 @@ Remember what we're looking at here. The ```x``` axis is the temperature and the
 ```{r}
 #define where you want the breaks in the historgram
 userbreak<-c(8,10,12,14,16,18,20,22,24,26)
-hist(Perthtemp, breaks=userbreak, col="red", main="Histogram of Perth Temperature", xlab="Temperature", ylab="Frequency")
+hist(Perthtemp, breaks=userbreak, col="red", 
+     main="Histogram of Perth Temperature", xlab="Temperature", ylab="Frequency")
 ```
 
 16. Check out the histogram information R generated
@@ -151,7 +155,6 @@ Here we have:
 * midpoints --- the middle value for each bin
 * density --- the density of data per bin
 
-
 ### Using more data
 
 This was still a rather basic histogram, what if we wanted to see the distribution of temperatures for the whole of Australia in Jan (from averaged WorldClim data) as opposed to just our point for Perth.
@@ -165,7 +168,7 @@ library(sf)
 st_layers("prac3_data/gadm36_AUS.gpkg")
 ```
 
-19. Then lets read in the GeoPackage layer for the whole of Australia 
+19. Then read in the GeoPackage layer for the whole of Australia 
 
 ```{r}
 Ausoutline <- st_read("prac3_data/gadm36_AUS.gpkg", layer='gadm36_AUS_0')
@@ -179,7 +182,7 @@ plot(Ausoutline$geom)
 Ausarea <- extent(Ausoutline)
 # check the extent
 Ausarea
-# now crop our temp data to the extemt
+# now crop our temp data to the extent
 Austemp <- crop(worldclimtemp, Ausoutline)
 # plot the output
 Austemp
@@ -197,10 +200,10 @@ You could also run this using the original worldclimtemp raster, however, it may
 
 Both our Austemp and exactAus are raster bricks. A brick is similar to a stack except it is now stored as one file instead of a collection.
 
-22. Let's re-compute our histogram for Australia in January. We could just use hist like we have done before
+22. Let's re-compute our histogram for Australia in March. We could just use hist like we have done before
 
 ```{r}
-hist(exactAus[[3]], col="red")
+hist(exactAus[[3]], col="red", main ="March temperature")
 ```
 
 However we have a bit more control with ggplot...
@@ -215,10 +218,14 @@ alldf=as.data.frame(exactAus)
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
-gghist <- ggplot(alldf, aes(x=Mar)) + geom_histogram(color="black", fill="white")+
-  labs(title="Ggplot2 histogram of Australian March temperatures", x="Temperature", y="Frequency")
+gghist <- ggplot(alldf, aes(x=Mar)) + 
+  geom_histogram(color="black", fill="white")+
+  labs(title="Ggplot2 histogram of Australian March temperatures", 
+  x="Temperature", y="Frequency")
 gghist + geom_vline(aes(xintercept=mean(Mar, na.rm=TRUE)),
-            color="blue", linetype="dashed", size=1)
+            color="blue", linetype="dashed", size=1)+
+  theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 How about plotting multiple months of temperature data on the same histogram 
@@ -246,7 +253,7 @@ colnames(meantwomonths)[colnames(meantwomonths)=="variable"] <- "Month"
 head(meantwomonths)
 ```
 
-27. Select the colour (here color in the code) and fill based on the variable (which is our month). The intercept is the mean we just calculated, with the lines also based on the coloumn variable (from mu).
+27. Select the colour (here color in the code --- US english) and fill based on the variable (which is our month). The intercept is the mean we just calculated, with the lines also based on the coloumn variable.
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -260,9 +267,9 @@ ggplot(twomonths, aes(x=value, color=Month, fill=Month)) +
   labs(title="Ggplot2 histogram of Australian Jan and Jun temperatures", x="Temperature",    y="Frequency")+
   theme_classic()+
   theme(plot.title = element_text(hjust = 0.5))
-
-# note how i adjusted the title after i selected the theme, if i had done this before the theme defaults would have overwritten my command.
 ```
+Note how i adjusted the title after i selected the theme, if i had done this before the theme defaults would have overwritten my command.
+
 
 28. Have you been getting an annoying error message about bin size and non-finate values? Me too!...Bin size defaults to 30 in ggplot2 and the non-finate values is referring to lots of NAs (no data) that we have in our dataset. In the code below i've selected a bin width of 5 and removed all the NAs with ```complete.cases``` and produced a faceted plot...
 
@@ -282,11 +289,41 @@ ggplot(data_complete_cases, aes(x=value, na.rm=TRUE))+
 
 ```
 
-Does this seem right to you? Well...yes. It shows that the distribution of temperature is higher (or warmer) in the Australian summer (Dec-Feb) than the rest of the year. 
+Does this seem right to you? Well...yes. It shows that the distribution of temperature is higher (or warmer) in the Australian summer (Dec-Feb) than the rest of the year, which makes perfect sense. 
+
+How about an interactive histogram using ```plotly```...
+
+29. See if you can understand what is going on in the code below. Run each line seperately.
+
+```{r, message=FALSE}
+library(plotly)
+# split the data for plotly based on month
+jan<-subset(squishdata, variable=="Jan", na.rm=TRUE)
+jun<-subset(squishdata, variable=="Jun", na.rm=TRUE)
+
+# give axis titles
+x <- list (title = "Temperature")
+y <- list (title = "Frequency")
+
+# set the bin width
+xbinsno<-list(start=0, end=40, size = 2.5)
+
+# plot the histogram calling all the variables we just set
+ihist<-plot_ly(alpha = 0.6) %>%
+        add_histogram(x = jan$value,
+        xbins=xbinsno, name="January") %>%
+        add_histogram(x = jun$value,
+        xbins=xbinsno, name="June") %>% 
+        layout(barmode = "overlay", xaxis=x, yaxis=y)
+
+ihist
+```
+
+This format of code where you set lots of varaibles then call them within a plot, package or fuction is sometihng you should become more familiar with as it's considerd good practice. If you were to go on and produce multiple plots using the same legends / aesthetics you only ahve to set them once. 
 
 Ok so enough with the histograms...the point is to think about how to best display your data both effectively and efficiently. 
 
-29. Let's change the pace a bit and do a quickfire of other descrptive statistics you might want to use...
+30. Let's change the pace a bit and do a quickfire of other descrptive statistics you might want to use...
 
 ```{r}
 # mean per month
@@ -305,101 +342,86 @@ lotsofthem <- ddply(squishdata, "variable", summarise, grp.min=min(value, na.rm=
 
 # or you want to know the mean (or some other stat) for the whole year as opposed to each month...
 meanwholeyear=mean(squishdata$value, na.rm=TRUE)
-
 ```
 
-
-
-## Interpolation 
+## Part 2 Interpolation 
 
 What if you had a selection of points over a spatial area but wanted to generate a complete raster. For this example, we will take our sample points (Australian cities) and estimate data between them using interpolation.
 
-If you look at our samples and AUcitytemp data the lat and lon is only in the former. We need to have this with our temperature data so let's combine it using ```cbind```
+31. If you look at our samples and AUcitytemp data the lat and lon is only in the former. We need to have this with our temperature data so let's combine it using ```cbind```
 
 ```{r}
 samplestemp<-cbind(AUcitytemp, samples)
 ```
 
-As always, let's check our data with a quick map...
-
-We need to tell R that our points are spatial points
-```{r}
+32. Now we need to tell R that our points are spatial points
+```{r, message=FALSE}
 library(dplyr)
-dsp <- SpatialPoints(select(samplestemp,lon,lat), proj4string = crs(worldclimtemp))
-dsp <- SpatialPointsDataFrame(dsp, samplestemp)
+spatialpt <- SpatialPoints(select(samplestemp,lon,lat), proj4string = crs(worldclimtemp))
+spatialpt <- SpatialPointsDataFrame(spatialpt, samplestemp)
 ```
-You'll notice that here i've used ```dplyr``` to select the longitude and latitude from my samplestemp data and i just nicked the CRS from our worldclimtemp. In generally it's good practice to avoid using *static* references, by that i mean if we added another coloumn to our samplestemp data (or manipulated somehow) then using this...
+
+33. You'll notice that here i've used ```dplyr``` to select the longitude and latitude from my samplestemp data and i just nicked the CRS from our worldclimtemp. In generally it's good practice to avoid using *static* or *hard coding* references, by that i mean if we added another coloumn to our samplestemp data (or manipulated somehow) then using this...
 
 ```{r, eval=FALSE}
-dsp <- SpatialPoints(samplestemp[13:14], proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+spatialpt <- SpatialPoints(samplestemp[13:14], 
+                           proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
 ```
 
 Would give us a headache as coloumns 13 and 14 might no longer be longitude and latitude.
 
-Right...plot the Australian geometry outline then add our spatial data points ontop...
+34. Right...plot the Australian geometry outline then add our spatial data points ontop...
 
 ```{r}
 plot(Ausoutline$geom)
-plot(dsp, col="red", add=TRUE)
+plot(spatialpt, col="red", add=TRUE)
 ```
 
-Let's interpolate using Inverse Distance Weighting, or IDW as it's more commonly known
+35. Let's interpolate using Inverse Distance Weighting, or IDW as it's more commonly known. IDW is a deterministic method for multivaraite interpolation that estaimtes values for a surface using a weighted average of the provided data. The values closer to the point being predicted have more weight than those further away. The rate at which distance from the provided point imapcts the predcted point is controlled by the power of ```p```. If ```p=0``` then there is no decrease with distance.
 
-```{r}
+For more infomation see: https://pro.arcgis.com/en/pro-app/help/analysis/geostatistical-analyst/how-inverse-distance-weighted-interpolation-works.htm
 
-
-dsp = st_as_sf(dsp)
-dsp <- st_transform(dsp, 4283)
-dsp<-as(dsp, 'Spatial')
+```{r message=FALSE}
+spatialpt = st_as_sf(spatialpt)
+spatialpt <- st_transform(spatialpt, 4283)
+spatialpt<-as(spatialpt, 'Spatial')
 
 library(gstat)
-library(sp)
 
-# Create an empty grid where n is the total number of cells
-grd <- as.data.frame(spsample(dsp, n=1000, type="regular", cellsize=0.2))
-names(grd) <- c("X", "Y")
-coordinates(grd) <- c("X", "Y")
-gridded(grd) <- TRUE  # Create SpatialPixel object
-fullgrid(grd) <- TRUE  # Create SpatialGrid object
+# Create an empty grid where n is the total number of cells, however this is overwritten based on cell size.
+emptygrd <- as.data.frame(spsample(spatialpt, n=1000, type="regular", cellsize=0.2))
+names(emptygrd) <- c("X", "Y")
+coordinates(emptygrd) <- c("X", "Y")
+gridded(emptygrd) <- TRUE  # Create SpatialPixel object
+fullgrid(emptygrd) <- TRUE  # Create SpatialGrid object
 
-# Add P's projection information to the empty grid
-proj4string(grd) <- proj4string(dsp)
+# Add the projection to the grid
+proj4string(emptygrd) <- proj4string(spatialpt)
 
-# Interpolate the grid cells using a power value of 2 (idp=2.0)
-P.idw <- gstat::idw(Jan ~ 1, dsp, newdata=grd, idp=2.0)
+# Interpolate the grid cells using a power value of 2 
+interpolate <- gstat::idw(Jan ~ 1, spatialpt, newdata=emptygrd, idp=2.0)
 
-# Convert to raster object then clip to Texas
-r <- raster(P.idw)
-#r.m <- mask(r, W)
+# Convert output to raster object 
+ras <- raster(interpolate)
+
+# Clip the raster to Australia outline
+rasmask <- mask(ras, Ausoutline)
+
+# Plot the raster
+rasmask
 ```
 
-More information: https://mgimond.github.io/Spatial/interpolation-in-r.html
+I've been a bit lazy here, if you recall from the previous practical session there are different ways to reproject data based if you have an SP or SF object. SP objects require you to specify the entire CRS string, so i just convered it to SF, used the ESPG code and converted it back to SP. The main reason for doing this is that i  made a grid to store my interpolation and having a remote sensing background i wanted to specify the pixel size. The equivalent function if SF won't let you specify pixel size or there is no easy and straightforward way to do it (at least to my knowledge).
 
+Wait... didn't we use ```crop``` earlier and now we are using ```mask```?....Yes. For most circumstances you could use either, but check the RDocumentation[https://www.rdocumentation.org/] for more information.  
 
-
-## Advanced analysis
-
-Compare multiple raster layers
-
-Subtracting 
-Scatterplot
-Co-variance, RMSE, bimodality 
-
-Assess accuracy
-
-Random points
-
-
-
-install.packages("dismo")
-library(dismo)
-AUcitytemp$jan
+There are also many more methods for interpolation, check out: https://mgimond.github.io/Spatial/interpolation-in-r.html
 
 ### Auto data download
 
-In this practical I've shown you how to source the data online, download it and load it into R. However for both WorldClim and GADM we can do this straight from R using the getData function....
+In this practical I've shown you how to source the data online, download it and load it into R. However for both WorldClim and GADM we can do this straight from R using the ```getData``` function....i'm sorry for making you do it the long way, but it's good to do things manually to see how they work.
 
-```{r, include=FALSE}
+```{r, eval=FALSE}
 ##WARNING, this may take some time. I've changed the resolution to 10 degrees, but I'd advise not running this in the practical session.
 tmean_auto <- getData("worldclim", res=10, var="tmean")
 ```
@@ -410,57 +432,19 @@ Now for GADM
 Aus_auto <- getData('GADM', country="AUS", level=0)
 ```
 
-## More raster analysis 
+Much more convenient right? 
 
+## Advanced analysis
 
+Are you already comptent with raster analysis and R, then have a go at completing this task in the practical session. 
 
+Within the practical we've loaded one and created one raster layer. Undertake some comparative analysis to detemrine spatial (and temporal if appropraite) differences between the rasters here and any others you may wish to create (e.g. from other interpolation methods). Try to identify where the varaitions are and explain why they are occuring. 
 
+You could assume that one raster is the 'gold standard' meaning it's beleived to be fully correct and compare others to it.
 
-## MODIS background
+... Or you could go further than this and obtain weather station temperature data (or any other variable) for multiple sites, interpolate based on 50% of the sites and use the remaining sites to assess the accuracy of your selected method / the WorldClim data.
 
-NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) is an instrument aboard the Terra and Aqua satellites providing continuous Earth observation data. Terra passes North to South crossing the equator in the morning whilst Aqua orbits South to North crossing the equator in the afternoon. Consequently we are able to obtain twice daily environmental data for the majority of locations on Earth such as:
+Free weather station data can be found here: https://rp5.ru/Weather_in_the_world
 
-* Total Precipitable Water
-* Cloud Product
-* Atmospheric Profiles
-* Land Surface Temperature and Emissivity (MOD11)
-* Land Cover Products
-* Chlorophyll-a Concentration
-* Thermal Anomalies - Active Fires
-* Fraction of Photosynthetically Active Radiation (FPAR) / Leaf Area Index (LAI)
-* Evapotranspiration
-* Gross Primary Productivity (GPP) / Net Primary Productivity (NPP)
-* Sea Ice and Ice Surface Temperature
-* Remote Sensing Reflectance
-
-See: https://modis.gsfc.nasa.gov/data/ for more details
-
-## Loading MODIS data
-
-The MODIStsp package enables us to automate the preprocessing of MODIS time series data. Before this I would have to download ```.txt``` files with all the images I wanted, create other ```.txt``` that specified the data to download, where to store it and any re-projection information. Then it would have to be loaded into R. 
-
-But don't worry as now we can do it all from R...
-
-```{r}
-#install.packages("rt")
-#library(rts)
-```
-
-Firstly, create a free account at: https://urs.earthdata.nasa.gov/home
-
-Let's see what data is now available:
-
-```{r}
-#modisProducts()
-
-```
-
-MYD11A1
-
-ModisDownload(MYD11A1, h, v, version='005',dates, mosaic=FALSE, MRTpath, bands_subset = "", del=FALSE, proj= FALSE, UL ="", LR="", resample_type="NEAREST_NEIGHBOR", proj_type="UTM", proj_params, utm_zone,pixel_size)
-
-
-
-
-
+Have a go and discuss with your fellow students / members of the teaching team during the practical sessions or on slack.
 

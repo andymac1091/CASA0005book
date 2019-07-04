@@ -1,6 +1,5 @@
 # Git, GitHub and RMarkdown
 
-Allison Hill's website: https://alison.rbind.io/post/
 
 ## Learning outcomes
 

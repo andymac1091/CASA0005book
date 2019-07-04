@@ -1,7 +1,7 @@
 --- 
 title: "CASA0005 Geographic Information Systems and Science"
 author: "Andy MacLachlan and Adam Dennett"
-date: "2019-07-03"
+date: "2019-07-04"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -40,7 +40,7 @@ The best way to view this practical book is through the website. However if you 
 
 
 
-# More help {-}
+## More help {-}
 
 If you need specific assistance with this course please:
 * Check the module handbook for queries relating to assignments / deadlines 
@@ -57,6 +57,6 @@ These meetings are **not** to be used for specific technical issues. Problems of
 Andy: https://amaclachlan.youcanbook.me/ 
 Adam: 
 
-# Noticed a mistake? {-}
+## Noticed a mistake? {-}
 
 No one is perfect, if you notice a mistake let us know through the GitHub issues tab...Don't worry if you are unsure about what GitHub is we, cover it in the course.
