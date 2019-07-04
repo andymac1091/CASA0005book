@@ -344,7 +344,7 @@ library(dplyr)
 # mean per month
 meanofall <- ddply(squishdata, "variable", summarise, grp.mean=mean(value, na.rm=TRUE))
 # print the top 1
-top_n(meanofall, 1)
+head(meanofall, n=1)
 # standard deviation per month
 sdofall <- ddply(squishdata, "variable", summarise, grp.sd=sd(value, na.rm=TRUE))
 # maximum per month

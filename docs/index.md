@@ -39,7 +39,6 @@ The best way to view this practical book is through the website. However if you 
 
 
 
-
 ## More help {-}
 
 If you need specific assistance with this course please:
@@ -56,7 +55,7 @@ These meetings are **not** to be used for specific technical issues. Problems of
 
 Andy: https://amaclachlan.youcanbook.me/ 
 
-Adam: 
+Adam: https://amaclachlan.youcanbook.me/ 
 
 ## Noticed a mistake? {-}
 
